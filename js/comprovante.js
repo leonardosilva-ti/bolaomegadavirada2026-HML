@@ -186,11 +186,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
 
-        // 💡 REGISTRO EXPLÍCITO DA FONTE NotoSans para UTF-8/Emojis
-        // É essencial que os scripts NotoSans-normal.js E NotoSans-bold.js estejam no HTML
-        doc.addFont('NotoSans-normal.js', 'NotoSans', 'normal');
-        doc.addFont('NotoSans-bold.js', 'NotoSans', 'bold'); // <--- ALTERAÇÃO CRUCIAL
-        doc.setFont('NotoSans'); 
+        // 💡 REGISTRO OTIMIZADO:
+        // Não use os nomes de arquivo '.js' em addFont. 
+        // Apenas force o registro dos estilos que foram injetados.
+        doc.addFont('NotoSans', 'NotoSans', 'normal'); 
+        doc.addFont('NotoSans', 'NotoSans', 'bold'); // <--- Registro sem o '.js'
+        doc.setFont('NotoSans');
         // ----------------------------------------------------
 
         // 🚨 ATENÇÃO: Usaremos 'NotoSans' onde queremos emojis
