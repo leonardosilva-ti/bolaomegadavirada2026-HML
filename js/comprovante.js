@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // ===== GERAR PDF DO COMPROVANTE =====
+    // ===== GERAR PDF DO COMPROVANTE CORRIGIDO E MELHORADO =====
     btnBaixarPDF.addEventListener("click", () => {
     if (!apostaData) {
         alert("Nenhuma aposta encontrada para gerar o comprovante.");
@@ -184,87 +184,168 @@ document.addEventListener("DOMContentLoaded", () => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
 
-    // ===== Cabeçalho =====
-    doc.setFontSize(16);
-    doc.setTextColor(0, 114, 227);
-    doc.text("🎫 Comprovante Oficial do Bolão - Mega da Virada", 105, 20, { align: "center" });
+    // Cores
+    const COR_AZUL = [0, 80, 150]; // Azul Escuro para títulos
+    const COR_FUNDO_CINZA = [240, 240, 240]; // Cinza Claro para blocos
+    const COR_PAGO = [34, 139, 34]; // Verde
+    const COR_AGUARDANDO = [255, 140, 0]; // Laranja
+
+    let y = 15; // Ponto de partida
+    const MARGEM_ESQUERDA = 20;
+    const LARGURA = 170;
+
+    // 1. Bloco do Título Principal
+    doc.setFillColor(...COR_AZUL);
+    doc.rect(0, 0, 210, 30, 'F'); // Faixa Azul no topo
+    
+    doc.setFontSize(18);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(255, 255, 255); // Texto branco
+    doc.text("🎫 Comprovante Oficial do Bolão", 105, y, { align: "center" });
+    
+    y += 8;
+    doc.setFontSize(14);
+    doc.text("Mega da Virada 2026", 105, y, { align: "center" });
+    
+    y = 38; // Início do conteúdo
+
+    // 2. Dados do Participante (Em bloco cinza claro para destaque)
+    const H_DADOS = 40;
+    doc.setFillColor(...COR_FUNDO_CINZA);
+    doc.rect(MARGEM_ESQUERDA, y - 5, LARGURA, H_DADOS, 'F');
+
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "normal");
+    
+    doc.text("INFORMAÇÕES DO PARTICIPANTE", MARGEM_ESQUERDA + 2, y);
     doc.setDrawColor(200);
-    doc.line(20, 25, 190, 25);
+    doc.line(MARGEM_ESQUERDA + 2, y + 1, MARGEM_ESQUERDA + 60, y + 1);
 
-    // ===== Dados principais =====
-    doc.setTextColor(0, 0, 0);
+    y += 5;
     doc.setFontSize(12);
-    let y = 38;
-    doc.text(`Nome: ${apostaData.nome}`, 20, y);
-    y += 8;
-    doc.text(`Telefone: ${apostaData.telefone}`, 20, y);
-    y += 8;
-    doc.text(`Protocolo: ${apostaData.protocolo}`, 20, y);
-    y += 8;
-    doc.text(`Data/Hora: ${apostaData.dataHora}`, 20, y);
+    doc.setFont("helvetica", "bold");
+    doc.text(`Nome:`, MARGEM_ESQUERDA + 2, y + 5);
+    doc.setFont("helvetica", "normal");
+    doc.text(`${apostaData.nome}`, MARGEM_ESQUERDA + 25, y + 5);
 
-    // ===== Status =====
-    y += 12;
-    doc.setFontSize(13);
-    doc.setTextColor(80, 80, 80);
-    doc.text("Status do Pagamento:", 20, y);
-    doc.setFontSize(13);
-    doc.setTextColor(apostaData.status === "PAGO" ? 22 : 220, apostaData.status === "PAGO" ? 197 : 50, apostaData.status === "PAGO" ? 94 : 50);
-    doc.text(apostaData.status, 75, y);
+    doc.setFont("helvetica", "bold");
+    doc.text(`Telefone:`, MARGEM_ESQUERDA + 90, y + 5);
+    doc.setFont("helvetica", "normal");
+    doc.text(`${apostaData.telefone}`, MARGEM_ESQUERDA + 115, y + 5);
+    
+    y += 10;
+    doc.setFont("helvetica", "bold");
+    doc.text(`Protocolo:`, MARGEM_ESQUERDA + 2, y + 5);
+    doc.setFont("helvetica", "normal");
+    doc.text(`${apostaData.protocolo}`, MARGEM_ESQUERDA + 27, y + 5);
+
+    doc.setFont("helvetica", "bold");
+    doc.text(`Data/Hora:`, MARGEM_ESQUERDA + 90, y + 5);
+    doc.setFont("helvetica", "normal");
+    doc.text(`${apostaData.dataHora}`, MARGEM_ESQUERDA + 115, y + 5);
+    
+    y += 15;
+
+    // 3. Status de Pagamento (Destaque visual)
+    doc.setFontSize(14);
+    doc.setTextColor(0, 0, 0);
+    doc.setFont("helvetica", "bold");
+    doc.text("Status do Pagamento:", MARGEM_ESQUERDA, y);
+    
+    const statusText = apostaData.status;
+    const statusColor = statusText === "PAGO" ? COR_PAGO : COR_AGUARDANDO;
+    
+    doc.setTextColor(...statusColor);
+    doc.setFontSize(16);
+    doc.text(statusText, MARGEM_ESQUERDA + 58, y);
     doc.setTextColor(0, 0, 0);
 
-    // ===== Jogos =====
-    y += 12;
-    doc.setFontSize(13);
-    doc.setTextColor(0, 114, 227);
-    doc.text("Jogos Selecionados", 20, y);
-    doc.setDrawColor(220);
-    doc.line(20, y + 2, 80, y + 2);
+    // Linha divisória
+    doc.setDrawColor(...COR_AZUL);
+    doc.line(MARGEM_ESQUERDA, y + 5, MARGEM_ESQUERDA + LARGURA, y + 5);
+    y += 10;
 
+    // 4. Jogos Selecionados
+    doc.setFontSize(14);
+    doc.setTextColor(...COR_AZUL);
+    doc.setFont("helvetica", "bold");
+    doc.text("🎲 Seus Jogos Selecionados", MARGEM_ESQUERDA, y);
+    doc.setTextColor(0, 0, 0);
+
+    y += 8;
     doc.setFontSize(12);
-    doc.setTextColor(0, 0, 0);
-    y += 8;
+    doc.setFont("courier", "normal"); // Fonte monoespaçada para números (opcional, mas fica bonito)
+    
     apostaData.jogos.forEach((j, i) => {
-        doc.text(`Jogo ${i + 1}: ${j}`, 25, y);
+        // Bloco de jogo com cor de fundo alternada (opcional)
+        if (i % 2 === 0) {
+            doc.setFillColor(250, 250, 250);
+            doc.rect(MARGEM_ESQUERDA, y - 5, LARGURA, 6, 'F');
+        }
+        
+        doc.setFont("helvetica", "bold");
+        doc.text(`Jogo ${i + 1}:`, MARGEM_ESQUERDA + 5, y);
+        doc.setFont("courier", "bold");
+        doc.text(j, MARGEM_ESQUERDA + 30, y);
+        
         y += 8;
         if (y > 260) { // quebra de página automática
             doc.addPage();
             y = 30;
+            // Repete o cabeçalho "Jogos Selecionados" na nova página
+            doc.setFontSize(14);
+            doc.setTextColor(...COR_AZUL);
+            doc.setFont("helvetica", "bold");
+            doc.text("🎲 Seus Jogos Selecionados (continuação)", MARGEM_ESQUERDA, y);
+            doc.setTextColor(0, 0, 0);
+            y += 8;
         }
     });
+    doc.setFont("helvetica", "normal");
 
-    // ===== PIX =====
+    // 5. Seção PIX (Se AGUARDANDO PAGAMENTO)
     if (apostaData.status === "AGUARDANDO PAGAMENTO") {
-        y += 12;
-        doc.setFontSize(13);
-        doc.setTextColor(0, 114, 227);
-        doc.text("Pagamento via PIX", 20, y);
-        doc.line(20, y + 2, 80, y + 2);
+        y += 10;
+        
+        // Verifica se há espaço para o PIX antes de quebrar
+        if (y > 240) {
+            doc.addPage();
+            y = 30;
+        }
+
+        doc.setFillColor(...COR_FUNDO_CINZA);
+        doc.rect(MARGEM_ESQUERDA, y - 5, LARGURA, 30, 'F'); // Bloco PIX
+
+        doc.setFontSize(14);
+        doc.setTextColor(...COR_AZUL);
+        doc.setFont("helvetica", "bold");
+        doc.text("💲 Dados para Pagamento via PIX", MARGEM_ESQUERDA + 2, y);
+        doc.setTextColor(0, 0, 0);
 
         doc.setFontSize(11);
-        doc.setTextColor(0, 0, 0);
-        y += 8;
-        doc.text("Chave PIX (copie e cole no app do seu banco):", 20, y);
+        doc.setFont("helvetica", "normal");
         y += 7;
+        doc.text("Chave PIX (Copie e cole no app do seu banco):", MARGEM_ESQUERDA + 2, y);
+        y += 6;
         doc.setFont("courier", "bold");
-        doc.text(PIX_KEY, 20, y);
+        doc.text(PIX_KEY, MARGEM_ESQUERDA + 2, y);
         doc.setFont("helvetica", "normal");
     }
 
-    // ===== Rodapé =====
-    doc.setDrawColor(200);
-    doc.line(20, 275, 190, 275);
-    doc.setFontSize(9);
+    // 6. Rodapé (Posicionamento fixo)
+    doc.setDrawColor(150);
+    doc.line(MARGEM_ESQUERDA, 275, MARGEM_ESQUERDA + LARGURA, 275);
+    doc.setFontSize(8);
     doc.setTextColor(100, 100, 100);
-    doc.text("Guarde este comprovante e o número de protocolo para futuras consultas.", 105, 282, { align: "center" });
-    doc.text("Página gerada automaticamente pelo sistema do bolão.", 105, 288, { align: "center" });
+    doc.text("Guarde este comprovante e o número de protocolo para futuras consultas.", 105, 280, { align: "center" });
+    doc.text("Página gerada automaticamente pelo sistema do bolão - " + new Date().toLocaleDateString(), 105, 284, { align: "center" });
 
-    // ===== Salvar =====
+    // 7. Salvar
     const nomeArquivo = `Comprovante_${apostaData.protocolo}.pdf`;
     doc.save(nomeArquivo);
 });
 
-    
-    // Inicia o carregamento dos dados
-    carregarComprovante(protocolo);
+// Inicia o carregamento dos dados
+carregarComprovante(protocolo);
 });
