@@ -29,8 +29,8 @@ const btnConferir = el("btnConferir");
 const resultadoConferencia = el("resultadoConferencia");
 const areaRateio = el("areaRateio");
 const inputValorPremio = el("valorPremio");
-const btnCalcularRateio = el("btnCalcularRateio");
-const resultadoRateio = el("resultadoRateio");
+const btnCalcular = el("btnCalcular");
+const resultado = el("resultado");
 
 const btnAtualizar = el("btnAtualizar");
 const btnLogout = el("btnLogout");
@@ -487,17 +487,28 @@ btnConferir?.addEventListener("click",()=>{
 
 // ================== RATEIO ==================
 btnCalcularRateio?.addEventListener("click",()=>{
-    const total=parseFloat(inputValorPremio.value);
-    const pagos=document.rateioData?.totalPagos||0;
+    const total=parseFloat(inputValorPremio.value);
+    const pagos=document.rateioData?.totalPagos||0;
 
-    if(!total||total<=0) return mostrarRateio("Insira um valor válido.","red");
-    if(pagos===0) return mostrarRateio("Nenhum participante pago.","red");
+    if(!total||total<=0) return mostrarRateio("Insira um valor válido.","red");
+    if(pagos===0) return mostrarRateio("Nenhum participante pago.","red");
 
-    const porPessoa=total/pagos;
-    mostrarRateio(`💵 R$ ${total.toFixed(2).replace('.',',')} / ${pagos} → R$ ${porPessoa.toFixed(2).replace('.',',')} por participante.`,"green");
+    const porPessoa=total/pagos;
+    
+    // --- NOVIDADE: FORMATANDO OS VALORES ---
+    
+    // 1. Formata o valor total para R$ 200.000.000,00
+    const totalFormatado = total.toLocaleString('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+
+    // 2. Formata o valor por pessoa para R$ 20.000,00
+    const porPessoaFormatado = porPessoa.toLocaleString('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+
+    // --- MENSAGEM ATUALIZADA ---
+    mostrarRateio(`💵 R$ ${totalFormatado} / ${pagos} → R$ ${porPessoaFormatado} por participante.`, "green");
 });
-
-function mostrarRateio(msg,cor){
-    resultadoRateio.textContent=msg;
-    resultadoRateio.style.color=cor;
-}
