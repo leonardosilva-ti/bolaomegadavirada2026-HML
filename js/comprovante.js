@@ -174,183 +174,182 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // ===== GERAR PDF DO COMPROVANTE CORRIGIDO E MELHORADO (v2 com Noto Sans) =====
+    // ===== GERAR PDF DO COMPROVANTE CORRIGIDO E MELHORADO (v3 com registro de fonte) =====
     btnBaixarPDF.addEventListener("click", () => {
-    if (!apostaData) {
-        alert("Nenhuma aposta encontrada para gerar o comprovante.");
-        return;
-    }
-
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
-
-    // 💡 ADICIONE ESTAS DUAS LINHAS AQUI 💡
-    // Isso registra a fonte NotoSans (assumindo que o script foi carregado no HTML)
-    // e a define como fonte principal, suportando o Unicode (emojis).
-    doc.addFont('NotoSans-normal.js', 'NotoSans', 'normal');
-    doc.setFont('NotoSans'); 
-    // ------------------------------------
-
-    // 🚨 ATENÇÃO: Use o nome da fonte Unicode que você carregou
-    const FONT_UNICODE = 'NotoSans';
-    
-    // Cores
-    const COR_AZUL = [0, 80, 150];
-    const COR_FUNDO_CINZA = [240, 240, 240];
-    const COR_PAGO = [34, 139, 34];
-    const COR_AGUARDANDO = [255, 140, 0];
-
-    let y = 15; 
-    const MARGEM_ESQUERDA = 20;
-    const LARGURA = 170;
-
-    // 1. Bloco do Título Principal (Agora usando a fonte UNICODE)
-    doc.setFillColor(...COR_AZUL);
-    doc.rect(0, 0, 210, 30, 'F');
-    
-    doc.setFont(FONT_UNICODE, "bold"); // 🚨 MUDEI A FONTE AQUI
-    doc.setFontSize(18);
-    doc.setTextColor(255, 255, 255);
-    doc.text("🎫 Comprovante Oficial do Bolão", 105, y, { align: "center" });
-    
-    y += 8;
-    doc.setFontSize(14);
-    doc.text("Mega da Virada 2026", 105, y, { align: "center" });
-    
-    y = 38; // Início do conteúdo
-
-    // 2. Dados do Participante
-    const H_DADOS = 40;
-    doc.setFillColor(...COR_FUNDO_CINZA);
-    doc.rect(MARGEM_ESQUERDA, y - 5, LARGURA, H_DADOS, 'F');
-
-    doc.setTextColor(0, 0, 0);
-    doc.setFontSize(10);
-    doc.setFont("helvetica", "normal"); 
-    
-    doc.text("INFORMAÇÕES DO PARTICIPANTE", MARGEM_ESQUERDA + 2, y);
-    doc.setDrawColor(200);
-    doc.line(MARGEM_ESQUERDA + 2, y + 1, MARGEM_ESQUERDA + 60, y + 1);
-
-    y += 5;
-    doc.setFontSize(12);
-    doc.setFont("helvetica", "bold");
-    doc.text(`Nome:`, MARGEM_ESQUERDA + 2, y + 5);
-    doc.setFont("helvetica", "normal");
-    doc.text(`${apostaData.nome}`, MARGEM_ESQUERDA + 25, y + 5);
-
-    doc.setFont("helvetica", "bold");
-    doc.text(`Telefone:`, MARGEM_ESQUERDA + 90, y + 5);
-    doc.setFont("helvetica", "normal");
-    doc.text(`${apostaData.telefone}`, MARGEM_ESQUERDA + 115, y + 5);
-    
-    y += 10;
-    doc.setFont("helvetica", "bold");
-    doc.text(`Protocolo:`, MARGEM_ESQUERDA + 2, y + 5);
-    doc.setFont("helvetica", "normal");
-    doc.text(`${apostaData.protocolo}`, MARGEM_ESQUERDA + 27, y + 5);
-
-    doc.setFont("helvetica", "bold");
-    doc.text(`Data/Hora:`, MARGEM_ESQUERDA + 90, y + 5);
-    doc.setFont("helvetica", "normal");
-    doc.text(`${apostaData.dataHora}`, MARGEM_ESQUERDA + 115, y + 5);
-    
-    y += 15;
-
-    // 3. Status de Pagamento
-    doc.setFontSize(14);
-    doc.setTextColor(0, 0, 0);
-    doc.setFont("helvetica", "bold");
-    doc.text("Status do Pagamento:", MARGEM_ESQUERDA, y);
-    
-    const statusText = apostaData.status;
-    const statusColor = statusText === "PAGO" ? COR_PAGO : COR_AGUARDANDO;
-    
-    doc.setTextColor(...statusColor);
-    doc.setFontSize(16);
-    doc.text(statusText, MARGEM_ESQUERDA + 58, y);
-    doc.setTextColor(0, 0, 0);
-
-    // Linha divisória
-    doc.setDrawColor(...COR_AZUL);
-    doc.line(MARGEM_ESQUERDA, y + 5, MARGEM_ESQUERDA + LARGURA, y + 5);
-    y += 10;
-
-    // 4. Jogos Selecionados (Agora usando a fonte UNICODE)
-    doc.setFont(FONT_UNICODE, "bold"); // 🚨 MUDEI A FONTE AQUI
-    doc.setFontSize(14);
-    doc.setTextColor(...COR_AZUL);
-    doc.text("🎲 Seus Jogos Selecionados", MARGEM_ESQUERDA, y);
-    doc.setTextColor(0, 0, 0);
-
-    y += 8;
-    doc.setFontSize(12);
-    
-    apostaData.jogos.forEach((j, i) => {
-        if (i % 2 === 0) {
-            doc.setFillColor(250, 250, 250);
-            doc.rect(MARGEM_ESQUERDA, y - 5, LARGURA, 6, 'F');
+        if (!apostaData) {
+            alert("Nenhuma aposta encontrada para gerar o comprovante.");
+            return;
         }
+
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+
+        // 💡 REGISTRO EXPLÍCITO DA FONTE NotoSans para UTF-8/Emojis
+        // O primeiro parâmetro deve ser o nome da fonte carregada via HTML (NotoSans-normal.js)
+        doc.addFont('NotoSans-normal.js', 'NotoSans', 'normal');
+        doc.setFont('NotoSans'); 
+        // ----------------------------------------------------
+
+        // 🚨 ATENÇÃO: Usaremos 'NotoSans' onde queremos emojis
+        const FONT_UNICODE = 'NotoSans'; 
         
-        doc.setFont("helvetica", "bold");
-        doc.text(`Jogo ${i + 1}:`, MARGEM_ESQUERDA + 5, y);
-        doc.setFont("courier", "bold");
-        doc.text(j, MARGEM_ESQUERDA + 30, y);
+        // Cores
+        const COR_AZUL = [0, 80, 150];
+        const COR_FUNDO_CINZA = [240, 240, 240];
+        const COR_PAGO = [34, 139, 34];
+        const COR_AGUARDANDO = [255, 140, 0];
+
+        let y = 15; 
+        const MARGEM_ESQUERDA = 20;
+        const LARGURA = 170;
+
+        // 1. Bloco do Título Principal (Usando NotoSans para o emoji)
+        doc.setFillColor(...COR_AZUL);
+        doc.rect(0, 0, 210, 30, 'F');
+        
+        doc.setFont(FONT_UNICODE, "bold"); 
+        doc.setFontSize(18);
+        doc.setTextColor(255, 255, 255);
+        doc.text("🎫 Comprovante Oficial do Bolão", 105, y, { align: "center" });
         
         y += 8;
-        if (y > 260) {
-            doc.addPage();
-            y = 30;
-            doc.setFont(FONT_UNICODE, "bold"); // 🚨 MUDEI A FONTE AQUI
-            doc.setFontSize(14);
-            doc.setTextColor(...COR_AZUL);
-            doc.text("🎲 Seus Jogos Selecionados (continuação)", MARGEM_ESQUERDA, y);
-            doc.setTextColor(0, 0, 0);
-            y += 8;
-        }
-    });
-    doc.setFont("helvetica", "normal");
-
-    // 5. Seção PIX (Agora usando a fonte UNICODE)
-    if (apostaData.status === "AGUARDANDO PAGAMENTO") {
-        y += 10;
-        
-        if (y > 240) {
-            doc.addPage();
-            y = 30;
-        }
-
-        doc.setFillColor(...COR_FUNDO_CINZA);
-        doc.rect(MARGEM_ESQUERDA, y - 5, LARGURA, 30, 'F');
-
-        doc.setFont(FONT_UNICODE, "bold"); // 🚨 MUDEI A FONTE AQUI
         doc.setFontSize(14);
-        doc.setTextColor(...COR_AZUL);
-        doc.text("💲 Dados para Pagamento via PIX", MARGEM_ESQUERDA + 2, y);
+        doc.text("Mega da Virada 2026", 105, y, { align: "center" });
+        
+        y = 38; // Início do conteúdo
+
+        // 2. Dados do Participante
+        const H_DADOS = 40;
+        doc.setFillColor(...COR_FUNDO_CINZA);
+        doc.rect(MARGEM_ESQUERDA, y - 5, LARGURA, H_DADOS, 'F');
+
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "normal"); 
+        
+        doc.text("INFORMAÇÕES DO PARTICIPANTE", MARGEM_ESQUERDA + 2, y);
+        doc.setDrawColor(200);
+        doc.line(MARGEM_ESQUERDA + 2, y + 1, MARGEM_ESQUERDA + 60, y + 1);
+
+        y += 5;
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.text(`Nome:`, MARGEM_ESQUERDA + 2, y + 5);
+        doc.setFont("helvetica", "normal");
+        doc.text(`${apostaData.nome}`, MARGEM_ESQUERDA + 25, y + 5);
+
+        doc.setFont("helvetica", "bold");
+        doc.text(`Telefone:`, MARGEM_ESQUERDA + 90, y + 5);
+        doc.setFont("helvetica", "normal");
+        doc.text(`${apostaData.telefone}`, MARGEM_ESQUERDA + 115, y + 5);
+        
+        y += 10;
+        doc.setFont("helvetica", "bold");
+        doc.text(`Protocolo:`, MARGEM_ESQUERDA + 2, y + 5);
+        doc.setFont("helvetica", "normal");
+        doc.text(`${apostaData.protocolo}`, MARGEM_ESQUERDA + 27, y + 5);
+
+        doc.setFont("helvetica", "bold");
+        doc.text(`Data/Hora:`, MARGEM_ESQUERDA + 90, y + 5);
+        doc.setFont("helvetica", "normal");
+        doc.text(`${apostaData.dataHora}`, MARGEM_ESQUERDA + 115, y + 5);
+        
+        y += 15;
+
+        // 3. Status de Pagamento (Mantém Helvetica, sem emojis)
+        doc.setFontSize(14);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont("helvetica", "bold");
+        doc.text("Status do Pagamento:", MARGEM_ESQUERDA, y);
+        
+        const statusText = apostaData.status;
+        const statusColor = statusText === "PAGO" ? COR_PAGO : COR_AGUARDANDO;
+        
+        doc.setTextColor(...statusColor);
+        doc.setFontSize(16);
+        doc.text(statusText, MARGEM_ESQUERDA + 58, y);
         doc.setTextColor(0, 0, 0);
 
-        doc.setFontSize(11);
+        // Linha divisória
+        doc.setDrawColor(...COR_AZUL);
+        doc.line(MARGEM_ESQUERDA, y + 5, MARGEM_ESQUERDA + LARGURA, y + 5);
+        y += 10;
+
+        // 4. Jogos Selecionados (Usando NotoSans para o emoji)
+        doc.setFont(FONT_UNICODE, "bold"); 
+        doc.setFontSize(14);
+        doc.setTextColor(...COR_AZUL);
+        doc.text("🎲 Seus Jogos Selecionados", MARGEM_ESQUERDA, y);
+        doc.setTextColor(0, 0, 0);
+
+        y += 8;
+        doc.setFontSize(12);
+        
+        apostaData.jogos.forEach((j, i) => {
+            if (i % 2 === 0) {
+                doc.setFillColor(250, 250, 250);
+                doc.rect(MARGEM_ESQUERDA, y - 5, LARGURA, 6, 'F');
+            }
+            
+            doc.setFont("helvetica", "bold");
+            doc.text(`Jogo ${i + 1}:`, MARGEM_ESQUERDA + 5, y);
+            doc.setFont("courier", "bold");
+            doc.text(j, MARGEM_ESQUERDA + 30, y);
+            
+            y += 8;
+            if (y > 260) {
+                doc.addPage();
+                y = 30;
+                doc.setFont(FONT_UNICODE, "bold"); // NotoSans na quebra de página
+                doc.setFontSize(14);
+                doc.setTextColor(...COR_AZUL);
+                doc.text("🎲 Seus Jogos Selecionados (continuação)", MARGEM_ESQUERDA, y);
+                doc.setTextColor(0, 0, 0);
+                y += 8;
+            }
+        });
         doc.setFont("helvetica", "normal");
-        y += 7;
-        doc.text("Chave PIX (Copie e cole no app do seu banco):", MARGEM_ESQUERDA + 2, y);
-        y += 6;
-        doc.setFont("courier", "bold");
-        doc.text(PIX_KEY, MARGEM_ESQUERDA + 2, y);
-        doc.setFont("helvetica", "normal");
-    }
 
-    // 6. Rodapé
-    doc.setDrawColor(150);
-    doc.line(MARGEM_ESQUERDA, 275, MARGEM_ESQUERDA + LARGURA, 275);
-    doc.setFontSize(8);
-    doc.setTextColor(100, 100, 100);
-    doc.text("Guarde este comprovante e o número de protocolo para futuras consultas.", 105, 280, { align: "center" });
-    doc.text("Página gerada automaticamente pelo sistema do bolão - " + new Date().toLocaleDateString(), 105, 284, { align: "center" });
+        // 5. Seção PIX (Usando NotoSans para o emoji)
+        if (apostaData.status === "AGUARDANDO PAGAMENTO") {
+            y += 10;
+            
+            if (y > 240) {
+                doc.addPage();
+                y = 30;
+            }
 
-    // 7. Salvar
-    const nomeArquivo = `Comprovante_${apostaData.protocolo}.pdf`;
-    doc.save(nomeArquivo);
-});
+            doc.setFillColor(...COR_FUNDO_CINZA);
+            doc.rect(MARGEM_ESQUERDA, y - 5, LARGURA, 30, 'F');
 
-carregarComprovante(protocolo);
+            doc.setFont(FONT_UNICODE, "bold"); // NotoSans para o emoji
+            doc.setFontSize(14);
+            doc.setTextColor(...COR_AZUL);
+            doc.text("💲 Dados para Pagamento via PIX", MARGEM_ESQUERDA + 2, y);
+            doc.setTextColor(0, 0, 0);
+
+            doc.setFontSize(11);
+            doc.setFont("helvetica", "normal");
+            y += 7;
+            doc.text("Chave PIX (Copie e cole no app do seu banco):", MARGEM_ESQUERDA + 2, y);
+            y += 6;
+            doc.setFont("courier", "bold");
+            doc.text(PIX_KEY, MARGEM_ESQUERDA + 2, y);
+            doc.setFont("helvetica", "normal");
+        }
+
+        // 6. Rodapé
+        doc.setDrawColor(150);
+        doc.line(MARGEM_ESQUERDA, 275, MARGEM_ESQUERDA + LARGURA, 275);
+        doc.setFontSize(8);
+        doc.setTextColor(100, 100, 100);
+        doc.text("Guarde este comprovante e o número de protocolo para futuras consultas.", 105, 280, { align: "center" });
+        doc.text("Página gerada automaticamente pelo sistema do bolão - " + new Date().toLocaleDateString(), 105, 284, { align: "center" });
+
+        // 7. Salvar
+        const nomeArquivo = `Comprovante_${apostaData.protocolo}.pdf`;
+        doc.save(nomeArquivo);
+    });
+
+    carregarComprovante(protocolo);
 });
