@@ -184,9 +184,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
 
+    // 💡 ADICIONE ESTAS DUAS LINHAS AQUI 💡
+    // Isso registra a fonte NotoSans (assumindo que o script foi carregado no HTML)
+    // e a define como fonte principal, suportando o Unicode (emojis).
+    doc.addFont('NotoSans-normal.js', 'NotoSans', 'normal');
+    doc.setFont('NotoSans'); 
+    // ------------------------------------
+
     // 🚨 ATENÇÃO: Use o nome da fonte Unicode que você carregou
-    // Se a fonte for carregada corretamente, o nome NotoSans deve funcionar.
-    const FONT_UNICODE = 'NotoSans'; 
+    const FONT_UNICODE = 'NotoSans';
     
     // Cores
     const COR_AZUL = [0, 80, 150];
