@@ -18,7 +18,7 @@ logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO,
 # 2. CONFIGURAÇÃO DE ACESSO E SELETORES
 # =================================================================
 
-APPS_SCRIPT_BASE_URL = "https://script.google.com/macros/s/AKfycbylsOPklfzElA8ZYF7wYneORp5nWymkrnDzXhVK-onsnb9PXze16S50yVbu059g_w4tLA/exec"
+APPS_SCRIPT_BASE_URL = "https://script.google.com/macros/s/AKfycbyuX4NxUodwTALVVsFMvDHFhrgV-tR4MBTZA_xdJd2rXLg5qIj1CSg3yXghM66JpWSm/exec"
 FINAL_API_URL = f"{APPS_SCRIPT_BASE_URL}?action=getAllJogos"
 
 URL_MEGA = "https://www.loteriasonline.caixa.gov.br/silce-web/#/mega-sena/especial"
@@ -210,4 +210,5 @@ def automatizar_apostas(jogos_para_apostar):
 
 if __name__ == "__main__":
     jogos_lidos = ler_jogos_da_planilha(FINAL_API_URL)
+
     automatizar_apostas(jogos_lidos)
