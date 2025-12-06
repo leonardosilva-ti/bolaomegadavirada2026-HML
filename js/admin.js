@@ -29,8 +29,8 @@ const btnConferir = el("btnConferir");
 const resultadoConferencia = el("resultadoConferencia");
 const areaRateio = el("areaRateio");
 const inputValorPremio = el("valorPremio");
-const btnCalcular = el("btnCalcular"); // Corrigido
-const resultado = el("resultado"); // Corrigido
+const btnCalcular = el("btnCalcular");
+const resultado = el("resultado");
 
 const btnAtualizar = el("btnAtualizar");
 const btnLogout = el("btnLogout");
@@ -333,7 +333,7 @@ btnSalvarExcedentes?.addEventListener("click", async()=>{
     // Captura os valores ATUAIS do DOM
     const grids = excedentesContainer.querySelectorAll("div[data-index]");
     const dados = Array.from(grids).map(grid =>
-        Array.from(grid.querySelectorAll("input")).map(i => i.value.trim())
+        Array.from(grid.querySelectorAll("input")).map(i => i.value.trim()) // Remove padStart para ordenar como números
     );
 
     for(const jogo of dados){
@@ -486,7 +486,9 @@ btnConferir?.addEventListener("click",()=>{
 });
 
 // ================== RATEIO ==================
-btnCalcular?.addEventListener("click",()=>{
+
+// 🚨 CORREÇÃO APLICADA: Substituindo btnCalcularRateio por btnCalcular
+btnCalcular?.addEventListener("click",()=>{ 
     const total=parseFloat(inputValorPremio.value);
     const pagos=document.rateioData?.totalPagos||0;
 
@@ -495,7 +497,7 @@ btnCalcular?.addEventListener("click",()=>{
 
     const porPessoa=total/pagos;
     
-    // --- NOVIDADE: FORMATANDO OS VALORES (com ponto e vírgula) ---
+    // --- FORMATANDO OS VALORES ---
     
     // 1. Formata o valor total
     const totalFormatado = total.toLocaleString('pt-BR', {
@@ -513,7 +515,7 @@ btnCalcular?.addEventListener("click",()=>{
     mostrarRateio(`💵 R$ ${totalFormatado} / ${pagos} → R$ ${porPessoaFormatado} por participante.`, "green");
 });
 
-// FUNÇÃO RESTAURADA E CORRIGIDA
+// FUNÇÃO UTILITÁRIA RESTAURADA E NECESSÁRIA PARA O RATEIO
 function mostrarRateio(msg,cor){
     resultado.textContent=msg;
     resultado.style.color=cor;
