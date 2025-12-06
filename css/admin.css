@@ -121,7 +121,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; background: #ddd !important
 #jogoSorteContainer, #excedentesContainer {
     display: flex;
     justify-content: center;
-    align-items: center; /* Adicionado para alinhamento central */
     gap: 10px;
     flex-wrap: wrap;
     margin-bottom: 1rem;
@@ -181,17 +180,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; background: #ddd !important
 .jogo-numero:hover { transform: scale(1.1); }
 
 /* Inputs Excedentes e Conferência */
-/* Ajustado para layout flex centralizado, compatível com as classes Tailwind-like no HTML */
-#conferenciaContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    max-width: 400px;
-    margin: 1rem auto;
-}
-.input-jogo-excedente {
+.input-jogo-excedente, #conferenciaContainer {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 8px;
@@ -237,57 +226,12 @@ thead { background-color: #4f46e5; color: white; }
 .bg-indigo-600 { background-color: #4f46e5; }
 .text-white { color: #fff; }
 
-/* =========================================
-   NOVAS FUNCIONALIDADES: Toggle de Jogos e Paginação
-   ========================================= */
-
-/* Estilos para o input de Pesquisa */
-.flex.gap-2.mb-3.items-center {
-    align-items: flex-end; /* Alinha o input de pesquisa e o botão */
-}
-#inputPesquisa {
-    min-width: 150px;
-    height: 38px; /* Alinha a altura com o botão de atualização */
-}
-
-/* Linha de jogos escondida por padrão (Toggle) */
-.jogos-participante {
-    display: none;
-    background-color: #f9f9f9;
-    font-family: monospace;
-    font-size: 0.85rem;
-    padding: 5px 12px;
-    border-top: 1px dashed #e0e0e0;
-}
-.jogos-participante.visible {
-    display: table-row; /* Para exibir como linha da tabela */
-}
-/* Estilo para garantir que o botão "Mostrar Jogos" fique alinhado */
-.nome-coluna {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-}
-
-/* Paginação */
-#paginationControls {
-    padding: 10px 0;
-    font-size: 0.95rem;
-}
-#paginationControls button {
-    padding: 6px 10px;
-}
-
-
 /* Responsividade */
 @media (max-width: 600px) {
     .resumo-grid { flex-direction: column; align-items: center; }
     .resumo-item { width: 80%; justify-content: center; }
     #jogoSorteInputs { flex-wrap: wrap; justify-content: center; }
-    
-    /* Esta regra foi substituída abaixo, mas mantida para garantir compatibilidade */
-    .input-jogo-excedente, #conferenciaContainer { max-width: 100%; } 
+    .input-jogo-excedente, #conferenciaContainer { max-width: 100%; grid-template-columns: repeat(6, 1fr); }
 }
 
 /* ============================
@@ -326,17 +270,6 @@ thead { background-color: #4f46e5; color: white; }
       font-size: 16px; /* evita zoom automático do iOS */
   }
 
-  /* --- PESQUISA E ATUALIZAR (TELA PEQUENA) --- */
-  .flex.gap-2.mb-3.items-center {
-      flex-direction: column;
-      align-items: stretch;
-  }
-  #inputPesquisa, #btnAtualizar {
-      width: 100%;
-      margin-top: 0;
-      padding: 8px 12px;
-  }
-
   /* --- RESUMO DO BOLÃO --- */
   .resumo-card {
       padding: 20px 14px;
@@ -362,15 +295,12 @@ thead { background-color: #4f46e5; color: white; }
       font-size: 1rem;
   }
 
-  /* Conversão para 3 colunas em telas pequenas */
+  /* Grid de 6 colunas vira 3 (melhor leitura) */
   .input-jogo-excedente,
   #conferenciaContainer {
       grid-template-columns: repeat(3, 1fr);
       max-width: 280px;
       gap: 10px;
-      /* Override no modo flex para grid: */
-       display: grid; 
-       justify-content: center; 
   }
 
   /* Jogo da Sorte – números mais espaçados */
@@ -390,15 +320,6 @@ thead { background-color: #4f46e5; color: white; }
       flex-direction: column;
       gap: 10px;
   }
-    /* Exceção para a Paginação, que deve ser horizontal */
-    #paginationControls.flex.justify-between {
-        flex-direction: row;
-        gap: 10px;
-        align-items: center;
-    }
-    #paginationControls button {
-        width: auto;
-    }
 
   .flex.justify-between button {
       width: 100%;
