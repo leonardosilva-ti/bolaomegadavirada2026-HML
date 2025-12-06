@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mega da Virada - Bolão</title>
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+<body>
+  <header class="site-header">
+    <h1>Mega da Virada</h1>
+  </header>
+
+  <main class="container">
+    <!-- Informações do bolão -->
+    <section class="admin-card">
+      <h2>Informações sobre este bolão</h2>
+      <p>
+        O valor da participação no bolão é de <strong>R$ 60,00</strong>.
+        Após cadastrar seus jogos, envie o comprovante de pagamento para o WhatsApp
+        <a href="https://wa.me/5519995155047" target="_blank" class="whatsapp-link">(19) 99515-5047</a>
+        para que possamos confirmar sua participação.
+      </p>
+
+      <p>
+        Os jogos e pagamentos deverão ser realizados até <b>28/12/2025 às 20:00</b>.
+        Após esse horário, não serão mais aceitos participantes e as apostas não pagas serão excluídas.
+      </p>
+
+      <p>
+        Cada participante escolhe <b>5 jogos</b> de <b>6 números</b>, cujo valor total seria de <b>R$ 30,00</b>
+        se fossem feitos individualmente em uma lotérica. Os <b>R$ 30,00 restantes</b> da cota serão destinados
+        a complementar a participação em um <b>Jogo da Sorte com 9 números</b>, que custa <b>R$ 504,00</b> e oferece
+        <b>maiores chances de premiação</b>. Caso o valor arrecadado ultrapasse o necessário, o saldo será utilizado
+        para realizar <b>apostas extras de 6 números</b>, fortalecendo ainda mais as chances do grupo.
+      </p>
+
+      <p>
+        Este é um <b>bolão particular</b> e não está registrado no sistema oficial de bolões da Caixa Econômica Federal.
+        Em caso de premiação, o valor será dividido e repassado diretamente aos participantes pelo organizador.
+      </p>
+
+      <div class="pix-box">
+        <p><strong>Chave PIX para pagamento:</strong></p>
+        <div class="pix-line">
+          <span id="pix-chave">88f77025-40bc-4364-9b64-02ad88443cc4</span>
+          <button id="btnCopiarPix" class="primary small">Copiar</button>
+        </div>
+        <p class="pix-info">Use esta chave para realizar o pagamento da sua aposta.</p>
+      </div>
+    </section>
+
+    <!-- Formulário de cadastro -->
+    <form id="cadastroForm" class="form" onsubmit="return false;">
+      <div class="form-row">
+        <label for="nome">Nome Completo:</label>
+        <input type="text" id="nome" required>
+      </div>
+
+      <div class="form-row">
+        <label for="telefone">Telefone (Whatsapp):</label>
+        <input type="text" id="telefone" placeholder="(DDD) 99999-9999" required>
+      </div>
+
+      <!-- Status dos jogos -->
+      <div id="statusJogosContainer" class="status-jogos-grid"></div>
+
+      <!-- Grade de números -->
+      <div id="numerosContainer" class="numeros-grid"></div>
+
+      <!-- Controles -->
+      <div class="controles">
+        <button type="button" id="btnAnterior" class="muted" disabled>Jogo Anterior</button>
+        <button type="button" id="gerarAleatorios" class="muted">Preencher Aleatoriamente</button>
+        <button type="button" id="btnProximo" class="muted" disabled>Próximo Jogo</button>
+      </div>
+    </form>
+
+    <!-- Mensagem de status -->
+    <div id="mensagem" class="mensagem"></div>
+
+    <!-- Navegação inferior -->
+    <div class="bottom-buttons">
+      <button onclick="window.location.href='consulta.html'">Consultar Jogos</button>
+      <button onclick="window.location.href='admin.html'">Área Administrativa</button>
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

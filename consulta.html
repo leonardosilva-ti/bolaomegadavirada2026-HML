@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta - Bolão da Sorte</title>
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <link rel="stylesheet" href="css/consulta.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Consulta de Jogos</h1>
+  </header>
+
+  <main class="container">
+    <!-- Seção de consulta -->
+    <section class="admin-card">
+      <h2>Consultar por Protocolo</h2>
+      <p>
+        Informe o seu <strong>Número de Protocolo</strong> para consultar seus dados e jogos.
+      </p>
+
+      <div class="form-row">
+        <input id="protocoloInput" type="text" placeholder="Número de Protocolo">
+        <button id="btnConsultar" class="primary">Consultar</button>
+      </div>
+    </section>
+
+    <!-- Resultado da consulta -->
+    <div id="resultado" class="resultado"></div>
+  </main>
+
+  <div class="bottom-buttons">
+    <button onclick="window.location.href='index.html'">Voltar</button>
+  </div>
+
+  <script src="js/consulta.js"></script>
+  
+</body>
+
+</html>

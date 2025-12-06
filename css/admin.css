@@ -1,0 +1,391 @@
+/* admin.css - Estilos específicos para a Área Administrativa */
+
+/* Variáveis e Reset Básico */
+:root {
+    --accent: #0072e3; /* Cor principal (azul) */
+    --muted: #f2f2f2; /* Cinza claro para botões e fundos */
+    --danger: #c62828; /* Vermelho para ações de risco */
+    --text: #222;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    margin: 0;
+    color: var(--text);
+}
+
+/* Layout e Componentes Principais */
+.site-header {
+    background: var(--accent);
+    color: #fff;
+    padding: 16px;
+    text-align: center;
+    font-size: 24px;
+}
+
+/* Containers principais */
+.container {
+    max-width: 950px;
+    background: #fff;
+    margin: 24px auto;
+    padding: 22px;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+}
+
+/* Classes utilitárias Tailwind-like */
+.bg-gray-100 { background-color: #f3f4f6; }
+.text-gray-900 { color: #111827; }
+.max-w-4xl { max-width: 950px; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.p-6 { padding: 1.5rem; }
+.max-w-md { max-width: 28rem; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.font-semibold { font-weight: 600; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.pt-3 { padding-top: 0.75rem; }
+.border-t { border-top: 1px solid #e5e7eb; }
+.text-center { text-align: center; }
+.text-red-500 { color: #ef4444; }
+.text-green-600 { color: #16a34a; }
+.text-sm { font-size: 0.875rem; }
+.hidden { display: none !important; }
+.flex { display: flex; }
+.gap-2 { gap: 0.5rem; }
+.flex-wrap { flex-wrap: wrap; }
+.justify-between { justify-content: space-between; }
+.grid { display: grid; }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.flex-1 { flex: 1 1 0%; }
+
+/* Inputs e Botões */
+.border { border: 1px solid #ccc; }
+.p-2 { padding: 0.5rem; }
+.w-full { width: 100%; }
+.rounded { border-radius: 0.25rem; }
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+button.primary { background: var(--accent); color: #fff; padding: 10px 16px; }
+button.primary:hover { background: #005bb5; }
+button.muted { background: var(--muted); color: #333; padding: 8px 12px; }
+button.muted:hover { background: #e0e0e0; }
+button.danger { background: var(--danger); color: #fff; padding: 8px 12px; }
+button.danger:hover { background: #b02323; }
+button.small { font-size: 13px; padding: 6px 10px; line-height: 1; margin-top: 5px; }
+button:disabled { opacity: 0.6; cursor: not-allowed; background: #ddd !important; color: #666 !important; border: 1px solid #ccc !important; }
+
+/* Cards administrativos */
+.admin-card, .jogo-sorte-card {
+    background: #fff;
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    line-height: 1.4;
+}
+
+/* Resumo do Bolão */
+.resumo-card {
+    background: linear-gradient(135deg, #4f46e5, #3b82f6);
+    color: #fff;
+    padding: 25px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin-bottom: 25px;
+    text-align: center;
+}
+.titulo-resumo { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
+.resumo-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
+.resumo-item { display: flex; align-items: center; gap: 12px; background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 15px 20px; min-width: 160px; transition: transform 0.2s ease, background 0.2s ease; }
+.resumo-item:hover { transform: translateY(-4px); background: rgba(255, 255, 255, 0.25); }
+.resumo-icone { font-size: 2rem; }
+.resumo-info { text-align: left; }
+.resumo-label { font-size: 0.9rem; opacity: 0.9; display: block; }
+.resumo-numero { font-size: 1.6rem; font-weight: bold; line-height: 1.2; }
+
+/* ===== Jogo da Sorte e Jogos Excedentes ===== */
+#jogoSorteContainer, #excedentesContainer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+/* Inputs Jogo da Sorte (horizontal) */
+#jogoSorteInputs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.input-numero {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    -moz-appearance: textfield;
+}
+
+/* Remove spinners */
+.input-numero::-webkit-outer-spin-button,
+.input-numero::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Container dos números do jogo da sorte (visual) */
+.jogo-numero-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.jogo-numero {
+    background: #4f46e5;
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: default;
+    transition: transform 0.15s ease;
+}
+.jogo-numero:hover { transform: scale(1.1); }
+
+/* Inputs Excedentes e Conferência */
+.input-jogo-excedente, #conferenciaContainer {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    max-width: 360px;
+    margin: 1rem auto;
+}
+
+.input-jogo-excedente input, #conferenciaContainer input {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    -moz-appearance: textfield;
+}
+
+.input-jogo-excedente input::-webkit-outer-spin-button,
+.input-jogo-excedente input::-webkit-inner-spin-button,
+#conferenciaContainer input::-webkit-outer-spin-button,
+#conferenciaContainer input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Conferência e rateio */
+.resultado-premio {
+    padding: 10px;
+    border: 1px dashed #ccc;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+.resultado-premio h4 { margin-top: 0; margin-bottom: 5px; color: #0072e3; }
+.resultado-premio h5 { margin-bottom: 5px; color: #16a34a; }
+.resultado-premio hr { margin: 8px 0; }
+.loading { color: #666; font-style: italic; }
+
+/* Tabela de Participantes */
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid #ccc; padding: 8px 12px; line-height: 1.3; }
+thead { background-color: #4f46e5; color: white; }
+.bg-indigo-600 { background-color: #4f46e5; }
+.text-white { color: #fff; }
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .resumo-grid { flex-direction: column; align-items: center; }
+    .resumo-item { width: 80%; justify-content: center; }
+    #jogoSorteInputs { flex-wrap: wrap; justify-content: center; }
+    .input-jogo-excedente, #conferenciaContainer { max-width: 100%; grid-template-columns: repeat(6, 1fr); }
+}
+
+/* ============================
+   OPTIMIZAÇÃO COMPLETA MOBILE
+   ============================ */
+
+/* --- Container principal mais fluido --- */
+@media (max-width: 700px) {
+
+  .container {
+      padding: 16px;
+      margin: 12px;
+      width: calc(100% - 24px);
+  }
+
+  /* Reduz padding dos cards */
+  .admin-card, .jogo-sorte-card {
+      padding: 14px;
+      margin-bottom: 16px;
+  }
+
+  /* Título menor para caber melhor */
+  .site-header {
+      font-size: 20px;
+      padding: 14px;
+  }
+
+  /* --- LOGIN --- */
+  #loginArea {
+      width: 100%;
+      max-width: 380px;
+      padding: 16px;
+  }
+
+  input, button {
+      font-size: 16px; /* evita zoom automático do iOS */
+  }
+
+  /* --- RESUMO DO BOLÃO --- */
+  .resumo-card {
+      padding: 20px 14px;
+  }
+
+  .titulo-resumo {
+      font-size: 1.3rem;
+  }
+
+  .resumo-item {
+      width: 100%;
+      min-width: auto;
+      justify-content: center;
+      padding: 12px;
+  }
+
+  /* --- Inputs numéricos (Jogo da Sorte / Excedentes / Conferência) --- */
+  .input-numero,
+  .input-jogo-excedente input,
+  #conferenciaContainer input {
+      width: 42px;
+      height: 42px;
+      font-size: 1rem;
+  }
+
+  /* Grid de 6 colunas vira 3 (melhor leitura) */
+  .input-jogo-excedente,
+  #conferenciaContainer {
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 280px;
+      gap: 10px;
+  }
+
+  /* Jogo da Sorte – números mais espaçados */
+  #jogoSorteContainer,
+  .jogo-numero-container {
+      gap: 6px;
+  }
+
+  .jogo-numero {
+      width: 38px;
+      height: 38px;
+      font-size: 0.95rem;
+  }
+
+  /* --- Botões alinhados verticalmente em telas pequenas --- */
+  .flex.justify-between {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .flex.justify-between button {
+      width: 100%;
+  }
+
+  /* --- TABELA --- */
+  #tabelaParticipantes {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+      min-width: 600px; /* evita quebra feia */
+      font-size: 15px;
+  }
+
+  th, td {
+      padding: 8px;
+  }
+
+  td small {
+      font-size: 13px;
+  }
+
+  /* Botões da tabela empilhados */
+  td button.small {
+      margin: 4px 0;
+      width: 100%;
+  }
+
+  /* --- Rateio --- */
+  #areaRateio {
+      padding-top: 16px;
+  }
+
+  #valorPremio {
+      font-size: 16px;
+  }
+}
+
+/* =======================
+   MOBILE ULTRA-CURTO
+   <= 400px (celulares pequenos)
+   ======================= */
+@media (max-width: 400px) {
+
+  .input-numero {
+      width: 36px;
+      height: 36px;
+  }
+
+  .jogo-numero {
+      width: 34px;
+      height: 34px;
+      font-size: 0.85rem;
+  }
+
+  .resumo-item {
+      padding: 10px;
+  }
+
+  .container {
+      padding: 12px;
+  }
+
+  table {
+      min-width: 540px;
+  }
+}

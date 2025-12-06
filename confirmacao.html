@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmação da Aposta</title>
+
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/confirmacao.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Confirmação da Aposta</h1>
+  </header>
+
+  <main class="container">
+    <h2>Revise e Confirme seus Dados</h2>
+
+    <div id="dadosConfirmacao" class="card compact"></div>
+    <div id="jogosConfirmacao" class="card compact"></div>
+
+    <section class="observacao compact">
+      <h3>Atenção</h3>
+      <p>
+        Este bolão <b>não é oficial da CAIXA</b>. É uma organização particular — 
+        os jogos são reais, mas registrados em nome do organizador.
+        Em caso de prêmio, o valor será dividido entre os participantes
+        conforme os registros deste site.
+      </p>
+    </section>
+
+    <label class="termos compact">
+      <input type="checkbox" id="aceitoTermos" required>
+      Confirmo que li e aceito os termos acima.
+    </label>
+
+    <div class="controles compact">
+      <button id="btnVoltar" class="muted">Voltar</button>
+      <button id="btnConfirmar" class="primary" disabled>Confirmar Aposta</button>
+    </div>
+
+    <p id="mensagem" class="mensagem"></p>
+  </main>
+
+  <script src="js/confirmacao.js"></script>
+</body>
+</html>

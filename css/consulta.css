@@ -1,0 +1,301 @@
+/* ======= CONSULTA - VISUAL OTIMIZADO PARA MOBILE ======= */
+
+body {
+  background-color: #f5f7fb;
+  color: #1f2937;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* --- CABEÇALHO --- */
+header.site-header {
+  background: #0072e3;
+  color: white;
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* --- CONTAINER PRINCIPAL --- */
+.container {
+  width: 100%;
+  max-width: 900px;
+  background: #fff;
+  margin-top: 0.8rem;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* --- CARTÃO DE INFORMAÇÕES --- */
+.admin-card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+  line-height: 1.45;
+}
+
+.admin-card h2 {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.15rem;
+  color: #1e3a8a;
+}
+
+.admin-card p {
+  font-size: 0.95rem;
+  margin: 0.4rem 0;
+}
+
+/* --- FORMULÁRIO DE CONSULTA --- */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 0.8rem;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+}
+
+button.primary {
+  background: #0072e3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button.primary:hover {
+  background: #005fc1;
+}
+
+/* --- RESULTADO DA CONSULTA --- */
+.resultado {
+  margin-top: 1rem;
+}
+
+.card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  margin-top: 0.9rem;
+  text-align: left;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #333;
+  margin: 3px 0;
+}
+
+.card p strong {
+  color: #111;
+}
+
+/* --- STATUS + PIX --- */
+.status {
+  color: #0072e3;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.pix-box {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.8rem;
+  text-align: center;
+  margin: 0.8rem 0;
+}
+
+#pix-chave {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: #2563eb;
+  overflow-wrap: anywhere;
+}
+
+.btn-copiar {
+  background: #0072e3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background 0.2s;
+}
+
+.btn-copiar:hover {
+  background: #005fc1;
+}
+
+.pix-info {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 8px;
+}
+
+/* --- JOGO DA SORTE E TODOS OS JOGOS --- */
+.jogo-sorte-container,
+.jogos-bolao-container {
+  text-align: center;
+  margin-top: 1.2rem;
+}
+
+.jogo-sorte-container h3,
+.jogos-bolao-container h3 {
+  font-size: 1.1rem;
+  color: #111827;
+  margin-bottom: 0.8rem;
+}
+
+/* Números do jogo da sorte */
+.jogo-sorte-numeros {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Números dos jogos */
+.jogos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  justify-content: center;
+  margin-top: 0.6rem;
+}
+
+/* Cada cartão de jogo (sem retângulo grande externo) */
+.jogo-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* ======= AVISO ACIMA DOS JOGOS ======= */
+.aviso-bolao {
+  background: #fff3cd;
+  color: #7c5400;
+  border: 1px solid #ffeeba;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+
+/* Bolinhas dos números */
+.jogo-sorte-numeros span,
+.jogo-card span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #4f46e5;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* --- BOTÕES INFERIORES --- */
+.bottom-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px auto;
+}
+
+.bottom-buttons button {
+  background-color: #0072e3;
+  color: #fff !important;
+  font-weight: 600;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.bottom-buttons button:hover {
+  background-color: #005ec0;
+  transform: translateY(-2px);
+}
+
+.bottom-buttons button:active {
+  background-color: #004b9e;
+  transform: scale(0.97);
+}
+
+/* Estilo para bolinhas vazias (hífen) */
+.jogo-sorte-numeros .empty {
+    background-color: #e5e7eb; /* Fundo cinza claro */
+    color: #6b7280; /* Cor do hífen cinza */
+    border: 1px dashed #d1d5db; /* Borda tracejada */
+    font-weight: normal;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 600px) {
+  .container {
+    padding: 0.8rem;
+  }
+
+  .jogos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bottom-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .bottom-buttons button {
+    width: 100%;
+  }
+
+  .jogo-card span,
+  .jogo-sorte-numeros span {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+  }
+}

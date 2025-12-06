@@ -1,0 +1,328 @@
+/* ======= INDEX OTIMIZADO PARA MOBILE ======= */
+
+/* --- BASE --- */
+body {
+  background-color: #f5f7fb;
+  color: #1f2937;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* --- HEADER --- */
+header.site-header {
+  background: #0072e3;
+  color: white;
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* --- CONTAINER GERAL --- */
+.container {
+  width: 100%;
+  max-width: 900px;
+  background: #fff;
+  margin-top: 0.9rem;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  overflow-x: hidden;
+}
+
+/* ===== ADMIN CARD ===== */
+.admin-card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 0.8rem;
+  line-height: 1.45;
+  font-size: 1rem;
+}
+
+.admin-card h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  color: #1e3a8a;
+}
+
+.admin-card p {
+  margin: 0.45rem 0;
+  text-align: justify;
+}
+
+/* Links */
+.whatsapp-link {
+  color: #16a34a;
+  font-weight: 600;
+  text-decoration: none;
+}
+.whatsapp-link:hover {
+  text-decoration: underline;
+  color: #128c7e;
+}
+
+/* ===== PIX ===== */
+.pix-box {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.9rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.pix-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 0.4rem;
+}
+
+#pix-chave {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.95rem;
+  color: #2563eb;
+  overflow-wrap: anywhere;
+}
+
+#btnCopiarPix {
+  background: #0072e3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* ===== FORMULÁRIO ===== */
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 0.9rem;
+}
+
+label {
+  font-weight: 600;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+}
+
+/* ===== STATUS DOS JOGOS ===== */
+.status-jogos-grid {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 14px 0;
+  flex-wrap: wrap;
+}
+
+.status-jogo-btn {
+  background: #6c757d;
+  color: #fff;
+  padding: 7px 16px;
+  border-radius: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  font-size: 0.92rem;
+}
+
+.status-jogo-btn.ativo {
+  background: #ff9800;
+}
+.status-jogo-btn.preenchido {
+  background: #28a745;
+}
+
+/* ===== GRADE DE NÚMEROS ===== */
+.numeros-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 6px;
+  margin: 1rem 0;
+}
+
+.numeros-grid button {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 9px 0;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.numeros-grid button.selected {
+  background: #0072e3;
+  color: #fff;
+}
+
+/* ===== CONTROLES ===== */
+.controles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+button.primary,
+button.muted {
+  border: none;
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button.primary {
+  background: #0072e3;
+  color: #fff;
+}
+button.muted {
+  background: #f3f4f6;
+  color: #333;
+}
+
+/* ===== BOTÕES INFERIORES ===== */
+.bottom-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 10px 0;
+}
+
+.bottom-buttons button {
+  background-color: #0072e3;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 350px;
+}
+
+/* ============================
+   RESPONSIVO
+   ============================ */
+
+@media (max-width: 600px) {
+
+  header.site-header {
+    font-size: 1.35rem;
+  }
+
+  .container {
+    padding: 0.8rem;
+  }
+
+  /* Grade fica 6 colunas (melhor toque) */
+  .numeros-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .numeros-grid button {
+    padding: 10px 0;
+    font-size: 1rem;
+  }
+
+  .status-jogo-btn {
+    padding: 8px 16px;
+    font-size: 1rem;
+  }
+
+  .bottom-buttons button {
+    width: 100%;
+  }
+}
+
+/* CELULARES MUITO PEQUENOS */
+@media (max-width: 380px) {
+  .numeros-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Corrige alinhamento da área PIX */
+.pix-box p,
+.pix-box strong,
+.pix-info {
+    text-align: center !important;
+}
+
+.admin-card .pix-box p {
+    text-align: center !important;
+}
+
+/* ===== Botões inferiores estilizados ===== */
+
+.bottom-buttons button {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 350px;
+}
+
+/* Botão CONSULTAR JOGOS */
+.bottom-buttons button:nth-child(1) {
+    background-color: #065f46; /* Verde escuro elegante */
+    color: #fff;
+}
+
+/* Adiciona lupa antes e depois do texto */
+.bottom-buttons button:nth-child(1)::before,
+.bottom-buttons button:nth-child(1)::after {
+    content: "🔍";
+    margin: 0 6px;
+}
+
+/* Hover do verde */
+.bottom-buttons button:nth-child(1):hover {
+    background-color: #064e3b;
+}
+
+/* Botão ÁREA ADMINISTRATIVA */
+.bottom-buttons button:nth-child(2) {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Hover preto */
+.bottom-buttons button:nth-child(2):hover {
+    background-color: #111;
+}
