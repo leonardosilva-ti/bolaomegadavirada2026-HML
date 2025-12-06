@@ -1,4 +1,4 @@
-// === /js/admin.js - ADMIN COMPLETO (COM CORREÇÃO DOS IDS HTML/JS) ===
+// === /js/admin.js - ADMIN COMPLETO (COM CORREÇÕES DE IDS E OTIMIZAÇÃO DA LISTA) ===
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyuX4NxUodwTALVVsFMvDHFhrgV-tR4MBTZA_xdJd2rXLg5qIj1CSg3yXghM66JpWSm/exec";
 
 const el = id => document.getElementById(id);
@@ -29,19 +29,23 @@ const btnConferir = el("btnConferir");
 const resultadoConferencia = el("resultadoConferencia");
 const areaRateio = el("areaRateio");
 const inputValorPremio = el("valorPremio");
-// 🚨 CORREÇÃO DE ID PARA btnCalcularRateio
+// CORREÇÃO DE ID PARA btnCalcularRateio
 const btnCalcular = el("btnCalcularRateio");
-// 🚨 CORREÇÃO DE ID PARA resultadoRateio
+// CORREÇÃO DE ID PARA resultadoRateio
 const resultado = el("resultadoRateio");
+
+// NOVO: Pesquisa
+const inputPesquisa = el("inputPesquisa"); 
 
 const btnAtualizar = el("btnAtualizar");
 const btnLogout = el("btnLogout");
 
-// ==== VARIÁVEIS GLOBAIS CORRIGIDAS ====
+// ==== VARIÁVEIS GLOBAIS ====
 let todosDados = [];
 let jogoSorteAtual = [];         // array de strings '01','02',...
 let jogosExcedentes = [];        // array de arrays [['01','02',...], ['..'], ...] - USADO APENAS PELA CONFERÊNCIA
 let jogosExcedentesEmEdicao = []; // NOVO ARRAY: USADO PARA A INTERFACE DE EDIÇÃO/CADASTRO.
+
 let accessToken = localStorage.getItem("adminToken") || null;
 
 // ================== FUNÇÃO DE LOG PARA PLANILHA ==================
@@ -144,10 +148,10 @@ async function carregarParticipantes() {
         countParticipantes.textContent = todosDados.length;
         countJogos.textContent = todosDados.reduce((acc,p) => acc + (p.Jogos?.split('|').length||0),0);
 
-        renderTabela(todosDados);
+        // Renderiza a lista completa
+        renderTabela(todosDados); 
 
         // ==== Jogo da Sorte ====
-        // Normaliza para array de strings '01'
         if (data.jogoDaSorte) {
             jogoSorteAtual = Array.from(new Set(String(data.jogoDaSorte).split(/\s+/).filter(Boolean)))
                 .map(n => n.toString().padStart(2,'0'));
@@ -185,25 +189,98 @@ async function carregarParticipantes() {
 
 btnAtualizar?.addEventListener("click", carregarParticipantes);
 
-// ================== TABELA PARTICIPANTES ==================
-function renderTabela(dados) {
-    if (!dados.length) {
-        listaParticipantes.innerHTML = `<tr><td colspan="4" class="text-center py-4">Nenhum participante encontrado.</td></tr>`;
-        return;
-    }
+// ================== TABELA PARTICIPANTES (OTIMIZADA) ==================
 
-    listaParticipantes.innerHTML = dados.map(p => `
-        <tr>
-            <td class="py-2 px-3 border">${p.Nome}<br><small>${p.Jogos?.split('|').join('<br>')}</small></td>
-            <td class="py-2 px-3 border text-center">${p.Protocolo}</td>
-            <td class="py-2 px-3 border text-center ${p.Status==="PAGO"?"text-green-600":"text-red-500"}">${p.Status||"AGUARDANDO"}</td>
-            <td class="py-2 px-3 border text-center">
-                <button class="primary small" onclick="confirmarPagamento('${p.Protocolo}')">💰 Confirmar</button><br>
-                <button class="danger small" onclick="excluirParticipante('${p.Protocolo}')">🗑 Excluir</button>
-            </td>
-        </tr>
-    `).join("");
+function renderTabela(dados) {
+    if (!dados.length) {
+        listaParticipantes.innerHTML = `<tr><td colspan="4" class="text-center py-4">Nenhum participante encontrado.</td></tr>`;
+        return;
+    }
+    
+    listaParticipantes.innerHTML = dados.map(p => {
+        // Separa os jogos por quebra de linha para exibição na linha escondida
+        const jogosHtml = p.Jogos ? p.Jogos.split('|').join('<br>') : 'Nenhum jogo cadastrado.';
+        
+        return `
+            <tr data-protocolo="${p.Protocolo}">
+                <td class="py-2 px-3 border">
+                    <div class="nome-coluna">
+                        <strong>${p.Nome}</strong>
+                        <button class="muted small btn-toggle-jogos" data-protocolo="${p.Protocolo}">+ Mostrar jogos</button>
+                    </div>
+                </td>
+                <td class="py-2 px-3 border text-center">${p.Protocolo}</td>
+                <td class="py-2 px-3 border text-center ${p.Status==="PAGO"?"text-green-600":"text-red-500"}">${p.Status||"AGUARDANDO"}</td>
+                <td class="py-2 px-3 border text-center">
+                    <button class="primary small" onclick="confirmarPagamento('${p.Protocolo}')">💰 Confirmar</button><br>
+                    <button class="danger small" onclick="excluirParticipante('${p.Protocolo}')">🗑 Excluir</button>
+                </td>
+            </tr>
+            <tr class="jogos-participante" id="jogos-${p.Protocolo}">
+                <td colspan="4" class="py-2 px-3 border">
+                    ${jogosHtml}
+                </td>
+            </tr>
+        `;
+    }).join("");
 }
+
+// ================== FUNÇÃO DE TOGGLE (NOVA) ==================
+
+/** Alterna a visibilidade dos jogos para um protocolo específico. */
+window.toggleJogos = (protocolo) => {
+    const linhaJogos = el(`jogos-${protocolo}`);
+    const botao = document.querySelector(`.btn-toggle-jogos[data-protocolo='${protocolo}']`);
+
+    if (linhaJogos) {
+        // Toggle da classe 'visible' (definida no CSS)
+        linhaJogos.classList.toggle('visible');
+
+        // Atualiza o texto e a cor do botão
+        if (linhaJogos.classList.contains('visible')) {
+            botao.textContent = '- Esconder jogos';
+            botao.classList.remove('muted');
+            botao.classList.add('primary');
+        } else {
+            botao.textContent = '+ Mostrar jogos';
+            botao.classList.remove('primary');
+            botao.classList.add('muted');
+        }
+    }
+};
+
+// Adiciona listener de evento DENTRO da tabela para lidar com o clique nos botões de toggle
+listaParticipantes.addEventListener('click', (e) => {
+    const target = e.target;
+    // Verifica se o elemento clicado tem a classe do botão de toggle
+    if (target.classList.contains('btn-toggle-jogos')) {
+        const protocolo = target.dataset.protocolo;
+        window.toggleJogos(protocolo);
+    }
+});
+
+
+// ================== PESQUISA E FILTRO (NOVA) ==================
+
+inputPesquisa?.addEventListener('keyup', () => {
+    const termo = inputPesquisa.value.toLowerCase().trim();
+    
+    if (termo === "") {
+        // Se o termo estiver vazio, renderiza todos os dados originais
+        renderTabela(todosDados);
+        return;
+    }
+    
+    // Filtra a lista completa (todosDados)
+    const filtrados = todosDados.filter(p => 
+        p.Nome.toLowerCase().includes(termo) || 
+        p.Protocolo.toLowerCase().includes(termo)
+    );
+    
+    // Renderiza apenas os participantes filtrados
+    renderTabela(filtrados);
+});
+
 
 // ================== AÇÕES CONFIRMAR / EXCLUIR ==================
 window.confirmarPagamento = async protocolo => {
@@ -239,7 +316,7 @@ async function postAction(action, params) {
         }
 
         // recarrega dados após ação (backend já atualizou)
-        // 🚨 Impedir recarregamento após um log, pois isso é apenas depuração.
+        // Impedir recarregamento após um log, pois isso é apenas depuração.
         if (action !== 'log') { 
             carregarParticipantes();
         }
@@ -385,7 +462,7 @@ btnSalvarExcedentes?.addEventListener("click", async()=>{
         return;
     }
 
-    // 🚨 CORREÇÃO: Ordena e formata com padStart
+    // CORREÇÃO: Ordena e formata com padStart
     const jogosStrings = dados.map(arr => {
         // Converte para número, ordena e depois formata de volta para string com zero à esquerda
         return arr.map(Number)
@@ -431,7 +508,7 @@ function capturarConferencia(){
 btnConferir?.addEventListener("click",()=>{
     const sorteados=capturarConferencia();
     
-    // 🚨 LOG: Capturando os números sorteados
+    // LOG: Capturando os números sorteados
     logToSheet(`Início da Conferência. Números Sorteados Digitados: ${sorteados.join(' ')}`);
 
     if(sorteados.length!==6) {
@@ -510,7 +587,7 @@ btnConferir?.addEventListener("click",()=>{
         }
     });
 
-    // 🚨 LOG: Enviando resumo dos acertos e dados
+    // LOG: Enviando resumo dos acertos e dados
     logToSheet(`Resumo: Sorteados: ${sorteados.join(' ')}. Premiados (Sena: ${logSummary.acertos.sena}, Quina: ${logSummary.acertos.quina}, Quadra: ${logSummary.acertos.quadra}). Total Pagos: ${todosDados.filter(p=>p.Status==='PAGO').length}.`);
 
 
