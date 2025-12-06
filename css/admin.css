@@ -360,6 +360,33 @@ thead { background-color: #4f46e5; color: white; }
   }
 }
 
+/* Estilos para otimização da Tabela */
+
+/* Linha de jogos escondida por padrão */
+.jogos-participante {
+    display: none;
+    background-color: #f9f9f9;
+    font-family: monospace;
+    font-size: 0.85rem;
+    padding: 5px 12px;
+    border-top: 1px dashed #e0e0e0;
+}
+.jogos-participante.visible {
+    display: table-row; /* Para exibir como linha da tabela */
+}
+/* Estilo para garantir que o botão "Mostrar Jogos" fique alinhado */
+.nome-coluna {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+/* Estilo para a célula de pesquisa */
+#inputPesquisa {
+    /* Garante que o input de pesquisa se ajuste */
+    min-width: 150px;
+}
+
 /* =======================
    MOBILE ULTRA-CURTO
    <= 400px (celulares pequenos)
