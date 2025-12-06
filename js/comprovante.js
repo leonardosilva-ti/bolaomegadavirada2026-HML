@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // ===== GERAR PDF DO COMPROVANTE CORRIGIDO E MELHORADO =====
+    // ===== GERAR PDF DO COMPROVANTE CORRIGIDO E MELHORADO (v2 com Noto Sans) =====
     btnBaixarPDF.addEventListener("click", () => {
     if (!apostaData) {
         alert("Nenhuma aposta encontrada para gerar o comprovante.");
@@ -184,23 +184,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
 
+    // 🚨 ATENÇÃO: Use o nome da fonte Unicode que você carregou
+    // Se a fonte for carregada corretamente, o nome NotoSans deve funcionar.
+    const FONT_UNICODE = 'NotoSans'; 
+    
     // Cores
-    const COR_AZUL = [0, 80, 150]; // Azul Escuro para títulos
-    const COR_FUNDO_CINZA = [240, 240, 240]; // Cinza Claro para blocos
-    const COR_PAGO = [34, 139, 34]; // Verde
-    const COR_AGUARDANDO = [255, 140, 0]; // Laranja
+    const COR_AZUL = [0, 80, 150];
+    const COR_FUNDO_CINZA = [240, 240, 240];
+    const COR_PAGO = [34, 139, 34];
+    const COR_AGUARDANDO = [255, 140, 0];
 
-    let y = 15; // Ponto de partida
+    let y = 15; 
     const MARGEM_ESQUERDA = 20;
     const LARGURA = 170;
 
-    // 1. Bloco do Título Principal
+    // 1. Bloco do Título Principal (Agora usando a fonte UNICODE)
     doc.setFillColor(...COR_AZUL);
-    doc.rect(0, 0, 210, 30, 'F'); // Faixa Azul no topo
+    doc.rect(0, 0, 210, 30, 'F');
     
+    doc.setFont(FONT_UNICODE, "bold"); // 🚨 MUDEI A FONTE AQUI
     doc.setFontSize(18);
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor(255, 255, 255); // Texto branco
+    doc.setTextColor(255, 255, 255);
     doc.text("🎫 Comprovante Oficial do Bolão", 105, y, { align: "center" });
     
     y += 8;
@@ -209,14 +213,14 @@ document.addEventListener("DOMContentLoaded", () => {
     
     y = 38; // Início do conteúdo
 
-    // 2. Dados do Participante (Em bloco cinza claro para destaque)
+    // 2. Dados do Participante
     const H_DADOS = 40;
     doc.setFillColor(...COR_FUNDO_CINZA);
     doc.rect(MARGEM_ESQUERDA, y - 5, LARGURA, H_DADOS, 'F');
 
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(10);
-    doc.setFont("helvetica", "normal");
+    doc.setFont("helvetica", "normal"); 
     
     doc.text("INFORMAÇÕES DO PARTICIPANTE", MARGEM_ESQUERDA + 2, y);
     doc.setDrawColor(200);
@@ -247,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     y += 15;
 
-    // 3. Status de Pagamento (Destaque visual)
+    // 3. Status de Pagamento
     doc.setFontSize(14);
     doc.setTextColor(0, 0, 0);
     doc.setFont("helvetica", "bold");
@@ -266,19 +270,17 @@ document.addEventListener("DOMContentLoaded", () => {
     doc.line(MARGEM_ESQUERDA, y + 5, MARGEM_ESQUERDA + LARGURA, y + 5);
     y += 10;
 
-    // 4. Jogos Selecionados
+    // 4. Jogos Selecionados (Agora usando a fonte UNICODE)
+    doc.setFont(FONT_UNICODE, "bold"); // 🚨 MUDEI A FONTE AQUI
     doc.setFontSize(14);
     doc.setTextColor(...COR_AZUL);
-    doc.setFont("helvetica", "bold");
     doc.text("🎲 Seus Jogos Selecionados", MARGEM_ESQUERDA, y);
     doc.setTextColor(0, 0, 0);
 
     y += 8;
     doc.setFontSize(12);
-    doc.setFont("courier", "normal"); // Fonte monoespaçada para números (opcional, mas fica bonito)
     
     apostaData.jogos.forEach((j, i) => {
-        // Bloco de jogo com cor de fundo alternada (opcional)
         if (i % 2 === 0) {
             doc.setFillColor(250, 250, 250);
             doc.rect(MARGEM_ESQUERDA, y - 5, LARGURA, 6, 'F');
@@ -290,13 +292,12 @@ document.addEventListener("DOMContentLoaded", () => {
         doc.text(j, MARGEM_ESQUERDA + 30, y);
         
         y += 8;
-        if (y > 260) { // quebra de página automática
+        if (y > 260) {
             doc.addPage();
             y = 30;
-            // Repete o cabeçalho "Jogos Selecionados" na nova página
+            doc.setFont(FONT_UNICODE, "bold"); // 🚨 MUDEI A FONTE AQUI
             doc.setFontSize(14);
             doc.setTextColor(...COR_AZUL);
-            doc.setFont("helvetica", "bold");
             doc.text("🎲 Seus Jogos Selecionados (continuação)", MARGEM_ESQUERDA, y);
             doc.setTextColor(0, 0, 0);
             y += 8;
@@ -304,22 +305,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     doc.setFont("helvetica", "normal");
 
-    // 5. Seção PIX (Se AGUARDANDO PAGAMENTO)
+    // 5. Seção PIX (Agora usando a fonte UNICODE)
     if (apostaData.status === "AGUARDANDO PAGAMENTO") {
         y += 10;
         
-        // Verifica se há espaço para o PIX antes de quebrar
         if (y > 240) {
             doc.addPage();
             y = 30;
         }
 
         doc.setFillColor(...COR_FUNDO_CINZA);
-        doc.rect(MARGEM_ESQUERDA, y - 5, LARGURA, 30, 'F'); // Bloco PIX
+        doc.rect(MARGEM_ESQUERDA, y - 5, LARGURA, 30, 'F');
 
+        doc.setFont(FONT_UNICODE, "bold"); // 🚨 MUDEI A FONTE AQUI
         doc.setFontSize(14);
         doc.setTextColor(...COR_AZUL);
-        doc.setFont("helvetica", "bold");
         doc.text("💲 Dados para Pagamento via PIX", MARGEM_ESQUERDA + 2, y);
         doc.setTextColor(0, 0, 0);
 
@@ -333,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
         doc.setFont("helvetica", "normal");
     }
 
-    // 6. Rodapé (Posicionamento fixo)
+    // 6. Rodapé
     doc.setDrawColor(150);
     doc.line(MARGEM_ESQUERDA, 275, MARGEM_ESQUERDA + LARGURA, 275);
     doc.setFontSize(8);
@@ -346,6 +346,5 @@ document.addEventListener("DOMContentLoaded", () => {
     doc.save(nomeArquivo);
 });
 
-// Inicia o carregamento dos dados
 carregarComprovante(protocolo);
 });
