@@ -1,4 +1,4 @@
-// === /js/admin.js - ADMIN COMPLETO (COM CORREÇÕES DE IDS E OTIMIZAÇÃO DA LISTA) ===
+// === /js/admin.js - ADMIN COMPLETO (COM PAGINAÇÃO) ===
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyuX4NxUodwTALVVsFMvDHFhrgV-tR4MBTZA_xdJd2rXLg5qIj1CSg3yXghM66JpWSm/exec";
 
 const el = id => document.getElementById(id);
@@ -29,37 +29,32 @@ const btnConferir = el("btnConferir");
 const resultadoConferencia = el("resultadoConferencia");
 const areaRateio = el("areaRateio");
 const inputValorPremio = el("valorPremio");
-// CORREÇÃO DE ID PARA btnCalcularRateio
 const btnCalcular = el("btnCalcularRateio");
-// CORREÇÃO DE ID PARA resultadoRateio
 const resultado = el("resultadoRateio");
 
-// NOVO: Pesquisa
+// Pesquisa e Paginação
 const inputPesquisa = el("inputPesquisa"); 
-
 const btnAtualizar = el("btnAtualizar");
 const btnLogout = el("btnLogout");
+const paginationControls = el("paginationControls"); // NOVO ELEMENTO DE PAGINAÇÃO
+
 
 // ==== VARIÁVEIS GLOBAIS ====
 let todosDados = [];
-let jogoSorteAtual = [];         // array de strings '01','02',...
-let jogosExcedentes = [];        // array de arrays [['01','02',...], ['..'], ...] - USADO APENAS PELA CONFERÊNCIA
-let jogosExcedentesEmEdicao = []; // NOVO ARRAY: USADO PARA A INTERFACE DE EDIÇÃO/CADASTRO.
-
+let jogoSorteAtual = [];         
+let jogosExcedentes = [];        
+let jogosExcedentesEmEdicao = []; 
 let accessToken = localStorage.getItem("adminToken") || null;
+
+// VARIÁVEIS DE PAGINAÇÃO
+let dadosFiltradosParaPaginacao = []; // Dados que estão sendo exibidos no momento (após a pesquisa)
+let currentPage = 1;
+const ITEMS_PER_PAGE = 10; // Limite de 10 participantes por página
 
 // ================== FUNÇÃO DE LOG PARA PLANILHA ==================
 
-/**
- * Envia uma mensagem de log para a planilha (requer que o backend
- * tenha uma action 'log' implementada, que salva na guia 'Logs').
- * @param {string} message A mensagem a ser logada.
- */
 async function logToSheet(message) {
-    if (!accessToken) {
-        console.warn("Não é possível logar: Token ausente.");
-        return;
-    }
+    if (!accessToken) { return; }
 
     try {
         const formData = new FormData();
@@ -67,7 +62,6 @@ async function logToSheet(message) {
         formData.append("token", accessToken);
         formData.append("message", message);
         
-        // Não esperamos resposta ou recarregamos a página para o log
         await fetch(SCRIPT_URL, { method: "POST", body: formData });
     } catch (err) {
         console.error("Erro ao enviar log para a planilha:", err);
@@ -130,6 +124,10 @@ async function carregarParticipantes() {
     if (!accessToken) { alert("Erro: Sessão expirada."); btnLogout?.click(); return; }
 
     listaParticipantes.innerHTML = `<tr><td colspan="4" class="text-center py-4">Carregando...</td></tr>`;
+    currentPage = 1;
+    inputPesquisa.value = ""; 
+    dadosFiltradosParaPaginacao = []; 
+
     try {
         const formData = new FormData();
         formData.append("action", "getAdminData");
@@ -148,8 +146,9 @@ async function carregarParticipantes() {
         countParticipantes.textContent = todosDados.length;
         countJogos.textContent = todosDados.reduce((acc,p) => acc + (p.Jogos?.split('|').length||0),0);
 
-        // Renderiza a lista completa
-        renderTabela(todosDados); 
+        // Define a lista inicial a ser paginada (todos os dados)
+        dadosFiltradosParaPaginacao = todosDados;
+        renderTabelaPaginada(); 
 
         // ==== Jogo da Sorte ====
         if (data.jogoDaSorte) {
@@ -189,16 +188,39 @@ async function carregarParticipantes() {
 
 btnAtualizar?.addEventListener("click", carregarParticipantes);
 
-// ================== TABELA PARTICIPANTES (OTIMIZADA) ==================
+// ================== TABELA PARTICIPANTES (PAGINADA) ==================
 
-function renderTabela(dados) {
-    if (!dados.length) {
-        listaParticipantes.innerHTML = `<tr><td colspan="4" class="text-center py-4">Nenhum participante encontrado.</td></tr>`;
+/**
+ * Renderiza a tabela paginada e os controles de navegação.
+ * Usa o array global `dadosFiltradosParaPaginacao`.
+ */
+function renderTabelaPaginada() {
+    const totalItems = dadosFiltradosParaPaginacao.length;
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+    if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+    if (currentPage < 1 && totalItems > 0) currentPage = 1;
+
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+
+    // Obtém apenas os dados da página atual
+    const dadosPagina = dadosFiltradosParaPaginacao.slice(startIndex, endIndex);
+
+    if (!dadosPagina.length && totalItems > 0) {
+        listaParticipantes.innerHTML = `<tr><td colspan="4" class="text-center py-4">Página vazia.</td></tr>`;
+        renderPaginationControls(totalPages);
         return;
     }
     
-    listaParticipantes.innerHTML = dados.map(p => {
-        // Separa os jogos por quebra de linha para exibição na linha escondida
+    if (!dadosPagina.length && totalItems === 0) {
+        listaParticipantes.innerHTML = `<tr><td colspan="4" class="text-center py-4">Nenhum participante encontrado.</td></tr>`;
+        renderPaginationControls(totalPages);
+        return;
+    }
+    
+    // Renderiza o conteúdo da tabela
+    listaParticipantes.innerHTML = dadosPagina.map(p => {
         const jogosHtml = p.Jogos ? p.Jogos.split('|').join('<br>') : 'Nenhum jogo cadastrado.';
         
         return `
@@ -223,9 +245,52 @@ function renderTabela(dados) {
             </tr>
         `;
     }).join("");
+
+    // Renderiza os controles de paginação
+    renderPaginationControls(totalPages);
 }
 
-// ================== FUNÇÃO DE TOGGLE (NOVA) ==================
+/**
+ * Renderiza os botões de controle de paginação.
+ * @param {number} totalPages O número total de páginas.
+ */
+function renderPaginationControls(totalPages) {
+    if (totalPages <= 1) {
+        paginationControls.innerHTML = "";
+        return;
+    }
+
+    paginationControls.innerHTML = `
+        <button id="btnPrevPage" class="muted small" ${currentPage === 1 ? 'disabled' : ''}>← Anterior</button>
+        <span class="text-sm">Página ${currentPage} de ${totalPages}</span>
+        <button id="btnNextPage" class="muted small" ${currentPage === totalPages ? 'disabled' : ''}>Próximo →</button>
+    `;
+
+    // Adiciona os event listeners aos novos botões de paginação
+    el("btnPrevPage")?.addEventListener('click', () => changePage(-1));
+    el("btnNextPage")?.addEventListener('click', () => changePage(1));
+}
+
+/**
+ * Altera a página atual e renderiza novamente.
+ * @param {number} step -1 para página anterior, 1 para próxima página.
+ */
+function changePage(step) {
+    const totalItems = dadosFiltradosParaPaginacao.length;
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    
+    const newPage = currentPage + step;
+
+    if (newPage >= 1 && newPage <= totalPages) {
+        currentPage = newPage;
+        renderTabelaPaginada();
+        // Rola para o topo da tabela (opcional, mas melhora a UX)
+        el("tabelaParticipantes")?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+
+// ================== FUNÇÃO DE TOGGLE ==================
 
 /** Alterna a visibilidade dos jogos para um protocolo específico. */
 window.toggleJogos = (protocolo) => {
@@ -233,10 +298,8 @@ window.toggleJogos = (protocolo) => {
     const botao = document.querySelector(`.btn-toggle-jogos[data-protocolo='${protocolo}']`);
 
     if (linhaJogos) {
-        // Toggle da classe 'visible' (definida no CSS)
         linhaJogos.classList.toggle('visible');
 
-        // Atualiza o texto e a cor do botão
         if (linhaJogos.classList.contains('visible')) {
             botao.textContent = '- Esconder jogos';
             botao.classList.remove('muted');
@@ -252,7 +315,6 @@ window.toggleJogos = (protocolo) => {
 // Adiciona listener de evento DENTRO da tabela para lidar com o clique nos botões de toggle
 listaParticipantes.addEventListener('click', (e) => {
     const target = e.target;
-    // Verifica se o elemento clicado tem a classe do botão de toggle
     if (target.classList.contains('btn-toggle-jogos')) {
         const protocolo = target.dataset.protocolo;
         window.toggleJogos(protocolo);
@@ -260,25 +322,26 @@ listaParticipantes.addEventListener('click', (e) => {
 });
 
 
-// ================== PESQUISA E FILTRO (NOVA) ==================
+// ================== PESQUISA E FILTRO ==================
 
 inputPesquisa?.addEventListener('keyup', () => {
     const termo = inputPesquisa.value.toLowerCase().trim();
     
+    // Zera a página para a primeira
+    currentPage = 1;
+
     if (termo === "") {
-        // Se o termo estiver vazio, renderiza todos os dados originais
-        renderTabela(todosDados);
-        return;
+        dadosFiltradosParaPaginacao = todosDados;
+    } else {
+        // Filtra a lista completa (todosDados)
+        dadosFiltradosParaPaginacao = todosDados.filter(p => 
+            p.Nome.toLowerCase().includes(termo) || 
+            p.Protocolo.toLowerCase().includes(termo)
+        );
     }
     
-    // Filtra a lista completa (todosDados)
-    const filtrados = todosDados.filter(p => 
-        p.Nome.toLowerCase().includes(termo) || 
-        p.Protocolo.toLowerCase().includes(termo)
-    );
-    
-    // Renderiza apenas os participantes filtrados
-    renderTabela(filtrados);
+    // Renderiza a primeira página da nova lista filtrada/completa
+    renderTabelaPaginada();
 });
 
 
@@ -303,7 +366,6 @@ async function postAction(action, params) {
         for (const k in params) formData.append(k, params[k]);
 
         const res = await fetch(SCRIPT_URL, { method: "POST", body: formData });
-        // tentar parsear JSON mas defender-se de respostas text/plain
         let data;
         try { data = await res.json(); }
         catch (e) { const text = await res.text(); data = { success: false, message: text }; }
@@ -315,8 +377,6 @@ async function postAction(action, params) {
             if(data.message && data.message.includes("Token")) btnLogout?.click();
         }
 
-        // recarrega dados após ação (backend já atualizou)
-        // Impedir recarregamento após um log, pois isso é apenas depuração.
         if (action !== 'log') { 
             carregarParticipantes();
         }
@@ -325,19 +385,17 @@ async function postAction(action, params) {
     }
 }
 
-// ================== JOGO DA SORTE CORRIGIDO ==================
+// ================== JOGO DA SORTE ==================
 function renderizarJogoSorte() {
     jogoSorteContainer.innerHTML = "";
     jogoSorteContainer.style.display = "flex";
     jogoSorteContainer.style.justifyContent = "center";
     jogoSorteContainer.style.gap = "10px";
     
-    // Se não houver jogo cadastrado, mostra 9 hífens
     const numerosParaMostrar = jogoSorteAtual.length === 9 ? jogoSorteAtual : Array(9).fill("-");
 
     numerosParaMostrar.forEach(num=>{
         const div=document.createElement("div");
-        // Adiciona classe 'empty' se for o hífen
         div.className="jogo-numero" + (num === "-" ? " empty" : ""); 
         div.textContent=num;
         jogoSorteContainer.appendChild(div);
@@ -356,7 +414,6 @@ function renderizarInputsJogoSorte(){
         input.min=1;
         input.max=60;
         input.className="input-numero";
-        // CORREÇÃO: Input sempre começa vazio ("")
         input.value = ""; 
         jogoSorteInputs.appendChild(input);
     }
@@ -386,7 +443,6 @@ function renderizarExcedente(index){
     div.className="flex gap-2 mb-2";
     div.dataset.index=index;
 
-    // Usa o array de EDIÇÃO
     const jogo = jogosExcedentesEmEdicao[index] || ["","","","","",""];
 
     for(let i=0;i<6;i++){
@@ -404,13 +460,11 @@ function renderizarExcedente(index){
     btnRemove.type="button";
     btnRemove.className="danger small";
     btnRemove.onclick=()=>{ 
-        // 1. Captura valores atuais no DOM e atualiza o array de edição
         const grids = Array.from(excedentesContainer.querySelectorAll("div[data-index]"));
         grids.forEach((g, idx) => {
             const vals = Array.from(g.querySelectorAll("input")).map(i=>i.value.trim().padStart(2,"0"));
             jogosExcedentesEmEdicao[idx] = vals; 
         });
-        // 2. Remove o item e redesenha
         jogosExcedentesEmEdicao.splice(index,1); 
         renderizarTodosExcedentes(); 
     };
@@ -421,35 +475,28 @@ function renderizarExcedente(index){
 
 function renderizarTodosExcedentes(){
     excedentesContainer.innerHTML="";
-    // Renderiza o array de edição
     jogosExcedentesEmEdicao.forEach((_,idx)=>{ excedentesContainer.appendChild(renderizarExcedente(idx)); });
 }
 
 btnAddExcedente?.addEventListener("click", ()=>{
-    // 1. Captura valores atuais no DOM e atualiza o array de edição
     const grids = excedentesContainer.querySelectorAll("div[data-index]");
     grids.forEach((grid, idx) => {
         const vals = Array.from(grid.querySelectorAll("input")).map(i => i.value.trim().padStart(2,"0"));
         jogosExcedentesEmEdicao[idx] = vals;
     });
 
-    // 2. Adiciona um novo slot vazio e redesenha
     jogosExcedentesEmEdicao.push(["","","","","",""]);
     renderizarTodosExcedentes();
 });
 
 btnSalvarExcedentes?.addEventListener("click", async()=>{
-    // Captura os valores ATUAIS do DOM
     const grids = excedentesContainer.querySelectorAll("div[data-index]");
     const dados = Array.from(grids).map(grid =>
         Array.from(grid.querySelectorAll("input")).map(i => i.value.trim()) 
     );
 
     for(const jogo of dados){
-        // Verifica se há campos vazios
         if(jogo.some(n=>!n)) { alert("Preencha todos os números de cada jogo."); return; }
-
-        // Garante que todos são números válidos e checa repetição
         const numerosInteiros = jogo.map(Number);
         if(numerosInteiros.some(n=>isNaN(n)||n<1||n>60)){ alert("Números devem ser entre 01 e 60."); return; }
         if(new Set(numerosInteiros).size!==6){ alert("Não é permitido números repetidos em um jogo."); return; }
@@ -462,20 +509,18 @@ btnSalvarExcedentes?.addEventListener("click", async()=>{
         return;
     }
 
-    // CORREÇÃO: Ordena e formata com padStart
     const jogosStrings = dados.map(arr => {
-        // Converte para número, ordena e depois formata de volta para string com zero à esquerda
         return arr.map(Number)
-                  .sort((a, b) => a - b) // Ordena em ordem crescente
+                  .sort((a, b) => a - b) 
                   .map(n => n.toString().padStart(2, "0"))
                   .join(" ");
     });
 
-    // Envia como "jogo1|jogo2|..."
     const payloadStr = jogosStrings.join("|");
 
     await postAction("salvarJogosAdm",{ jogos: payloadStr });
 });
+
 
 // ================== CONFERÊNCIA ==================
 function renderizarConferencia(){
@@ -500,15 +545,12 @@ function capturarConferencia(){
         .filter(v=>v!=="")
         .map(n=>parseInt(n).toString().padStart(2,"0"));
 
-    // ordenar numericamente
     arr.sort((a,b) => parseInt(a,10) - parseInt(b,10));
     return arr;
 }
 
 btnConferir?.addEventListener("click",()=>{
     const sorteados=capturarConferencia();
-    
-    // LOG: Capturando os números sorteados
     logToSheet(`Início da Conferência. Números Sorteados Digitados: ${sorteados.join(' ')}`);
 
     if(sorteados.length!==6) {
@@ -521,14 +563,12 @@ btnConferir?.addEventListener("click",()=>{
 
     const premiados={sena:[],quina:[],quadra:[]};
 
-    // Variável para log de resumo
     let logSummary = {
         totalParticipantes: todosDados.length,
         totalJogosExcedentes: jogosExcedentes.length,
         acertos: {sena: 0, quina: 0, quadra: 0}
     };
 
-    // === CONFERIR PARTICIPANTES ===
     todosDados.forEach(p=>{
         if(p.Jogos){
             p.Jogos.split('|').forEach((jogo,idx)=>{
@@ -550,7 +590,6 @@ btnConferir?.addEventListener("click",()=>{
         }
     });
 
-    // === CONFERIR JOGO DA SORTE ===
     if (Array.isArray(jogoSorteAtual) && jogoSorteAtual.length) {
         const jogoNums = jogoSorteAtual.map(n => n.toString().padStart(2,'0'));
         const acertos = jogoNums.filter(n => sorteados.includes(n)).length;
@@ -568,7 +607,6 @@ btnConferir?.addEventListener("click",()=>{
         }
     }
 
-    // === CONFERIR JOGOS EXCEDENTES (USA o array populado do servidor) ===
     jogosExcedentes.forEach((jArr, idx) => {
         if (!Array.isArray(jArr) || jArr.length !== 6) return;
         const jogoFormatado = jArr.map(n => n.toString().padStart(2,'0'));
@@ -587,11 +625,9 @@ btnConferir?.addEventListener("click",()=>{
         }
     });
 
-    // LOG: Enviando resumo dos acertos e dados
     logToSheet(`Resumo: Sorteados: ${sorteados.join(' ')}. Premiados (Sena: ${logSummary.acertos.sena}, Quina: ${logSummary.acertos.quina}, Quadra: ${logSummary.acertos.quadra}). Total Pagos: ${todosDados.filter(p=>p.Status==='PAGO').length}.`);
 
 
-    // ==== EXIBIÇÃO ====
     let html=`<h4>Resultado da Conferência</h4><p><strong>Números:</strong> ${sorteados.join(' ')}</p><hr>`;
 
     ["sena","quina","quadra"].forEach(tipo=>{
@@ -613,7 +649,6 @@ btnConferir?.addEventListener("click",()=>{
     resultadoConferencia.innerHTML=html;
     areaRateio.classList.remove("hidden");
 
-    // guarda info para rateio (total pagos)
     document.rateioData = { totalPagos: todosDados.filter(p=>p.Status==='PAGO').length };
 });
 
@@ -621,34 +656,26 @@ btnConferir?.addEventListener("click",()=>{
 
 btnCalcular?.addEventListener("click",()=>{ 
     const total=parseFloat(inputValorPremio.value);
-    // Puxa total pagos da variável global populada pela Conferência
     const pagos=document.rateioData?.totalPagos||0; 
 
     if(!total||total<=0) return mostrarRateio("Insira um valor válido.","red");
-    // Mensagem melhorada para quando não há pagos
     if(pagos===0) return mostrarRateio("Nenhum participante PAGO encontrado para o rateio.","red");
 
     const porPessoa=total/pagos;
     
-    // --- FORMATANDO OS VALORES ---
-    
-    // 1. Formata o valor total
     const totalFormatado = total.toLocaleString('pt-BR', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     });
 
-    // 2. Formata o valor por pessoa
     const porPessoaFormatado = porPessoa.toLocaleString('pt-BR', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     });
 
-    // --- MENSAGEM ATUALIZADA ---
     mostrarRateio(`💵 R$ ${totalFormatado} / ${pagos} → R$ ${porPessoaFormatado} por participante.`, "green");
 });
 
-// FUNÇÃO UTILITÁRIA NECESSÁRIA PARA O RATEIO
 function mostrarRateio(msg,cor){
     resultado.textContent=msg;
     resultado.style.color=cor;
