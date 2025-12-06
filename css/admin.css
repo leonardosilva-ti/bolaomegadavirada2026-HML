@@ -2,38 +2,38 @@
 
 /* Variáveis e Reset Básico */
 :root {
-    --accent: #0072e3; /* Cor principal (azul) */
-    --muted: #f2f2f2; /* Cinza claro para botões e fundos */
-    --danger: #c62828; /* Vermelho para ações de risco */
-    --text: #222;
+    --accent: #0072e3; /* Cor principal (azul) */
+    --muted: #f2f2f2; /* Cinza claro para botões e fundos */
+    --danger: #c62828; /* Vermelho para ações de risco */
+    --text: #222;
 }
 
 * { box-sizing: border-box; }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f5f7fb;
-    margin: 0;
-    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    margin: 0;
+    color: var(--text);
 }
 
 /* Layout e Componentes Principais */
 .site-header {
-    background: var(--accent);
-    color: #fff;
-    padding: 16px;
-    text-align: center;
-    font-size: 24px;
+    background: var(--accent);
+    color: #fff;
+    padding: 16px;
+    text-align: center;
+    font-size: 24px;
 }
 
 /* Containers principais */
 .container {
-    max-width: 950px;
-    background: #fff;
-    margin: 24px auto;
-    padding: 22px;
-    border-radius: 10px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+    max-width: 950px;
+    background: #fff;
+    margin: 24px auto;
+    padding: 22px;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
 }
 
 /* Classes utilitárias Tailwind-like */
@@ -73,11 +73,11 @@ body {
 .rounded { border-radius: 0.25rem; }
 
 button {
-    cursor: pointer;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: background 0.2s ease;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background 0.2s ease;
 }
 button.primary { background: var(--accent); color: #fff; padding: 10px 16px; }
 button.primary:hover { background: #005bb5; }
@@ -90,23 +90,23 @@ button:disabled { opacity: 0.6; cursor: not-allowed; background: #ddd !important
 
 /* Cards administrativos */
 .admin-card, .jogo-sorte-card {
-    background: #fff;
-    padding: 18px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    line-height: 1.4;
+    background: #fff;
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    line-height: 1.4;
 }
 
 /* Resumo do Bolão */
 .resumo-card {
-    background: linear-gradient(135deg, #4f46e5, #3b82f6);
-    color: #fff;
-    padding: 25px 20px;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    margin-bottom: 25px;
-    text-align: center;
+    background: linear-gradient(135deg, #4f46e5, #3b82f6);
+    color: #fff;
+    padding: 25px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin-bottom: 25px;
+    text-align: center;
 }
 .titulo-resumo { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
 .resumo-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
@@ -119,100 +119,108 @@ button:disabled { opacity: 0.6; cursor: not-allowed; background: #ddd !important
 
 /* ===== Jogo da Sorte e Jogos Excedentes ===== */
 #jogoSorteContainer, #excedentesContainer {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
+    /* Centraliza o flex container e o conteúdo */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Garante alinhamento vertical */
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
 }
 
 /* Inputs Jogo da Sorte (horizontal) */
 #jogoSorteInputs {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin: 1rem 0;
-    flex-wrap: wrap;
+    /* Centraliza o flex container */
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 1rem 0;
+    flex-wrap: wrap;
 }
 
 .input-numero {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 1.1rem;
-    font-weight: bold;
-    -moz-appearance: textfield;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    -moz-appearance: textfield;
 }
 
 /* Remove spinners */
 .input-numero::-webkit-outer-spin-button,
 .input-numero::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Container dos números do jogo da sorte (visual) */
 .jogo-numero-container {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
 }
 
 .jogo-numero {
-    background: #4f46e5;
-    color: white;
-    font-weight: bold;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    cursor: default;
-    transition: transform 0.15s ease;
+    background: #4f46e5;
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: default;
+    transition: transform 0.15s ease;
 }
 .jogo-numero:hover { transform: scale(1.1); }
 
 /* Inputs Excedentes e Conferência */
+/* Corrigido: As classes 'flex' no HTML sobrepõem este grid. */
 .input-jogo-excedente, #conferenciaContainer {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 8px;
-    max-width: 360px;
-    margin: 1rem auto;
+    /* Usando flex no JS/HTML. Aplicamos centralização aqui. */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    max-width: 400px; /* Aumentado um pouco para acomodar melhor */
+    margin: 1rem auto;
+    flex-wrap: wrap; /* Importante para responsividade */
 }
 
+/* Aplica estilo aos inputs dentro dos containers */
 .input-jogo-excedente input, #conferenciaContainer input {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 1.1rem;
-    font-weight: bold;
-    -moz-appearance: textfield;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    -moz-appearance: textfield;
 }
 
 .input-jogo-excedente input::-webkit-outer-spin-button,
 .input-jogo-excedente input::-webkit-inner-spin-button,
 #conferenciaContainer input::-webkit-outer-spin-button,
 #conferenciaContainer input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Conferência e rateio */
 .resultado-premio {
-    padding: 10px;
-    border: 1px dashed #ccc;
-    border-radius: 6px;
-    margin-top: 10px;
+    padding: 10px;
+    border: 1px dashed #ccc;
+    border-radius: 6px;
+    margin-top: 10px;
 }
 .resultado-premio h4 { margin-top: 0; margin-bottom: 5px; color: #0072e3; }
 .resultado-premio h5 { margin-bottom: 5px; color: #16a34a; }
@@ -226,193 +234,217 @@ thead { background-color: #4f46e5; color: white; }
 .bg-indigo-600 { background-color: #4f46e5; }
 .text-white { color: #fff; }
 
-/* Responsividade */
-@media (max-width: 600px) {
-    .resumo-grid { flex-direction: column; align-items: center; }
-    .resumo-item { width: 80%; justify-content: center; }
-    #jogoSorteInputs { flex-wrap: wrap; justify-content: center; }
-    .input-jogo-excedente, #conferenciaContainer { max-width: 100%; grid-template-columns: repeat(6, 1fr); }
+/* ============================
+   ESTILOS DA NOVA FUNCIONALIDADE (TOGGLE E PAGINAÇÃO)
+   ============================ */
+
+/* Linha de jogos escondida por padrão (Toggle) */
+.jogos-participante {
+    display: none;
+    background-color: #f9f9f9;
+    font-family: monospace;
+    font-size: 0.85rem;
+    padding: 5px 12px;
+    border-top: 1px dashed #e0e0e0;
+}
+.jogos-participante.visible {
+    display: table-row; /* Para exibir como linha da tabela */
+}
+/* Estilo para garantir que o botão "Mostrar Jogos" fique alinhado */
+.nome-coluna {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
 }
 
+/* Paginação */
+#paginationControls {
+    padding: 10px 0;
+    font-size: 0.95rem;
+}
+#paginationControls button {
+    padding: 6px 10px;
+}
+
+
+/* Estilo para a célula de pesquisa */
+#inputPesquisa {
+    /* Garante que o input de pesquisa se ajuste */
+    min-width: 150px;
+    height: 38px; /* Alinha com o botão de atualização */
+}
+.flex.gap-2.mb-3.items-center {
+    align-items: flex-end; /* Alinha o input e o botão de atualização na base */
+}
+
+
 /* ============================
-   OPTIMIZAÇÃO COMPLETA MOBILE
-   ============================ */
+   RESPONSIVIDADE E OTIMIZAÇÃO MOBILE
+   ============================ */
 
 /* --- Container principal mais fluido --- */
 @media (max-width: 700px) {
 
-  .container {
-      padding: 16px;
-      margin: 12px;
-      width: calc(100% - 24px);
-  }
+  .container {
+      padding: 16px;
+      margin: 12px;
+      width: calc(100% - 24px);
+  }
 
-  /* Reduz padding dos cards */
-  .admin-card, .jogo-sorte-card {
-      padding: 14px;
-      margin-bottom: 16px;
-  }
+  /* Reduz padding dos cards */
+  .admin-card, .jogo-sorte-card {
+      padding: 14px;
+      margin-bottom: 16px;
+  }
 
-  /* Título menor para caber melhor */
-  .site-header {
-      font-size: 20px;
-      padding: 14px;
-  }
+  /* Título menor para caber melhor */
+  .site-header {
+      font-size: 20px;
+      padding: 14px;
+  }
 
-  /* --- LOGIN --- */
-  #loginArea {
-      width: 100%;
-      max-width: 380px;
-      padding: 16px;
-  }
+  /* --- LOGIN --- */
+  #loginArea {
+      width: 100%;
+      max-width: 380px;
+      padding: 16px;
+  }
 
-  input, button {
-      font-size: 16px; /* evita zoom automático do iOS */
-  }
+  input, button {
+      font-size: 16px; /* evita zoom automático do iOS */
+  }
+  
+    /* Ajusta o alinhamento de pesquisa e botões da tabela */
+    .flex.gap-2.mb-3.items-center {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    #inputPesquisa, #btnAtualizar {
+        width: 100%;
+    }
+    #btnAtualizar {
+        margin-top: 0;
+        padding: 8px 12px;
+    }
 
-  /* --- RESUMO DO BOLÃO --- */
-  .resumo-card {
-      padding: 20px 14px;
-  }
 
-  .titulo-resumo {
-      font-size: 1.3rem;
-  }
+  /* --- RESUMO DO BOLÃO --- */
+  .resumo-card {
+      padding: 20px 14px;
+  }
 
-  .resumo-item {
-      width: 100%;
-      min-width: auto;
-      justify-content: center;
-      padding: 12px;
-  }
+  .titulo-resumo {
+      font-size: 1.3rem;
+  }
 
-  /* --- Inputs numéricos (Jogo da Sorte / Excedentes / Conferência) --- */
-  .input-numero,
-  .input-jogo-excedente input,
-  #conferenciaContainer input {
-      width: 42px;
-      height: 42px;
-      font-size: 1rem;
-  }
+  .resumo-item {
+      width: 100%;
+      min-width: auto;
+      justify-content: center;
+      padding: 12px;
+  }
 
-  /* Grid de 6 colunas vira 3 (melhor leitura) */
-  .input-jogo-excedente,
-  #conferenciaContainer {
-      grid-template-columns: repeat(3, 1fr);
-      max-width: 280px;
-      gap: 10px;
-  }
+  /* --- Inputs numéricos (Jogo da Sorte / Excedentes / Conferência) --- */
+  .input-numero,
+  .input-jogo-excedente input,
+  #conferenciaContainer input {
+      width: 42px;
+      height: 42px;
+      font-size: 1rem;
+  }
 
-  /* Jogo da Sorte – números mais espaçados */
-  #jogoSorteContainer,
-  .jogo-numero-container {
-      gap: 6px;
-  }
+  /* Grid de 6 colunas vira 3 (melhor leitura) */
+  .input-jogo-excedente,
+  #conferenciaContainer {
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 280px;
+      gap: 10px;
+  }
 
-  .jogo-numero {
-      width: 38px;
-      height: 38px;
-      font-size: 0.95rem;
-  }
+  /* Jogo da Sorte – números mais espaçados */
+  #jogoSorteContainer,
+  .jogo-numero-container {
+      gap: 6px;
+  }
 
-  /* --- Botões alinhados verticalmente em telas pequenas --- */
-  .flex.justify-between {
-      flex-direction: column;
-      gap: 10px;
-  }
+  .jogo-numero {
+      width: 38px;
+      height: 38px;
+      font-size: 0.95rem;
+  }
 
-  .flex.justify-between button {
-      width: 100%;
-  }
+  /* --- Botões alinhados verticalmente em telas pequenas --- */
+  .flex.justify-between:not(.items-center) { /* Exceção para paginação */
+      flex-direction: column;
+      gap: 10px;
+  }
 
-  /* --- TABELA --- */
-  #tabelaParticipantes {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-  }
+  .flex.justify-between:not(.items-center) button {
+      width: 100%;
+  }
 
-  table {
-      min-width: 600px; /* evita quebra feia */
-      font-size: 15px;
-  }
+  /* --- TABELA --- */
+  #tabelaParticipantes {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+  }
 
-  th, td {
-      padding: 8px;
-  }
+  table {
+      min-width: 600px; /* evita quebra feia */
+      font-size: 15px;
+  }
 
-  td small {
-      font-size: 13px;
-  }
+  th, td {
+      padding: 8px;
+  }
 
-  /* Botões da tabela empilhados */
-  td button.small {
-      margin: 4px 0;
-      width: 100%;
-  }
+  td small {
+      font-size: 13px;
+  }
 
-  /* --- Rateio --- */
-  #areaRateio {
-      padding-top: 16px;
-  }
+  /* Botões da tabela empilhados */
+  td button.small {
+      margin: 4px 0;
+      width: 100%;
+  }
 
-  #valorPremio {
-      font-size: 16px;
-  }
-}
+  /* --- Rateio --- */
+  #areaRateio {
+      padding-top: 16px;
+  }
 
-/* Estilos para otimização da Tabela */
-
-/* Linha de jogos escondida por padrão */
-.jogos-participante {
-    display: none;
-    background-color: #f9f9f9;
-    font-family: monospace;
-    font-size: 0.85rem;
-    padding: 5px 12px;
-    border-top: 1px dashed #e0e0e0;
-}
-.jogos-participante.visible {
-    display: table-row; /* Para exibir como linha da tabela */
-}
-/* Estilo para garantir que o botão "Mostrar Jogos" fique alinhado */
-.nome-coluna {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-}
-/* Estilo para a célula de pesquisa */
-#inputPesquisa {
-    /* Garante que o input de pesquisa se ajuste */
-    min-width: 150px;
+  #valorPremio {
+      font-size: 16px;
+  }
 }
 
 /* =======================
-   MOBILE ULTRA-CURTO
-   <= 400px (celulares pequenos)
-   ======================= */
+   MOBILE ULTRA-CURTO
+   <= 400px (celulares pequenos)
+   ======================= */
 @media (max-width: 400px) {
 
-  .input-numero {
-      width: 36px;
-      height: 36px;
-  }
+  .input-numero {
+      width: 36px;
+      height: 36px;
+  }
 
-  .jogo-numero {
-      width: 34px;
-      height: 34px;
-      font-size: 0.85rem;
-  }
+  .jogo-numero {
+      width: 34px;
+      height: 34px;
+      font-size: 0.85rem;
+  }
 
-  .resumo-item {
-      padding: 10px;
-  }
+  .resumo-item {
+      padding: 10px;
+  }
 
-  .container {
-      padding: 12px;
-  }
+  .container {
+      padding: 12px;
+  }
 
-  table {
-      min-width: 540px;
-  }
+  table {
+      min-width: 540px;
+  }
 }
