@@ -4,7 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Área Administrativa - Bolão Mega da Virada</title>
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css">   <style>
+    .admin-card {
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #eee;
+    }
+    .stats-grid { 
+      display: flex; 
+      justify-content: space-around; 
+      margin-bottom: 15px;
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+    .resultado-premio p { margin: 5px 0; }
+  </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
   <header class="site-header">
@@ -78,31 +94,22 @@
 
             <div class="admin-card">
         <h2 class="text-xl font-semibold text-indigo-700 mb-3">Lista de Participantes</h2>
-    
-        <div class="flex gap-2 mb-3 items-center">
-          <input type="text" id="inputPesquisa" placeholder="Pesquisar por Nome ou Protocolo..." class="border p-2 rounded flex-1">
-          <button id="btnAtualizar" class="muted small">🔄 Atualizar Lista</button>
-        </div>
-
+        <button id="btnAtualizar" class="muted small mb-3">🔄 Atualizar Lista</button>
         <div id="tabelaParticipantes" class="bg-white rounded-lg shadow-md overflow-x-auto">
           <table class="min-w-full border-collapse">
             <thead class="bg-indigo-600 text-white">
-                <tr>
-                    <th class="py-2 px-3 text-left">Nome</th>
-                    <th class="py-2 px-3 text-center">Protocolo</th>
-                    <th class="py-2 px-3 text-center">Status</th>
-                    <th class="py-2 px-3 text-center">Ações</th>
-                </tr>
+              <tr>
+                <th class="py-2 px-3 text-left">Nome (Jogos)</th>
+                <th class="py-2 px-3 text-center">Protocolo</th>
+                <th class="py-2 px-3 text-center">Status</th>
+                <th class="py-2 px-3 text-center">Ações</th>
+              </tr>
             </thead>
-            <tbody id="listaParticipantes" class="divide-y divide-gray-200">
-                            </tbody>
+            <tbody id="listaParticipantes" class="divide-y divide-gray-200"></tbody>
           </table>
+        </div>
       </div>
-        
-                <div id="paginationControls" class="flex justify-between items-center mt-3">
-                    </div>
-    </div>
-    
+
       <div class="text-center mt-6">
         <button id="btnLogout" class="danger">Sair</button>
       </div>
