@@ -1,4 +1,4 @@
-// === /js/admin.js - ADMIN COMPLETO (CORREÇÃO E LOGS DE CONFERÊNCIA) ===
+// === /js/admin.js - ADMIN COMPLETO (COM CORREÇÃO DOS IDS HTML/JS) ===
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyuX4NxUodwTALVVsFMvDHFhrgV-tR4MBTZA_xdJd2rXLg5qIj1CSg3yXghM66JpWSm/exec";
 
 const el = id => document.getElementById(id);
@@ -29,8 +29,10 @@ const btnConferir = el("btnConferir");
 const resultadoConferencia = el("resultadoConferencia");
 const areaRateio = el("areaRateio");
 const inputValorPremio = el("valorPremio");
-const btnCalcular = el("btnCalcular");
-const resultado = el("resultado");
+// 🚨 CORREÇÃO DE ID PARA btnCalcularRateio
+const btnCalcular = el("btnCalcularRateio");
+// 🚨 CORREÇÃO DE ID PARA resultadoRateio
+const resultado = el("resultadoRateio");
 
 const btnAtualizar = el("btnAtualizar");
 const btnLogout = el("btnLogout");
@@ -540,7 +542,6 @@ btnConferir?.addEventListener("click",()=>{
 
 // ================== RATEIO ==================
 
-// 🚨 CORREÇÃO: Usando a variável definida 'btnCalcular'
 btnCalcular?.addEventListener("click",()=>{ 
     const total=parseFloat(inputValorPremio.value);
     // Puxa total pagos da variável global populada pela Conferência
