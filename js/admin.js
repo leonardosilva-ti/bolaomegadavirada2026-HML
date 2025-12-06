@@ -1,4 +1,4 @@
-// === /js/admin.js - ADMIN COMPLETO (CORREÇÃO JOGO DA SORTE) ===
+// === /js/admin.js - ADMIN COMPLETO (CORREÇÃO E LOGS DE CONFERÊNCIA) ===
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyuX4NxUodwTALVVsFMvDHFhrgV-tR4MBTZA_xdJd2rXLg5qIj1CSg3yXghM66JpWSm/exec";
 
 const el = id => document.getElementById(id);
@@ -41,6 +41,33 @@ let jogoSorteAtual = [];         // array de strings '01','02',...
 let jogosExcedentes = [];        // array de arrays [['01','02',...], ['..'], ...] - USADO APENAS PELA CONFERÊNCIA
 let jogosExcedentesEmEdicao = []; // NOVO ARRAY: USADO PARA A INTERFACE DE EDIÇÃO/CADASTRO.
 let accessToken = localStorage.getItem("adminToken") || null;
+
+// ================== FUNÇÃO DE LOG PARA PLANILHA ==================
+
+/**
+ * Envia uma mensagem de log para a planilha (requer que o backend
+ * tenha uma action 'log' implementada, que salva na guia 'Logs').
+ * @param {string} message A mensagem a ser logada.
+ */
+async function logToSheet(message) {
+    if (!accessToken) {
+        console.warn("Não é possível logar: Token ausente.");
+        return;
+    }
+
+    try {
+        const formData = new FormData();
+        formData.append("action", "log");
+        formData.append("token", accessToken);
+        formData.append("message", message);
+        
+        // Não esperamos resposta ou recarregamos a página para o log
+        await fetch(SCRIPT_URL, { method: "POST", body: formData });
+    } catch (err) {
+        console.error("Erro ao enviar log para a planilha:", err);
+    }
+}
+
 
 // ================== LOGIN ==================
 el("btnLogin")?.addEventListener("click", async () => {
@@ -126,7 +153,7 @@ async function carregarParticipantes() {
             jogoSorteAtual = [];
         }
         renderizarJogoSorte();
-        renderizarInputsJogoSorte(); // Chamar aqui garante que os inputs estejam vazios
+        renderizarInputsJogoSorte(); 
 
         // ==== Jogos Excedentes ====
         let rawExcedentes = data.jogosExcedentes || data.jogosAdm || [];
@@ -210,7 +237,9 @@ async function postAction(action, params) {
         }
 
         // recarrega dados após ação (backend já atualizou)
-        carregarParticipantes();
+        if (action !== 'log') { // Evita recarregar a tela após um log
+            carregarParticipantes();
+        }
     } catch(err) {
         alert("Erro de conexão: "+err.message);
     }
@@ -333,7 +362,7 @@ btnSalvarExcedentes?.addEventListener("click", async()=>{
     // Captura os valores ATUAIS do DOM
     const grids = excedentesContainer.querySelectorAll("div[data-index]");
     const dados = Array.from(grids).map(grid =>
-        Array.from(grid.querySelectorAll("input")).map(i => i.value.trim()) // Remove padStart para ordenar como números
+        Array.from(grid.querySelectorAll("input")).map(i => i.value.trim()) 
     );
 
     for(const jogo of dados){
@@ -398,12 +427,26 @@ function capturarConferencia(){
 
 btnConferir?.addEventListener("click",()=>{
     const sorteados=capturarConferencia();
-    if(sorteados.length!==6) return alert("Informe exatamente 6 números sorteados.");
+    
+    // 🚨 LOG: Capturando os números sorteados
+    logToSheet(`Início da Conferência. Números Sorteados Digitados: ${sorteados.join(' ')}`);
+
+    if(sorteados.length!==6) {
+        logToSheet(`ERRO: Números Sorteados Incompletos (${sorteados.length}/6). Abortando.`);
+        return alert("Informe exatamente 6 números sorteados.");
+    }
 
     resultadoConferencia.innerHTML=`<p class="loading">Conferindo resultados...</p>`;
     areaRateio.classList.add("hidden");
 
     const premiados={sena:[],quina:[],quadra:[]};
+
+    // Variável para log de resumo
+    let logSummary = {
+        totalParticipantes: todosDados.length,
+        totalJogosExcedentes: jogosExcedentes.length,
+        acertos: {sena: 0, quina: 0, quadra: 0}
+    };
 
     // === CONFERIR PARTICIPANTES ===
     todosDados.forEach(p=>{
@@ -412,7 +455,8 @@ btnConferir?.addEventListener("click",()=>{
                 const nums = jogo.split(' ').map(n=>n.padStart(2,'0'));
                 const acertos = nums.filter(n=>sorteados.includes(n)).length;
                 if(acertos>=4){
-                    premiados[acertos===6?'sena':acertos===5?'quina':'quadra'].push({
+                    const tipoPremio = acertos===6?'sena':acertos===5?'quina':'quadra';
+                    premiados[tipoPremio].push({
                         Nome:p.Nome,
                         Protocolo:p.Protocolo,
                         acertos,
@@ -420,6 +464,7 @@ btnConferir?.addEventListener("click",()=>{
                         tipo:"Participante",
                         jogo:jogo
                     });
+                    logSummary.acertos[tipoPremio]++;
                 }
             });
         }
@@ -430,7 +475,8 @@ btnConferir?.addEventListener("click",()=>{
         const jogoNums = jogoSorteAtual.map(n => n.toString().padStart(2,'0'));
         const acertos = jogoNums.filter(n => sorteados.includes(n)).length;
         if(acertos>=4){
-            premiados[acertos===6?'sena':acertos===5?'quina':'quadra'].push({
+            const tipoPremio = acertos===6?'sena':acertos===5?'quina':'quadra';
+            premiados[tipoPremio].push({
                 Nome:"Jogo da Sorte",
                 Protocolo:"-",
                 acertos,
@@ -438,17 +484,18 @@ btnConferir?.addEventListener("click",()=>{
                 tipo:"Jogo da Sorte",
                 jogo:jogoNums.join(" ")
             });
+            logSummary.acertos[tipoPremio]++;
         }
     }
 
     // === CONFERIR JOGOS EXCEDENTES (USA o array populado do servidor) ===
-    // jogosExcedentes é array de arrays [['01','02',...], ...]
     jogosExcedentes.forEach((jArr, idx) => {
         if (!Array.isArray(jArr) || jArr.length !== 6) return;
         const jogoFormatado = jArr.map(n => n.toString().padStart(2,'0'));
         const acertos = jogoFormatado.filter(n => sorteados.includes(n)).length;
         if(acertos>=4){
-            premiados[acertos===6?'sena':acertos===5?'quina':'quadra'].push({
+            const tipoPremio = acertos===6?'sena':acertos===5?'quina':'quadra';
+            premiados[tipoPremio].push({
                 Nome:"Excedente",
                 Protocolo:"-",
                 acertos,
@@ -456,8 +503,13 @@ btnConferir?.addEventListener("click",()=>{
                 tipo:"Jogo Excedente",
                 jogo:jogoFormatado.join(" ")
             });
+            logSummary.acertos[tipoPremio]++;
         }
     });
+
+    // 🚨 LOG: Enviando resumo dos acertos e dados
+    logToSheet(`Resumo: Sorteados: ${sorteados.join(' ')}. Premiados (Sena: ${logSummary.acertos.sena}, Quina: ${logSummary.acertos.quina}, Quadra: ${logSummary.acertos.quadra}). Total Pagos: ${todosDados.filter(p=>p.Status==='PAGO').length}.`);
+
 
     // ==== EXIBIÇÃO ====
     let html=`<h4>Resultado da Conferência</h4><p><strong>Números:</strong> ${sorteados.join(' ')}</p><hr>`;
@@ -487,7 +539,6 @@ btnConferir?.addEventListener("click",()=>{
 
 // ================== RATEIO ==================
 
-// 🚨 CORREÇÃO APLICADA: Substituindo btnCalcularRateio por btnCalcular
 btnCalcular?.addEventListener("click",()=>{ 
     const total=parseFloat(inputValorPremio.value);
     const pagos=document.rateioData?.totalPagos||0;
@@ -515,7 +566,7 @@ btnCalcular?.addEventListener("click",()=>{
     mostrarRateio(`💵 R$ ${totalFormatado} / ${pagos} → R$ ${porPessoaFormatado} por participante.`, "green");
 });
 
-// FUNÇÃO UTILITÁRIA RESTAURADA E NECESSÁRIA PARA O RATEIO
+// FUNÇÃO UTILITÁRIA NECESSÁRIA PARA O RATEIO
 function mostrarRateio(msg,cor){
     resultado.textContent=msg;
     resultado.style.color=cor;
