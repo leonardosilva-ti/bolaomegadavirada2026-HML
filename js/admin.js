@@ -333,33 +333,39 @@ btnSalvarExcedentes?.addEventListener("click", async()=>{
     // Captura os valores ATUAIS do DOM
     const grids = excedentesContainer.querySelectorAll("div[data-index]");
     const dados = Array.from(grids).map(grid =>
-        Array.from(grid.querySelectorAll("input")).map(i => i.value.trim().padStart(2,"0"))
+        Array.from(grid.querySelectorAll("input")).map(i => i.value.trim()) // Remove padStart para ordenar como números
     );
 
     for(const jogo of dados){
+        // Verifica se há campos vazios
         if(jogo.some(n=>!n)) { alert("Preencha todos os números de cada jogo."); return; }
-        // Filtra para garantir que não há zero ou vazios para checar repetição
-        if(new Set(jogo.filter(n=>n && n!=="00")).size!==6){ alert("Não é permitido números repetidos em um jogo."); return; }
+
+        // Garante que todos são números válidos e checa repetição
+        const numerosInteiros = jogo.map(Number);
+        if(numerosInteiros.some(n=>isNaN(n)||n<1||n>60)){ alert("Números devem ser entre 01 e 60."); return; }
+        if(new Set(numerosInteiros).size!==6){ alert("Não é permitido números repetidos em um jogo."); return; }
     }
-    
-    if (dados.length === 0) {
-        // Se a lista estiver vazia, envia string vazia para limpar tudo.
-        const confirmClear = confirm("Nenhum jogo excedente será salvo. Deseja apagar todos os jogos excedentes existentes na planilha?");
-        if (!confirmClear) return;
-        await postAction("salvarJogosAdm", { jogos: "" });
-        return;
-    }
+    
+    if (dados.length === 0) {
+        const confirmClear = confirm("Nenhum jogo excedente será salvo. Deseja apagar todos os jogos excedentes existentes na planilha?");
+        if (!confirmClear) return;
+        await postAction("salvarJogosAdm", { jogos: "" });
+        return;
+    }
 
-
-    // Transforma em array de strings "01 02 03 04 05 06"
-    const jogosStrings = dados.map(arr => arr.join(" "));
+    // 🚨 MUDANÇA AQUI: Ordena e formata com padStart
+    const jogosStrings = dados.map(arr => {
+        // Converte para número, ordena e depois formata de volta para string com zero à esquerda
+        return arr.map(Number)
+                  .sort((a, b) => a - b) // Ordena em ordem crescente
+                  .map(n => n.toString().padStart(2, "0"))
+                  .join(" ");
+    });
 
     // Envia como "jogo1|jogo2|..."
     const payloadStr = jogosStrings.join("|");
 
     await postAction("salvarJogosAdm",{ jogos: payloadStr });
-
-    // postAction já chama carregarParticipantes(), que zera o jogosExcedentesEmEdicao.
 });
 
 // ================== CONFERÊNCIA ==================
