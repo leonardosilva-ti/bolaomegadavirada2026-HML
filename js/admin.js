@@ -237,7 +237,8 @@ async function postAction(action, params) {
         }
 
         // recarrega dados após ação (backend já atualizou)
-        if (action !== 'log') { // Evita recarregar a tela após um log
+        // 🚨 Impedir recarregamento após um log, pois isso é apenas depuração.
+        if (action !== 'log') { 
             carregarParticipantes();
         }
     } catch(err) {
@@ -539,6 +540,7 @@ btnConferir?.addEventListener("click",()=>{
 
 // ================== RATEIO ==================
 
+// 🚨 CORREÇÃO: Usando a variável definida 'btnCalcular'
 btnCalcular?.addEventListener("click",()=>{ 
     const total=parseFloat(inputValorPremio.value);
     const pagos=document.rateioData?.totalPagos||0;
