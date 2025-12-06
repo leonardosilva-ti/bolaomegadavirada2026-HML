@@ -186,15 +186,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
 
-        // 💡 REGISTRO OTIMIZADO:
-        // Não use os nomes de arquivo '.js' em addFont. 
-        // Apenas force o registro dos estilos que foram injetados.
-        doc.addFont('NotoSans', 'NotoSans', 'normal'); 
-        doc.addFont('NotoSans', 'NotoSans', 'bold'); // <--- Registro sem o '.js'
-        doc.setFont('NotoSans');
+        // 💡 REGISTRO OTIMIZADO USANDO FONT CNS:
+        // O fontcns injeta a fonte no escopo do jsPDF, 
+        // mas pode ser necessário defini-la explicitamente como 'normal'.
+        // Não use nomes de arquivo.
+        doc.setFont('NotoSans'); // Use o nome injetado, que o fontcns deve gerenciar
+        doc.setFontSize(12); // Ajusta o tamanho da fonte para inicializar
+
+        // Não há necessidade de doc.addFont() se o fontcns.min.js fizer o trabalho.
+        // A fonte FONT_UNICODE agora será NotoSans.
         // ----------------------------------------------------
 
-        // 🚨 ATENÇÃO: Usaremos 'NotoSans' onde queremos emojis
+        // 🚨 ATENÇÃO: FONT_UNICODE = 'NotoSans'
         const FONT_UNICODE = 'NotoSans'; 
         
         // Cores
