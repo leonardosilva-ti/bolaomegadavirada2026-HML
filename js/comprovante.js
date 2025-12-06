@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ====================================================================
-    // ===== GERAR PDF DO COMPROVANTE (Com registro explícito de Bold) =====
+    // ===== GERAR PDF DO COMPROVANTE (Apenas texto, sem NotoSans) =====
     // ====================================================================
     btnBaixarPDF.addEventListener("click", () => {
         if (!apostaData) {
@@ -186,19 +186,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
 
-        // 💡 REGISTRO OTIMIZADO USANDO FONT CNS:
-        // O fontcns injeta a fonte no escopo do jsPDF, 
-        // mas pode ser necessário defini-la explicitamente como 'normal'.
-        // Não use nomes de arquivo.
-        doc.setFont('NotoSans'); // Use o nome injetado, que o fontcns deve gerenciar
-        doc.setFontSize(12); // Ajusta o tamanho da fonte para inicializar
-
-        // Não há necessidade de doc.addFont() se o fontcns.min.js fizer o trabalho.
-        // A fonte FONT_UNICODE agora será NotoSans.
+        // 💡 Remoção do registro da fonte: usaremos Helvetica/Courier
+        doc.setFont('helvetica'); 
         // ----------------------------------------------------
-
-        // 🚨 ATENÇÃO: FONT_UNICODE = 'NotoSans'
-        const FONT_UNICODE = 'NotoSans'; 
         
         // Cores
         const COR_AZUL = [0, 80, 150];
@@ -210,14 +200,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const MARGEM_ESQUERDA = 20;
         const LARGURA = 170;
 
-        // 1. Bloco do Título Principal (Usando NotoSans para o emoji e negrito)
+        // 1. Bloco do Título Principal
         doc.setFillColor(...COR_AZUL);
         doc.rect(0, 0, 210, 30, 'F');
         
-        doc.setFont(FONT_UNICODE, "bold"); 
+        doc.setFont("helvetica", "bold"); 
         doc.setFontSize(18);
         doc.setTextColor(255, 255, 255);
-        doc.text("🎫 Comprovante Oficial do Bolão", 105, y, { align: "center" });
+        doc.text("Comprovante Oficial do Bolão", 105, y, { align: "center" });
         
         y += 8;
         doc.setFontSize(14);
@@ -263,7 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         y += 15;
 
-        // 3. Status de Pagamento (Mantém Helvetica, sem emojis)
+        // 3. Status de Pagamento
         doc.setFontSize(14);
         doc.setTextColor(0, 0, 0);
         doc.setFont("helvetica", "bold");
@@ -282,11 +272,11 @@ document.addEventListener("DOMContentLoaded", () => {
         doc.line(MARGEM_ESQUERDA, y + 5, MARGEM_ESQUERDA + LARGURA, y + 5);
         y += 10;
 
-        // 4. Jogos Selecionados (Usando NotoSans para o emoji e negrito)
-        doc.setFont(FONT_UNICODE, "bold"); 
+        // 4. Jogos Selecionados
+        doc.setFont("helvetica", "bold"); 
         doc.setFontSize(14);
         doc.setTextColor(...COR_AZUL);
-        doc.text("🎲 Seus Jogos Selecionados", MARGEM_ESQUERDA, y);
+        doc.text("Seus Jogos Selecionados", MARGEM_ESQUERDA, y);
         doc.setTextColor(0, 0, 0);
 
         y += 8;
@@ -307,17 +297,17 @@ document.addEventListener("DOMContentLoaded", () => {
             if (y > 260) {
                 doc.addPage();
                 y = 30;
-                doc.setFont(FONT_UNICODE, "bold"); // NotoSans na quebra de página
+                doc.setFont("helvetica", "bold");
                 doc.setFontSize(14);
                 doc.setTextColor(...COR_AZUL);
-                doc.text("🎲 Seus Jogos Selecionados (continuação)", MARGEM_ESQUERDA, y);
+                doc.text("Seus Jogos Selecionados (continuação)", MARGEM_ESQUERDA, y);
                 doc.setTextColor(0, 0, 0);
                 y += 8;
             }
         });
         doc.setFont("helvetica", "normal");
 
-        // 5. Seção PIX (Usando NotoSans para o emoji e negrito)
+        // 5. Seção PIX
         if (apostaData.status === "AGUARDANDO PAGAMENTO") {
             y += 10;
             
@@ -329,10 +319,10 @@ document.addEventListener("DOMContentLoaded", () => {
             doc.setFillColor(...COR_FUNDO_CINZA);
             doc.rect(MARGEM_ESQUERDA, y - 5, LARGURA, 30, 'F');
 
-            doc.setFont(FONT_UNICODE, "bold"); // NotoSans para o emoji e negrito
+            doc.setFont("helvetica", "bold"); 
             doc.setFontSize(14);
             doc.setTextColor(...COR_AZUL);
-            doc.text("💲 Dados para Pagamento via PIX", MARGEM_ESQUERDA + 2, y);
+            doc.text("Dados para Pagamento via PIX", MARGEM_ESQUERDA + 2, y);
             doc.setTextColor(0, 0, 0);
 
             doc.setFontSize(11);
