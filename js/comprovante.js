@@ -174,7 +174,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // ===== GERAR PDF DO COMPROVANTE CORRIGIDO E MELHORADO (v3 com registro de fonte) =====
+    // ====================================================================
+    // ===== GERAR PDF DO COMPROVANTE (Com registro explícito de Bold) =====
+    // ====================================================================
     btnBaixarPDF.addEventListener("click", () => {
         if (!apostaData) {
             alert("Nenhuma aposta encontrada para gerar o comprovante.");
@@ -185,8 +187,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
 
         // 💡 REGISTRO EXPLÍCITO DA FONTE NotoSans para UTF-8/Emojis
-        // O primeiro parâmetro deve ser o nome da fonte carregada via HTML (NotoSans-normal.js)
+        // É essencial que os scripts NotoSans-normal.js E NotoSans-bold.js estejam no HTML
         doc.addFont('NotoSans-normal.js', 'NotoSans', 'normal');
+        doc.addFont('NotoSans-bold.js', 'NotoSans', 'bold'); // <--- ALTERAÇÃO CRUCIAL
         doc.setFont('NotoSans'); 
         // ----------------------------------------------------
 
@@ -203,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const MARGEM_ESQUERDA = 20;
         const LARGURA = 170;
 
-        // 1. Bloco do Título Principal (Usando NotoSans para o emoji)
+        // 1. Bloco do Título Principal (Usando NotoSans para o emoji e negrito)
         doc.setFillColor(...COR_AZUL);
         doc.rect(0, 0, 210, 30, 'F');
         
@@ -275,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
         doc.line(MARGEM_ESQUERDA, y + 5, MARGEM_ESQUERDA + LARGURA, y + 5);
         y += 10;
 
-        // 4. Jogos Selecionados (Usando NotoSans para o emoji)
+        // 4. Jogos Selecionados (Usando NotoSans para o emoji e negrito)
         doc.setFont(FONT_UNICODE, "bold"); 
         doc.setFontSize(14);
         doc.setTextColor(...COR_AZUL);
@@ -310,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         doc.setFont("helvetica", "normal");
 
-        // 5. Seção PIX (Usando NotoSans para o emoji)
+        // 5. Seção PIX (Usando NotoSans para o emoji e negrito)
         if (apostaData.status === "AGUARDANDO PAGAMENTO") {
             y += 10;
             
@@ -322,7 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
             doc.setFillColor(...COR_FUNDO_CINZA);
             doc.rect(MARGEM_ESQUERDA, y - 5, LARGURA, 30, 'F');
 
-            doc.setFont(FONT_UNICODE, "bold"); // NotoSans para o emoji
+            doc.setFont(FONT_UNICODE, "bold"); // NotoSans para o emoji e negrito
             doc.setFontSize(14);
             doc.setTextColor(...COR_AZUL);
             doc.text("💲 Dados para Pagamento via PIX", MARGEM_ESQUERDA + 2, y);
