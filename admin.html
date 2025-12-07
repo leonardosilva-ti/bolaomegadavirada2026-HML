@@ -13,13 +13,14 @@
       border: 1px solid #eee;
     }
     .stats-grid { 
-      display: flex; 
+      display: flex;
       justify-content: space-around; 
       margin-bottom: 15px;
       font-size: 1.1em;
       font-weight: bold;
     }
-    .resultado-premio p { margin: 5px 0; }
+    .resultado-premio p { margin: 5px 0;
+    }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
@@ -29,25 +30,24 @@
 
   <main class="container max-w-4xl mx-auto p-6">
     
-    <!-- LOGIN -->
     <section id="loginArea" class="admin-card max-w-md mx-auto">
       <h2 class="text-lg font-semibold mb-4 text-center">Login</h2>
       <input type="text" id="adminUser" placeholder="Usuário" class="border p-2 w-full mb-3 rounded" />
       <input type="password" id="adminPass" placeholder="Senha" class="border p-2 w-full mb-3 rounded" />
       <button id="btnLogin" class="primary w-full">Entrar</button>
       <p id="loginMsg" class="text-red-500 text-sm mt-3 text-center hidden"></p>
+  
     </section>
 
-    <!-- ÁREA ADMIN -->
     <section id="adminArea" class="hidden">
 
-      <!-- Resumo do Bolão -->
       <div class="resumo-card">
         <h2 class="titulo-resumo">Resumo do Bolão</h2>
         <div class="resumo-grid">
           <div class="resumo-item">
             <div class="resumo-icone">👥</div>
             <div class="resumo-info">
+           
               <span class="resumo-label">Participantes</span>
               <span class="resumo-numero" id="countParticipantes">0</span>
             </div>
@@ -56,38 +56,39 @@
             <div class="resumo-icone">🎫</div>
             <div class="resumo-info">
               <span class="resumo-label">Total de Jogos</span>
+    
               <span class="resumo-numero" id="countJogos">0</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Jogo da Sorte -->
       <div class="jogo-sorte-card">
         <h3>🎲 Jogo da Sorte</h3>
         <div id="jogoSorteContainer"></div>
         <div id="jogoSorteInputs" class="grid grid-cols-3 gap-2 mb-3"></div>
+  
         <div class="flex justify-between">
           <button id="btnSalvarJogoSorte" class="primary">💾 Salvar Jogo da Sorte</button>
           <button id="btnApagarJogoSorte" class="danger">🗑 Apagar Jogo da Sorte</button>
         </div>
       </div>
 
-      <!-- Jogos Excedentes -->
       <div class="jogo-sorte-card">
         <h3>🎲 Jogos Excedentes</h3>
         <div id="excedentesContainer"></div>
-        <div class="flex justify-between mt-2">
+        <div class="flex justify-between 
+mt-2">
           <button id="btnAddExcedente" class="primary small">➕ Adicionar Jogo</button>
           <button id="btnSalvarExcedentes" class="primary">💾 Salvar Excedentes</button>
         </div>
       </div>
 
-      <!-- Conferência -->
       <div class="admin-card">
         <h2 class="text-xl font-semibold mb-3">Conferência de Sorteio</h2>
         <div id="conferenciaContainer" class="flex gap-2 flex-wrap mb-3"></div>
         <button id="btnConferir" class="primary mb-3">Conferir</button>
+     
         <div id="resultadoConferencia" class="resultado-premio"></div>
 
         <div id="areaRateio" class="hidden mt-4 pt-3 border-t">
@@ -98,7 +99,7 @@
         </div>
       </div>
 
-      <!-- Lista de Participantes -->
+    
       <div class="admin-card">
         <h2 class="text-xl font-semibold text-indigo-700 mb-3">Lista de Participantes</h2>
         <button id="btnAtualizar" class="muted small mb-3">🔄 Atualizar Lista</button>
@@ -106,12 +107,13 @@
           <table class="min-w-full border-collapse">
             <thead class="bg-indigo-600 text-white">
               <tr>
-                <th class="py-2 px-3 text-left">Nome (Jogos)</th>
-                <th class="py-2 px-3 text-center">Protocolo</th>
+      
+                <th class="py-2 px-3 text-left">Nome</th> <th class="py-2 px-3 text-center">Protocolo</th>
                 <th class="py-2 px-3 text-center">Status</th>
                 <th class="py-2 px-3 text-center">Ações</th>
               </tr>
             </thead>
+   
             <tbody id="listaParticipantes" class="divide-y divide-gray-200"></tbody>
           </table>
         </div>
