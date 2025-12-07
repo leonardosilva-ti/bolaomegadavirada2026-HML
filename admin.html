@@ -39,6 +39,7 @@
   
     </section>
 
+  
     <section id="adminArea" class="hidden">
 
       <div class="resumo-card">
@@ -49,6 +50,7 @@
             <div class="resumo-info">
            
               <span class="resumo-label">Participantes</span>
+      
               <span class="resumo-numero" id="countParticipantes">0</span>
             </div>
           </div>
@@ -57,6 +59,7 @@
             <div class="resumo-info">
               <span class="resumo-label">Total de Jogos</span>
     
+          
               <span class="resumo-numero" id="countJogos">0</span>
             </div>
           </div>
@@ -69,6 +72,7 @@
         <div id="jogoSorteInputs" class="grid grid-cols-3 gap-2 mb-3"></div>
   
         <div class="flex justify-between">
+      
           <button id="btnSalvarJogoSorte" class="primary">💾 Salvar Jogo da Sorte</button>
           <button id="btnApagarJogoSorte" class="danger">🗑 Apagar Jogo da Sorte</button>
         </div>
@@ -80,6 +84,7 @@
         <div class="flex justify-between 
 mt-2">
           <button id="btnAddExcedente" class="primary small">➕ Adicionar Jogo</button>
+        
           <button id="btnSalvarExcedentes" class="primary">💾 Salvar Excedentes</button>
         </div>
       </div>
@@ -92,6 +97,7 @@ mt-2">
         <div id="resultadoConferencia" class="resultado-premio"></div>
 
         <div id="areaRateio" class="hidden mt-4 pt-3 border-t">
+        
           <label for="valorPremio" class="font-semibold block mb-2">Valor Total do Prêmio (R$):</label>
           <input type="number" id="valorPremio" placeholder="Ex: 150000.00" step="0.01" class="border p-2 w-full mb-3 rounded">
           <button id="btnCalcularRateio" class="primary">Calcular Rateio</button>
@@ -102,13 +108,25 @@ mt-2">
     
       <div class="admin-card">
         <h2 class="text-xl font-semibold text-indigo-700 mb-3">Lista de Participantes</h2>
-        <button id="btnAtualizar" class="muted small mb-3">🔄 Atualizar Lista</button>
+        
+        <div class="flex flex-wrap gap-2 mb-3 items-center justify-between">
+            <input type="text" id="filtroBusca" placeholder="Buscar Nome/Protocolo" class="border p-2 rounded flex-1 min-w-[200px]" />
+            
+            <select id="filtroStatus" class="border p-2 rounded">
+                <option value="">Todos os Status</option>
+                <option value="PAGO">PAGO</option>
+                <option value="AGUARDANDO">AGUARDANDO PAGAMENTO</option>
+            </select>
+            
+            <button id="btnAtualizar" class="muted small">🔄 Atualizar Lista</button>
+        </div>
         <div id="tabelaParticipantes" class="bg-white rounded-lg shadow-md overflow-x-auto">
           <table class="min-w-full border-collapse">
             <thead class="bg-indigo-600 text-white">
               <tr>
       
                 <th class="py-2 px-3 text-left">Nome</th> <th class="py-2 px-3 text-center">Protocolo</th>
+         
                 <th class="py-2 px-3 text-center">Status</th>
                 <th class="py-2 px-3 text-center">Ações</th>
               </tr>
@@ -117,8 +135,15 @@ mt-2">
             <tbody id="listaParticipantes" class="divide-y divide-gray-200"></tbody>
           </table>
         </div>
-      </div>
+        
+        <div id="paginacao" class="flex justify-center gap-3 mt-4">
+            <button id="btnAnterior" class="muted">← Anterior</button>
+            <span id="paginaInfo" class="py-2 px-3 font-semibold">Página 0 de 0</span>
+            <button id="btnProxima" class="muted">Próxima →</button>
+        </div>
+        </div>
 
+   
       <div class="text-center mt-6">
         <button id="btnLogout" class="danger">Sair</button>
       </div>
