@@ -1,10 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbyuX4NxUodwTALVVsFMvDHFhrgV-tR4MBTZA_xdJd2rXLg5qIj1CSg3yXghM66JpWSm/exec";
+
+  const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzavXeNlDzPh_hGnoWM7AKv5ecp4WHJdHd-ILwWQ2j-O59GNHLoBwYMrkZyRQrNSmSK/exec"; // 🔥 Substitua pela URL publicada da API REST
   const chavePix = "88f77025-40bc-4364-9b64-02ad88443cc4";
 
   const btnConsultar = document.getElementById("btnConsultar");
   const resultadoDiv = document.getElementById("resultado");
+
+  // Helper REST
+  async function postPath(path, body = {}) {
+    const url = `${WEBAPP_URL}?path=${encodeURIComponent(path)}`;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+    return res.json();
+  }
 
   btnConsultar.addEventListener("click", async () => {
     const protocolo = document.getElementById("protocoloInput").value.trim();
@@ -16,24 +27,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      // Busca participante, jogos do bolão e jogos excedentes da planilha Jogos-adm
-      const [resParticipante, resGeral, resJogosAdm] = await Promise.all([
-        fetch(`${SCRIPT_URL}?action=getComprovante&protocolo=${protocolo}`).then((r) => r.json()),
-        fetch(`${SCRIPT_URL}?action=consultarBolao`).then((r) => r.json()),
-        fetch(`${SCRIPT_URL}?action=getJogosAdm`).then((r) => r.json()),
+
+      // ======= CHAMADAS REST EM PARALELO =======
+      const [resPart, resGeral, resJogosAdm] = await Promise.all([
+        postPath("consulta/participante", { protocolo }),
+        postPath("consulta/geral"),
+        postPath("consulta/jogosAdm")
       ]);
 
-      if (!resParticipante.success) {
+      if (!resPart.success) {
         resultadoDiv.innerHTML = `<p class="center" style="color:red">${
-          resParticipante.message || "Protocolo não encontrado."
+          resPart.error || "Protocolo não encontrado."
         }</p>`;
         return;
       }
 
-      const participante = resParticipante.participante;
+      const participante = resPart.participante;
       const dadosGerais = resGeral || {};
-      const todosJogos = dadosGerais.todosJogos || [];
-      const jogosAdm = resJogosAdm?.jogosAdm || [];
+
+      const todosJogos = (dadosGerais.todosJogos || []);
+      const jogosAdm = (resJogosAdm.jogosAdm || []);
 
       /* ======= ESTATÍSTICAS ======= */
       let html = `
@@ -50,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
           .split(" ")
           .map((n) => `<span>${n}</span>`)
           .join("");
+
         html += `
           <div class="jogo-sorte-container">
             <h3>Jogo da Sorte (9 Números)</h3>
@@ -57,49 +71,43 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         `;
       } else {
-        // Lógica para quando não há jogo da sorte cadastrado
-        const totalBolinhas = 9;
-        const bolinhasVazias = Array(totalBolinhas)
-          .fill(`<span class="empty">-</span>`)
-          .join("");
-
+        const vazio = Array(9).fill(`<span class="empty">-</span>`).join("");
         html += `
           <div class="jogo-sorte-container">
             <h3>Jogo da Sorte (9 Números)</h3>
-            <p style="color:#e94a4a; font-weight:600; font-size:0.95rem; margin: 0 0 10px 0;">
-                O jogo de 9 números ainda não foi cadastrado. Será cadastrado dia 29/12 quando o bolão fechar.
+            <p style="color:#e94a4a; font-weight:600; font-size:0.95rem;">
+              O jogo de 9 números ainda não foi cadastrado. Será cadastrado dia 29/12 quando o bolão fechar.
             </p>
-            <div class="jogo-sorte-numeros">${bolinhasVazias}</div>
+            <div class="jogo-sorte-numeros">${vazio}</div>
           </div>
         `;
       }
 
       /* ======= DADOS DO PARTICIPANTE ======= */
-      const statusPago = participante.Status === "PAGO";
+      const statusPago = participante.status === "PAGO";
       const statusCor = statusPago ? "green" : "red";
       const statusTxt = statusPago ? "Pago" : "Aguardando Pagamento";
 
       html += `
         <h3 class="center" style="margin-top:20px;">Seus Dados e Jogos</h3>
         <div class="card">
-          <p><strong>Nome:</strong> ${participante.Nome}</p>
-          <p><strong>Telefone:</strong> ${participante.Telefone}</p>
-          <p><strong>Protocolo:</strong> ${participante.Protocolo}</p>
+          <p><strong>Nome:</strong> ${participante.nome}</p>
+          <p><strong>Telefone:</strong> ${participante.telefone}</p>
+          <p><strong>Protocolo:</strong> ${participante.protocolo}</p>
           <p><strong>Status:</strong> <span style="color:${statusCor}">${statusTxt}</span></p>
           ${
             !statusPago
               ? `
-            <div class="pix-box">
-              <label><strong>Chave PIX para pagamento:</strong></label>
-              <div id="pix-chave">${chavePix}</div>
-              <button id="btnCopiarPix" class="btn-copiar">Copiar</button>
-              <p class="pix-info">Use esta chave para realizar o pagamento da sua aposta.</p>
-            </div>`
-              : ""
+              <div class="pix-box">
+                <label><strong>Chave PIX para pagamento:</strong></label>
+                <div id="pix-chave">${chavePix}</div>
+                <button id="btnCopiarPix" class="btn-copiar">Copiar</button>
+                <p class="pix-info">Use esta chave para realizar o pagamento da sua aposta.</p>
+              </div>
+            ` : ""
           }
           <hr style="margin:10px 0;">
-          ${participante.Jogos.split("|")
-            .filter(Boolean)
+          ${participante.jogos
             .map((j, i) => `<p><b>Jogo ${i + 1}:</b> ${j}</p>`)
             .join("")}
           <div class="bottom-buttons">
@@ -110,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
 
-      /* ======= TODOS OS JOGOS DO BOLÃO ======= */
+      /* ======= TODOS OS JOGOS ======= */
       const jogosCompletos = [...todosJogos, ...jogosAdm].filter(Boolean);
 
       if (jogosCompletos.length > 0) {
@@ -128,12 +136,12 @@ document.addEventListener("DOMContentLoaded", () => {
               ${jogosCompletos
                 .map(
                   (j) => `
-                <div class="jogo-card">
-                  ${j
-                    .split(" ")
-                    .map((num) => `<span>${num}</span>`)
-                    .join("")}
-                </div>`
+                  <div class="jogo-card">
+                    ${j
+                      .split(" ")
+                      .map((n) => `<span>${n}</span>`)
+                      .join("")}
+                  </div>`
                 )
                 .join("")}
             </div>
@@ -154,8 +162,11 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         };
       }
+
     } catch (err) {
+      console.error(err);
       resultadoDiv.innerHTML = `<p class="center" style="color:red">Erro: ${err.message}</p>`;
     }
+
   });
 });
