@@ -1,5 +1,5 @@
 // === /js/admin.js - ADMIN COMPLETO (REVISADO) ===
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyuX4NxUodwTALVVsFMvDHFhrgV-tR4MBTZA_xdJd2rXLg5qIj1CSg3yXghM66JpWSm/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzavXeNlDzPh_hGnoWM7AKv5ecp4WHJdHd-ILwWQ2j-O59GNHLoBwYMrkZyRQrNSmSK/exec";
 
 const el = id => document.getElementById(id);
 // ==== ELEMENTOS HTML ====
