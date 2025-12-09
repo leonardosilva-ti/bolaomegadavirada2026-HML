@@ -3,7 +3,7 @@
 // =========================
 
 // URL do Apps Script (MODELO A)
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyuX4NxUodwTALVVsFMvDHFhrgV-tR4MBTZA_xdJd2rXLg5qIj1CSg3yXghM66JpWSm/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzavXeNlDzPh_hGnoWM7AKv5ecp4WHJdHd-ILwWQ2j-O59GNHLoBwYMrkZyRQrNSmSK/exec";
 
 // Elementos
 const btnGerar = document.getElementById("btnGerar");
@@ -96,3 +96,4 @@ btnConfirmar?.addEventListener("click", async () => {
   btnConfirmar.disabled = false;
   btnConfirmar.textContent = "Confirmar Aposta";
 });
+
