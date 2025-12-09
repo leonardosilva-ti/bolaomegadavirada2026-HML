@@ -1,16 +1,6 @@
-// js/confirmacao.js — versão adaptada para API REST
-const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzavXeNlDzPh_hGnoWM7AKv5ecp4WHJdHd-ILwWQ2j-O59GNHLoBwYMrkZyRQrNSmSK/exec"; // Substituir pela URL do WebApp
+// js/confirmacao.js
 
-// Helper para chamadas REST
-async function postPath(path, body = {}) {
-  const url = `${WEBAPP_URL}?path=${encodeURIComponent(path)}`;
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body)
-  });
-  return res.json();
-}
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbylsOPklfzElA8ZYF7wYneORp5nWymkrnDzXhVK-onsnb9PXze16S50yVbu059g_w4tLA/exec"; // Certifique-se de que esta URL está atualizada
 
 const aposta = JSON.parse(localStorage.getItem("pendingAposta"));
 const dadosDiv = document.getElementById("dadosConfirmacao");
@@ -20,73 +10,101 @@ const termosCheckbox = document.getElementById("aceitoTermos");
 const btnConfirmar = document.getElementById("btnConfirmar");
 
 if (!aposta) {
-  dadosDiv.innerHTML = "<p style='color:red'>Nenhuma aposta pendente encontrada. Retorne à página principal.</p>";
-  btnConfirmar.disabled = true;
+  dadosDiv.innerHTML = "<p style='color:red'>Nenhuma aposta pendente encontrada. Retorne à página principal.</p>";
+  btnConfirmar.disabled = true;
 } else {
-  dadosDiv.innerHTML = `
-    <p><b>Nome Completo:</b> ${aposta.nome}</p>
-    <p><b>Telefone (WhatsApp):</b> ${aposta.telefone}</p>
-  `;
-  jogosDiv.innerHTML = `
-    <h3>Jogos Selecionados</h3>
-    ${aposta.jogos.map((jogo, i) => `<p><b>Jogo ${i + 1}:</b> ${jogo}</p>`).join("")}
-  `;
+  dadosDiv.innerHTML = `
+    <p><b>Nome Completo:</b> ${aposta.nome}</p>
+    <p><b>Telefone (WhatsApp):</b> ${aposta.telefone}</p>
+  `;
+  jogosDiv.innerHTML = `
+    <h3>Jogos Selecionados</h3>
+    ${aposta.jogos.map((jogo, i) => `<p><b>Jogo ${i + 1}:</b> ${jogo}</p>`).join("")}
+  `;
 }
 
-// ativar botão
 termosCheckbox.addEventListener("change", () => {
-  btnConfirmar.disabled = !termosCheckbox.checked;
+  btnConfirmar.disabled = !termosCheckbox.checked;
 });
 
-// voltar
 document.getElementById("btnVoltar").addEventListener("click", () => {
-  window.location.href = "index.html";
+  window.location.href = "index.html";
 });
 
-// CONFIRMAR aposta
 btnConfirmar.addEventListener("click", async () => {
-  if (!termosCheckbox.checked) {
-    mensagem.textContent = "Você deve aceitar os termos antes de confirmar.";
-    mensagem.style.color = "red";
-    return;
-  }
+  if (!termosCheckbox.checked) {
+    mensagem.textContent = "Você deve aceitar os termos antes de confirmar.";
+    mensagem.style.color = "red";
+    return;
+  }
 
-  if (!aposta || !aposta.protocolo) {
-    mensagem.textContent = "Erro: protocolo não encontrado.";
-    mensagem.style.color = "red";
-    return;
-  }
+  mensagem.textContent = "Enviando e registrando aposta...";
+  mensagem.style.color = "blue";
+  btnConfirmar.disabled = true;
 
-  mensagem.textContent = "Confirmando aposta...";
-  mensagem.style.color = "blue";
-  btnConfirmar.disabled = true;
+  const protocolo = gerarProtocolo();
+  const dataHora = new Date().toLocaleString("pt-BR");
 
-  try {
-    // chamada à rota confirmacao/confirmar
-    const r = await postPath("confirmacao/confirmar", {
-      protocolo: aposta.protocolo
-    });
+  const apostaCompleta = {
+    ...aposta,
+    dataHora,
+    protocolo,
+    status: "AGUARDANDO PAGAMENTO"
+  };
 
-    if (!r || !r.success) {
-      throw new Error(r.error || "Falha inesperada ao confirmar aposta.");
-    }
+  try {
+    const formData = new FormData();
+    formData.append("action", "registrarAposta");
+    formData.append("nome", apostaCompleta.nome);
+    formData.append("telefone", (apostaCompleta.telefone || "").replace(/\D/g, ""));
+    formData.append("protocolo", apostaCompleta.protocolo);
+    formData.append("dataHora", apostaCompleta.dataHora);
+    formData.append("status", apostaCompleta.status);
+    apostaCompleta.jogos.forEach((jogo, i) => formData.append(`jogo${i + 1}`, jogo));
 
-    // salvar aposta final
-    const apostaFinal = {
-      ...aposta,
-      status: "AGUARDANDO PAGAMENTO",
-      dataHora: new Date().toLocaleString("pt-BR")
-    };
+    const response = await fetch(SCRIPT_URL, { method: "POST", body: formData });
+    const texto = await response.text();
 
-    localStorage.setItem("lastAposta", JSON.stringify(apostaFinal));
-    localStorage.removeItem("pendingAposta");
+    // ✅ CORREÇÃO: A linha de redirecionamento está correta.
+    if (response.ok && texto.includes("Sucesso")) {
+      localStorage.setItem("lastAposta", JSON.stringify(apostaCompleta));
+      localStorage.removeItem("pendingAposta");
+      
+      // Redireciona para o comprovante, enviando o protocolo na URL
+      window.location.href = `comprovante.html?protocolo=${protocolo}`; 
 
-    // redirecionar com o protocolo
-    window.location.href = `comprovante.html?protocolo=${encodeURIComponent(aposta.protocolo)}`;
-
-  } catch (err) {
-    mensagem.textContent = "Erro ao confirmar aposta: " + err.message;
-    mensagem.style.color = "red";
-    btnConfirmar.disabled = false;
-  }
+    } else {
+      mensagem.textContent = `Erro ao enviar. Resposta do servidor: ${texto}`;
+      mensagem.style.color = "red";
+      btnConfirmar.disabled = false;
+    }
+  } catch (err) {
+    mensagem.textContent = "Falha na conexão com o Apps Script. A aposta não foi registrada.";
+    mensagem.style.color = "red";
+    btnConfirmar.disabled = false;
+  }
 });
+
+function gerarProtocolo() {
+  const now = new Date();
+  const pad = n => n.toString().padStart(2, '0');
+
+  const ano = now.getFullYear();
+  const mes = pad(now.getMonth() + 1);
+  const dia = pad(now.getDate());
+  const hora = pad(now.getHours());
+  const min = pad(now.getMinutes());
+  const seg = pad(now.getSeconds());
+
+  // Funções auxiliares
+  const letra = () => String.fromCharCode(65 + Math.floor(Math.random() * 26)); // A–Z
+  const numero = () => Math.floor(Math.random() * 10); // 0–9
+
+  // Parte aleatória EXATA: XX00X0 (dois zeros fixos)
+  const parteRandom = `${letra()}${letra()}00${letra()}${numero()}`;
+
+  // Retorna o formato: AAAAMMDDHHMMSS-XX00X0
+  const protocolo = `${ano}${mes}${dia}${hora}${min}${seg}-${parteRandom}`;
+  console.log("Protocolo gerado:", protocolo); 
+  return protocolo;
+}
