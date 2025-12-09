@@ -1,6 +1,6 @@
 // /js/script.js - Lógica da Página Principal (FINAL) adaptado para API REST
 // Substitua pela URL do seu WebApp deploy
-const WEBAPP_URL = "__WEBAPP_URL__";
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzavXeNlDzPh_hGnoWM7AKv5ecp4WHJdHd-ILwWQ2j-O59GNHLoBwYMrkZyRQrNSmSK/exec";
 
 const NUMEROS_TOTAL = 60;
 const JOGOS_MAXIMO = 5;
@@ -361,3 +361,4 @@ if (btnCopiarPixEl) {
     });
   });
 }
+
