@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbylsOPklfzElA8ZYF7wYneORp5nWymkrnDzXhVK-onsnb9PXze16S50yVbu059g_w4tLA/exec";
+    "https://script.google.com/macros/s/AKfycbzavXeNlDzPh_hGnoWM7AKv5ecp4WHJdHd-ILwWQ2j-O59GNHLoBwYMrkZyRQrNSmSK/exec";
   const chavePix = "88f77025-40bc-4364-9b64-02ad88443cc4";
 
   const btnConsultar = document.getElementById("btnConsultar");

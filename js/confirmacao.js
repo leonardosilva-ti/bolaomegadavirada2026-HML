@@ -1,6 +1,6 @@
 // js/confirmacao.js
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbylsOPklfzElA8ZYF7wYneORp5nWymkrnDzXhVK-onsnb9PXze16S50yVbu059g_w4tLA/exec"; // Certifique-se de que esta URL está atualizada
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzavXeNlDzPh_hGnoWM7AKv5ecp4WHJdHd-ILwWQ2j-O59GNHLoBwYMrkZyRQrNSmSK/exec"; // Certifique-se de que esta URL está atualizada
 
 const aposta = JSON.parse(localStorage.getItem("pendingAposta"));
 const dadosDiv = document.getElementById("dadosConfirmacao");
