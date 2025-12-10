@@ -256,18 +256,22 @@ h2 {
     font-size: 1em;
 }
 
-/* Responsividade Básica */
+/* --------------------------------- */
+/* 5. RESPONSIVIDADE (MOBILE) */
+/* --------------------------------- */
 @media (max-width: 600px) {
     .container {
         padding: 0.8rem;
     }
 
+    /* Reduz o tamanho das bolinhas para caber mais */
     .bolinha {
         width: 25px;
         height: 25px;
         font-size: 0.8rem;
     }
 
+    /* Empilha os botões "Voltar" e "Confirmar" */
     .controles {
         flex-direction: column;
         gap: 8px;
@@ -275,9 +279,6 @@ h2 {
 
     .controles button {
         width: 100%;
-    }
-
-    #copiarPixBtn {
-        max-width: 100%; /* Garante que o botão se expanda no mobile */
+        max-width: none;
     }
 }

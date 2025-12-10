@@ -383,74 +383,24 @@ thead { background-color: var(--mega-green); color: white; }
 		============================ */
 
 /* --- Container principal mais fluido --- */
-@media (max-width: 700px) {
+/* ... [Conteúdo existente de admin.css] ... */
 
+@media (max-width: 768px) {
+	/* --- MOBILE --- */
+
+	/* Container */
 	.container {
-			padding: 16px;
-			margin: 12px;
-			width: calc(100% - 24px);
+		padding: 15px;
+		margin: 10px auto;
+		box-shadow: none; 
 	}
 
-	/* Reduz padding dos cards */
-	.admin-card, .jogo-sorte-card {
-			padding: 14px;
-			margin-bottom: 16px;
+	/* Ajuste para títulos e cards */
+	.card-admin {
+		padding: 15px;
 	}
-
-	/* Título menor para caber melhor */
-	.site-header {
-			font-size: 20px;
-			padding: 14px;
-	}
-
-	/* --- LOGIN --- */
-	#loginArea {
-			width: 100%;
-			max-width: 380px;
-			padding: 16px;
-	}
-
-	input, button, select {
-			font-size: 16px; /* evita zoom automático do iOS */
-	}
-
-	/* --- RESUMO DO BOLÃO --- */
-	.resumo-card {
-			padding: 20px 14px;
-	}
-
-	.titulo-resumo {
-			font-size: 1.3rem;
-	}
-
-	.resumo-item {
-			width: 100%;
-			min-width: auto;
-			justify-content: center;
-			padding: 12px;
-	}
-
-	/* Grid de 6 colunas vira 3 (melhor leitura) */
-	.input-jogo-excedente,
-	#conferenciaContainer {
-			grid-template-columns: repeat(3, 1fr);
-			max-width: 280px;
-			gap: 10px;
-	}
-
-	/* Jogo da Sorte – números mais espaçados */
-	#jogoSorteContainer,
-	.jogo-numero-container {
-			gap: 6px;
-	}
-
-	.jogo-numero {
-			width: 38px;
-			height: 38px;
-			font-size: 0.95rem;
-	}
-
-	/* --- Botões alinhados verticalmente em telas pequenas --- */
+	
+	/* --- BOTÕES/CONTROLES GERAIS: Força empilhamento --- */
 	.flex.justify-between {
 			flex-direction: column;
 			gap: 10px;
@@ -459,29 +409,29 @@ thead { background-color: var(--mega-green); color: white; }
 	.flex.justify-between button {
 			width: 100%;
 	}
-  
-  /* Corrige o alinhamento da área de pesquisa e filtro na tabela */
-  .flex.flex-wrap.justify-between.gap-4 {
-      flex-direction: column;
-      gap: 10px;
-  }
-  
-  .flex.flex-wrap.justify-between.gap-4 > div {
-      width: 100%;
-      min-width: auto;
-  }
+ 
+	/* Corrige o alinhamento da área de pesquisa e filtro na tabela */
+	.flex.flex-wrap.justify-between.gap-4 {
+		flex-direction: column;
+		gap: 10px;
+	}
+	
+	.flex.flex-wrap.justify-between.gap-4 > div {
+		width: 100%;
+		min-width: auto;
+	}
 
-	/* --- TABELA --- */
+	/* --- TABELA: Scroll horizontal para telas pequenas --- */
 	#tabelaParticipantes {
-			overflow-x: auto;
-			-webkit-overflow-scrolling: touch;
+		overflow-x: auto; /* Permite rolagem horizontal */
+		-webkit-overflow-scrolling: touch;
 	}
 
 	table {
-			min-width: 600px; /* evita quebra feia */
-			font-size: 15px;
+		min-width: 600px; /* Força a tabela a ter uma largura mínima, ativando o scroll acima */
+		font-size: 15px;
 	}
-
+	
 	th, td {
 			padding: 8px;
 	}
@@ -489,61 +439,16 @@ thead { background-color: var(--mega-green); color: white; }
 	td small {
 			font-size: 13px;
 	}
-
+	
 	/* Botões da tabela empilhados */
 	td button.small {
-			margin: 4px 0;
-			width: 100%;
+		margin: 4px 0;
+		width: 100%;
 	}
 
 	/* --- Rateio --- */
-	#areaRateio {
-			padding-top: 16px;
-	}
-
 	#valorPremio {
-			font-size: 16px;
+		width: 100%;
+		max-width: none;
 	}
-}
-
-/* =======================
-		MOBILE ULTRA-CURTO
-		<= 400px (celulares pequenos)
-		======================= */
-@media (max-width: 400px) {
-
-	.input-numero {
-			width: 36px;
-			height: 36px;
-	}
-
-	.jogo-numero {
-			width: 34px;
-			height: 34px;
-			font-size: 0.85rem;
-	}
-
-	.resumo-item {
-			padding: 10px;
-	}
-
-	.container {
-			padding: 12px;
-	}
-
-	table {
-			min-width: 540px;
-	}
-
-    /* --- Botões de Paginação empilhados no mobile ultra-curto --- */
-    .pagination-controls {
-        flex-direction: column; 
-        gap: 8px;
-    }
-
-    .pagination-controls button {
-        width: 100%;
-        max-width: 200px;
-        margin: 0 auto;
-    }
 }

@@ -367,12 +367,14 @@ button.primary:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* ... [Conteúdo existente de consulta.css] ... */
+
 /* --------------------------------- */
 /* 5. RESPONSIVIDADE */
 /* --------------------------------- */
 
 @media (max-width: 768px) {
-    /* Em telas médias, 3 colunas ficam melhor */
+    /* Em telas médias, a grade de jogos deve ser flexível */
     .jogos-grid {
 		grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
     }
@@ -381,6 +383,29 @@ button.primary:hover {
 @media (max-width: 600px) {
 	/* Em telas pequenas (mobile) */
 	
+    /* Ajuste do container principal */
+    .container {
+        padding: 15px;
+        margin: 10px auto;
+        box-shadow: none;
+    }
+    
+	/* Força os campos e botões do formulário a se empilharem */
+	.consulta-form > div {
+		flex-direction: column;
+		gap: 5px;
+	}
+	
+	.consulta-form input, .consulta-form button {
+		width: 100%;
+		margin-top: 5px; 
+	}
+	
+    /* Ajuste da grade de bolinhas */
+    .jogos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); 
+    }
+
     /* Ajuste para botões inferiores */
     .bottom-buttons {
         flex-direction: column;
@@ -390,24 +415,6 @@ button.primary:hover {
 
     .bottom-buttons button {
         width: 100%;
-        min-width: auto; /* Remove o min-width em mobile */
+        min-width: auto;
     }
-
-    /* Ajuste para grid de jogos */
-	.jogos-grid {
-		grid-template-columns: repeat(2, 1fr); 
-        gap: 8px;
-	}
-    
-	.form-row {
-        /* Garante que os campos de input e botão fiquem em colunas no mobile */
-				flex-direction: column;
-		}
-
-	.jogo-card span,
-	.jogo-sorte-numeros span {
-		width: 28px;
-		height: 28px;
-		font-size: 0.85rem;
-	}
 }

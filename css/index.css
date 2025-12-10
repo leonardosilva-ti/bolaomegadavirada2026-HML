@@ -399,3 +399,56 @@ footer {
     background-color: #6c757d; /* Cinza */
     color: white;
 }
+
+/* ... [Conteúdo existente de index.css] ... */
+
+/* --------------------------------- */
+/* 5. RESPONSIVIDADE (MOBILE) */
+/* --------------------------------- */
+@media (max-width: 600px) {
+    /* Ajuste do container principal */
+    main {
+        margin: 10px auto;
+        padding: 15px;
+        box-shadow: none; 
+    }
+    
+    /* Grade de seleção de números: 6 colunas, mais espaçoso para touch */
+    #selecao-jogos .numeros-grid {
+        grid-template-columns: repeat(6, 1fr); 
+        gap: 5px;
+    }
+    
+    .numero-btn {
+        height: 40px;
+        font-size: 1.1em;
+    }
+    
+    /* Campos de formulário: Força empilhamento em colunas (se houver flex) */
+    .form-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    /* Botões de controle (ex: limpar e continuar) */
+    .controles {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .controles button, .controles input[type="submit"] {
+        width: 100%;
+        max-width: none;
+    }
+    
+    /* Acessos Rápidos (Se for um layout horizontal) */
+    #acessos-rapidos {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .atalho-box {
+        width: 100%;
+        margin-bottom: 0;
+    }
+}
