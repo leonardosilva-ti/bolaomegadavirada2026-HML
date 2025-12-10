@@ -123,8 +123,8 @@ hr {
 		gap: 8px;
 		justify-content: center;
 		margin-top: 15px;
-		border: 1px dashed #008000;
-		padding: 10px;
+		/* REMOVIDO: border: 1px dashed #008000; */
+		/* REMOVIDO: padding: 10px; */
 		border-radius: 5px;
 }
 
@@ -164,18 +164,20 @@ footer {
 /* ESTILOS DA SELEÇÃO DE JOGOS POR DISPLAY (Com Adaptação para Wrap) */
 #container-displays-jogos {
 		display: flex;
-    flex-wrap: wrap; /* ADICIONADO: Permite que os displays quebrem a linha */
-		justify-content: space-between;
-		gap: 8px; /* AJUSTADO: Aumentei o gap de 5px para 8px */
+		flex-wrap: wrap; 
+		justify-content: center; /* ALTERAÇÃO CHAVE: Centraliza os itens no container */
+		gap: 8px; 
 		margin-bottom: 20px;
-		padding: 5px;
-		border: 1px solid #ccc;
+		/*padding: 5px;*/
+		/*border: 1px solid #ccc;*/
 		border-radius: 5px;
 }
 
 .jogo-display {
-		flex: 1 1 0; /* AJUSTADO: Garante flexibilidade */
-    min-width: 140px; /* Largura mínima antes de quebrar para 2 linhas em telas maiores */
+		/* ... Mantém as alterações de largura para 3+2 linhas ... */
+		flex: 0 0 calc(33.33% - 8px); 
+		max-width: 150px; 
+		min-width: 100px; 
 		padding: 10px 5px;
 		text-align: center;
 		border-radius: 4px;
@@ -212,7 +214,7 @@ footer {
 }
 
 .numeros-selecionados-display {
-		display: block;
+		display: none;
 		font-weight: normal;
 		font-size: 0.8em;
 		margin-top: 3px;
@@ -282,8 +284,8 @@ footer {
 		gap: 8px;
 		justify-content: center;
 		margin-top: 15px;
-		border: 1px dashed #008000;
-		padding: 10px;
+		/*border: 1px dashed #008000;*/
+		/*padding: 10px;*/
 		border-radius: 5px;
 }
 
@@ -376,16 +378,17 @@ footer {
     
     /* DISPLAYS DE JOGO: Força empilhamento em colunas */
     #container-displays-jogos {
-        flex-direction: column; 
-        gap: 10px; 
-        padding: 10px;
-    }
+				flex-direction: column;	
+				gap: 10px;	
+				padding: 10px;
+		}
 
-    .jogo-display {
-        min-width: 100%; 
-        flex-basis: auto; 
-        font-size: 1em; 
-    }
+		.jogo-display {
+				min-width: 100%;	
+				flex-basis: auto;	
+				font-size: 1em;	
+		max-width: none; /* NOVO: Remove a limitação para usar a largura total */
+		}
 
     .numeros-selecionados-display {
         white-space: normal; /* Permite que os números quebrem a linha */

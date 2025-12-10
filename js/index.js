@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalSelecionado = jogo.length;
         // Ordena e exibe os números, com reticências se houver muitos
         const numerosFormatados = jogo.sort((a, b) => a - b).map(n => n.toString().padStart(2, '0')).join(', ');
-        numerosDisplay.textContent = totalSelecionado > 0 ? numerosFormatados : '...';
+        numerosDisplay.textContent = '';
 
         // Atualiza status visual (Cinza, Amarelo, Verde)
         if (totalSelecionado === 0) {
