@@ -286,4 +286,11 @@ h2 {
         max-width: none;
         width: 100%;
     }
+	
+	/* Centralizar apenas o título "Jogos Selecionados (5)" no mobile */
+	#jogosConfirmacao > h3 {
+		text-align: center;
+	}
+
 }
+
