@@ -1,176 +1,142 @@
-/* Conteúdo do home.css copiado para index.css */
+/* ===========================================================
+   ESTILO GERAL
+   =========================================================== */
 
-body {
-		font-family: Arial, sans-serif;
-		margin: 0;
-		padding: 0;
-		background-color: #f4f4f9;
-		color: #333;
+html, body {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 header {
-		background-color: #008000; /* Verde da Mega Sena */
-		color: white;
-		padding: 20px;
-		text-align: center;
+    background-color: #008000;
+    color: white;
+    padding: 20px;
+    text-align: center;
 }
 
 main {
-		max-width: 800px;
-		margin: 20px auto;
-		padding: 20px;
-		background-color: white;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		border-radius: 8px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 100%;
+    overflow-x: hidden;
 }
 
+/* ===========================================================
+   INFORMAÇÕES DO BOLÃO
+   =========================================================== */
+
 #info-bolao {
-		background-color: #e8f5e9; /* Fundo verde claro para destaque */
-		border-left: 5px solid #008000; /* Borda verde */
-		padding: 15px;
-		margin-bottom: 20px;
-		border-radius: 4px;
+    background-color: #e8f5e9;
+    border-left: 5px solid #008000;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
 }
 
 #info-bolao h3 {
-		margin-top: 0;
-		color: #005f00;
-		font-size: 1.3em;
+    margin: 0 0 10px 0;
+    color: #005f00;
+    font-size: 1.3em;
 }
 
 #info-bolao p {
-		margin-bottom: 10px;
-		line-height: 1.5;
+    margin-bottom: 10px;
+    line-height: 1.5;
 }
 
 .aviso-particular {
-		font-weight: bold;
-		color: #d32f2f; /* Vermelho para chamar atenção no aviso */
-		border-top: 1px dashed #ccc;
-		padding-top: 10px;
-		margin-top: 10px;
+    font-weight: bold;
+    color: #d32f2f;
+    border-top: 1px dashed #ccc;
+    padding-top: 10px;
 }
+
+/* ===========================================================
+   FORMULÁRIO
+   =========================================================== */
 
 .separator-info-form {
-		border: 0;
-		height: 1px;
-		background-color: #ddd;
-		margin: 20px 0;
+    border: 0;
+    height: 1px;
+    background-color: #ddd;
+    margin: 20px 0;
 }
 
-/* Formulário de Contato */
 .form-group {
-		margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .form-group label {
-		display: block;
-		margin-bottom: 5px;
-		font-weight: bold;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
 }
 
 .form-group input {
-		width: 100%;
-		padding: 10px;
-		border: 1px solid #ccc;
-		border-radius: 4px;
-		box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-/* PIX */
+/* ===========================================================
+   PIX
+   =========================================================== */
+
 .pix-info {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		background-color: #eee;
-		padding: 10px;
-		border-radius: 4px;
-		font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 4px;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 #chave-pix-display {
-		flex-grow: 1;
-		font-family: monospace;
-		font-weight: bold;
-		color: #000;
-		overflow-wrap: break-word; /* Garante que a chave longa se ajuste */
+    flex-grow: 1;
+    font-family: monospace;
+    font-weight: bold;
+    overflow-wrap: break-word;
 }
 
 #copiar-pix-btn {
-		padding: 8px 15px;
-		background-color: #0056b3;
-		color: white;
-		border: none;
-		border-radius: 4px;
-		cursor: pointer;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 #copiar-pix-btn:hover {
-		background-color: #004494;
+    background-color: #004494;
 }
 
-hr {
-		border: 0;
-		height: 1px;
-		background-color: #ccc;
-		margin: 30px 0;
-}
-
-/* Seleção de Jogos (Números) */
-#container-jogos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    justify-content: center;
-    margin-top: 15px;
-    padding: 0 5px;
-    border-radius: 5px;
-}
-
-
-.numero-btn {
-    width: 34px;
-    height: 34px;
-    line-height: 34px;
-    text-align: center;
-    border-radius: 50%;
-    border: 2px solid #008000;
-    background-color: #fff;
-    color: #008000;
-    font-weight: bold;
-    font-size: 0.95em;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
-    user-select: none;
-}
-
-
-.numero-btn.selecionado {
-		background-color: #008000;
-		color: white;
-		border-color: #005f00;
-}
-
-.numero-btn:hover:not(.selecionado) {
-		background-color: #e6ffe6;
-}
-
-footer {
-		text-align: center;
-		padding: 10px;
-		margin-top: 20px;
-		font-size: 0.9em;
-		color: #777;
-}
-
-/* ------ DISPLAYS EM BOLINHAS (NOVO ESTILO) ------ */
+/* ===========================================================
+   SELEÇÃO DOS JOGOS
+   =========================================================== */
 
 #container-displays-jogos {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 25px;
-    margin-top: 10px;
+    width: 100%;
+    margin: 10px 0 25px 0;
 }
 
 .jogo-display {
@@ -179,251 +145,234 @@ footer {
     border-radius: 50%;
     border: 3px solid #ccc;
     background-color: #f0f0f0;
-    cursor: pointer;
     transition: all 0.25s ease;
+    cursor: pointer;
 }
 
-/* Jogo ativo (destacado) */
 .jogo-display.ativo {
     border-color: #ffcc00;
-    box-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
-    transform: scale(1.12);
+    transform: scale(1.15);
+    box-shadow: 0 0 10px rgba(255,204,0,0.7);
 }
 
-/* Status vazio (cinza) */
 .jogo-display[data-status="vazio"] {
-    background-color: #d9d9d9;
+    background-color: #dedede;
     border-color: #b5b5b5;
 }
 
-/* Status incompleto (amarelo) */
 .jogo-display[data-status="incompleto"] {
     background-color: #ffe680;
     border-color: #ffcc00;
 }
 
-/* Status completo (verde) */
 .jogo-display[data-status="completo"] {
     background-color: #7ed957;
     border-color: #4caf50;
 }
 
+/* ===========================================================
+   NÚMEROS 1–60
+   =========================================================== */
 
-/* Controles de JOGO (Limpar, Aleatório, Próximo/Confirmar) */
-.controles-jogo {
-    display: flex; /* ADICIONADO: Permite layout em linha no desktop */
-    justify-content: center; /* ADICIONADO: Centraliza os botões */
-    flex-wrap: wrap; /* ADICIONADO: Permite que os botões quebrem a linha */
-		margin-top: 15px; /* ADICIONADO: Espaçamento entre a grade de números e os botões */
-		margin-bottom: 20px;
-    gap: 10px; /* ADICIONADO: Espaço entre botões */
-}
-
-.controles-jogo button {
-		padding: 10px 15px;
-		margin: 0; /* AJUSTADO: Remove a margem individual para usar 'gap' do flexbox */
-		border: none;
-		border-radius: 5px;
-		font-size: 1em;
-		cursor: pointer;
-		transition: background-color 0.3s;
-}
-
-#limpar-jogo-btn {
-		background-color: #f44336; /* Vermelho */
-		color: white;
-}
-#limpar-jogo-btn:hover {
-		background-color: #d32f2f;
-}
-
-#preencher-aleatoriamente-btn {
-		background-color: #2196f3; /* Azul */
-		color: white;
-}
-#preencher-aleatoriamente-btn:hover {
-		background-color: #1976d2;
-}
-
-#proximo-jogo-btn {
-		background-color: #4caf50; /* Verde */
-		color: white;
-}
-#proximo-jogo-btn:disabled {
-		background-color: #ccc;
-		cursor: not-allowed;
-}
-
-#confirmar-aposta-btn {
-		background-color: #ff9800; /* Laranja (substitui o botão anterior) */
-		color: white;
-		font-weight: bold;
-}
-#confirmar-aposta-btn:hover {
-		background-color: #e68900;
-}
-
-/* Estilos dos Números (Manter) */
 #container-jogos {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
     justify-content: center;
+    gap: 6px;
     margin-top: 15px;
     padding: 0 5px;
-    border-radius: 5px;
+    width: 100%;
+    max-width: 100%;
 }
 
+.numero-btn {
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    border-radius: 50%;
+    border: 2px solid #008000;
+    background-color: white;
+    color: #008000;
+    font-weight: bold;
+    font-size: 0.95em;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.2s;
+}
 
-/* A classe 'selecionado' deve indicar que o número foi escolhido em QUALQUER jogo */
+.numero-btn:hover:not(.selecionado) {
+    background-color: #e6ffe6;
+}
+
 .numero-btn.selecionado {
-		background-color: #008000;
-		color: white;
-		border-color: #005f00;
+    background-color: #008000;
+    color: white;
+    border-color: #005f00;
 }
 
-/* Estilos para Contato Dúvidas (Novo) */
+/* ===========================================================
+   BOTÕES DE CONTROLE DO JOGO
+   =========================================================== */
+
+.controles-jogo {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.controles-jogo button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#limpar-jogo-btn {
+    background-color: #f44336;
+    color: white;
+}
+#limpar-jogo-btn:hover {
+    background-color: #d32f2f;
+}
+
+#preencher-aleatoriamente-btn {
+    background-color: #2196f3;
+    color: white;
+}
+#preencher-aleatoriamente-btn:hover {
+    background-color: #1976d2;
+}
+
+#proximo-jogo-btn {
+    background-color: #4caf50;
+    color: white;
+}
+#proximo-jogo-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#confirmar-aposta-btn {
+    background-color: #ff9800;
+    color: white;
+    font-weight: bold;
+}
+#confirmar-aposta-btn:hover {
+    background-color: #e68900;
+}
+
+/* ===========================================================
+   SEÇÃO DE DÚVIDAS
+   =========================================================== */
+
 #contato-duvidas {
-		text-align: center;
-		margin-top: 30px;
-		padding: 15px;
-		border: 1px dashed #28a745; /* Verde do WhatsApp */
-		border-radius: 5px;
-}
-
-#contato-duvidas p {
-		margin-bottom: 10px;
-		font-size: 0.95em;
+    text-align: center;
+    padding: 15px;
+    border: 1px dashed #28a745;
+    border-radius: 5px;
+    margin-top: 30px;
 }
 
 .whatsapp-link-final {
-		display: inline-block;
-		padding: 10px 20px;
-		background-color: #28a745; /* Cor do WhatsApp */
-		color: white;
-		text-decoration: none;
-		font-weight: bold;
-		border-radius: 50px;
-		transition: background-color 0.3s;
+    background-color: #28a745;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s;
 }
-
 .whatsapp-link-final:hover {
-		background-color: #1e7e34;
+    background-color: #1e7e34;
 }
 
-/* Estilos para Acessos Rápidos (Novo) */
+/* ===========================================================
+   ACESSOS RÁPIDOS
+   =========================================================== */
+
 #acessos-rapidos {
-		text-align: center;
-		margin: 30px auto;
-		max-width: 800px;
-		padding: 0 20px;
-		display: flex;
-		justify-content: center;
-		gap: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    max-width: 800px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 0 15px;
 }
 
 .btn-acesso {
-		padding: 12px 20px;
-		font-size: 1em;
-		font-weight: bold;
-		text-decoration: none;
-		border-radius: 5px;
-		transition: opacity 0.3s;
-		flex-grow: 1;
-		max-width: 250px;
+    flex: 1;
+    padding: 12px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
 }
 
-.btn-acesso:hover {
-		opacity: 0.9;
-}
-
-/* Estilo específico para Consulta */
 .btn-acesso:not(.admin-btn) {
-		background-color: #007bff; /* Azul */
-		color: white;
+    background-color: #007bff;
 }
 
-/* Estilo específico para Admin */
 .admin-btn {
-		background-color: #6c757d; /* Cinza */
-		color: white;
+    background-color: #6c757d;
 }
 
+/* ===========================================================
+   FOOTER
+   =========================================================== */
 
-/* --------------------------------- */
-/* 5. RESPONSIVIDADE (MOBILE) */
-/* --------------------------------- */
+footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9em;
+    color: #777;
+}
+
+/* ===========================================================
+   RESPONSIVIDADE — MOBILE
+   =========================================================== */
+
 @media (max-width: 600px) {
-		/* Ajuste do container principal */
-		main {
-				margin: 10px auto;
-				padding: 15px;
-				box-shadow: none; 
-				max-width: 100%;	
-		}
-	
-		/* DISPLAYS DE JOGO: MANTENDO 3+2 COMPACTOS */
-		#container-displays-jogos {
-				gap: 6px; /* Reduzi o gap para 6px para economizar espaço */
-				padding: 10px;
-		}
 
-		.jogo-display {
-		/* Ajuste também a regra geral para que o min-width seja o mesmo, 
-           garantindo consistência em telas maiores que 600px */
-		flex: 0 0 calc(33.33% - 8px); 
-		max-width: 120px; /* Reduzi um pouco o max-width */
-		min-width: 75px; /* NOVO: Aplicando o menor min-width também aqui */
-		padding: 10px 5px;
-		text-align: center;
-		border-radius: 4px;
-		font-weight: bold;
-		cursor: pointer;
-		transition: background-color 0.3s, border 0.3s;
-		font-size: 0.9em;
-		border: 1px solid transparent;
-}
+    main {
+        box-shadow: none;
+        padding: 15px;
+        margin: 10px auto;
+    }
 
-		.numeros-selecionados-display {
-				white-space: normal; /* Permite que os números quebrem a linha */
-				font-size: 0.9em;
-		}
-    
-		/* Grade de seleção de números: Aumenta o tamanho dos botões para melhor toque */
-		.numero-btn {
-			width: 34px;
-			height: 34px;
-			line-height: 34px;
-			font-size: 0.95em;
-}
-			
-		/* Campos de formulário: Força empilhamento */
-		.form-group {
-				flex-direction: column;
-				gap: 10px;
-		}
-			
-		/* Botões de controle (limpar, aleatório, próximo, confirmar) */
-		.controles-jogo {
-				flex-direction: column;
-				gap: 10px;
-				margin-top: 15px;
-		}
-			
-		.controles-jogo button {
-				width: 100%;
-				max-width: none;
-        margin: 0;
-		}
-			
-		/* Acessos Rápidos (Força empilhamento em colunas) */
-		#acessos-rapidos {
-				flex-direction: column;
-				gap: 15px;
-		}
-			
-		.btn-acesso {
-				width: 100%; 
-				max-width: none;
-		}
+    #container-displays-jogos {
+        gap: 12px;
+    }
+
+    .jogo-display {
+        width: 32px;
+        height: 32px;
+    }
+
+    .numero-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 0.9em;
+    }
+
+    .controles-jogo {
+        flex-direction: column;
+    }
+
+    .controles-jogo button,
+    .btn-acesso {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    #acessos-rapidos {
+        flex-direction: column;
+    }
 }
