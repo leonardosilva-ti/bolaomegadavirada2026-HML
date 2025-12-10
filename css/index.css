@@ -383,4 +383,30 @@ footer {
     #acessos-rapidos {
         flex-direction: column;
     }
+	
+	/* Centraliza APENAS o texto “Chave PIX para Pagamento” */
+	.form-group label + .pix-info {
+		margin-top: 0;
+	}
+
+	.form-group label:has(+ .pix-info) {
+		text-align: center;
+		width: 100%;
+		display: block;
+}
+
+	
+	/* Centraliza o texto da chave PIX */
+    #chave-pix-display {
+        text-align: center;
+        width: 100%;
+    }
+
+    /* Também centraliza o container para garantir alinhamento */
+    .pix-info {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
 }
