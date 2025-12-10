@@ -3,14 +3,15 @@
 // URL de Implantação do Apps Script fornecida no prompt
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzavXeNlDzPh_hGnoWM7AKv5ecp4WHJdHd-ILwWQ2j-O59GNHLoBwYMrkZyRQrNSmSK/exec';
 
-const CHAVE_PIX_FIXA = "88f77025-40bc-4364-9b64-02ad88443cc4"; // Chave PIX fixa
+// REMOVIDO: const CHAVE_PIX_FIXA = "88f77025-40bc-4364-9b64-02ad88443cc4"; 
+// REMOVIDO: const COR_SUCESSO = "#16a34a";
 
-const aposta = JSON.parse(localStorage.getItem("dadosBolao")); 
+const aposta = JSON.parse(localStorage.getItem("dadosBolao"));
 
 const dadosDiv = document.getElementById("dadosConfirmacao");
 const jogosDiv = document.getElementById("jogosConfirmacao");
-const chavePixDisplay = document.getElementById("chavePixDisplay");
-const copiarPixBtn = document.getElementById("copiarPixBtn");
+// REMOVIDO: const chavePixDisplay = document.getElementById("chavePixDisplay");
+// REMOVIDO: const copiarPixBtn = document.getElementById("copiarPixBtn"); 
 const mensagem = document.getElementById("mensagem");
 const termosCheckbox = document.getElementById("aceitoTermos");
 const btnConfirmar = document.getElementById("btnConfirmar");
@@ -34,7 +35,7 @@ function formatarTelefone(telefone) {
 if (!aposta || !aposta.jogos || aposta.jogos.length !== 5) {
     dadosDiv.innerHTML = "<p style='color:red'>Nenhuma aposta válida encontrada. Retorne à página principal.</p>";
     btnConfirmar.disabled = true;
-    if (copiarPixBtn) copiarPixBtn.disabled = true;
+    // Lógica PIX removida
 } else {
     // 1. Exibe os dados do participante
     dadosDiv.innerHTML = `
@@ -62,28 +63,10 @@ if (!aposta || !aposta.jogos || aposta.jogos.length !== 5) {
         }).join("")}
     `;
 
-    // 3. Exibe a chave PIX
-    chavePixDisplay.textContent = CHAVE_PIX_FIXA;
+    // 3. Área PIX removida no HTML, não é necessário fazer nada aqui.
 }
 
-// Lógica para o botão Copiar PIX
-copiarPixBtn.addEventListener("click", () => {
-    navigator.clipboard.writeText(CHAVE_PIX_FIXA)
-        .then(() => {
-            const originalText = 'Copiar Chave';
-            copiarPixBtn.textContent = 'Chave Copiada! ✅';
-            copiarPixBtn.classList.add('copied-feedback'); 
-            
-            setTimeout(() => {
-                copiarPixBtn.textContent = originalText;
-                copiarPixBtn.classList.remove('copied-feedback');
-            }, 1500);
-        })
-        .catch(err => {
-            console.error('Falha ao copiar:', err);
-            alert(`Falha ao copiar automaticamente. A chave PIX é: ${CHAVE_PIX_FIXA}. Por favor, copie manualmente.`);
-        });
-});
+// REMOVIDA: Lógica para o botão Copiar PIX
 
 termosCheckbox.addEventListener("change", () => {
     btnConfirmar.disabled = !termosCheckbox.checked;

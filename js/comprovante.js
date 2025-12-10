@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					<p><b>Nome:</b> ${aposta.nome}</p>
 					<p><b>Telefone:</b> ${aposta.telefone}</p>
 					<p><b>Protocolo:</b> ${aposta.protocolo}</p>
-					<p><b>Data/Hora Reg.:</b> ${aposta.dataHora}</p>
+					<p><b>Data/Hora:</b> ${aposta.dataHora}</p>
 				`;
 
 				// Renderiza Jogos em Bolinhas
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
 						pixBox.id = "pixComprovante";
 						pixBox.innerHTML = `
                 <h3>Chave PIX para Pagamento</h3>
-								<p>Utilize a chave abaixo no aplicativo do seu banco:</p>
+								<p>Realize o pagamento no valor de <b>R$30,00</b> utilizando a chave abaixo no aplicativo do seu banco:</p>
 								<span class="pix-key">${PIX_KEY}</span>
 								<button id="btnCopiarPix">Copiar Chave PIX</button>
 						`;
@@ -286,7 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			doc.text(`Protocolo:`, MARGEM_X, y);
 			doc.text(apostaData.protocolo, MARGEM_X + 25, y);
 			y += 5;
-			doc.text(`Data/Hora Reg.:`, MARGEM_X, y);
+			doc.text(`Data/Hora:`, MARGEM_X, y);
 			doc.text(apostaData.dataHora, MARGEM_X + 35, y);
 
 			y += 10;

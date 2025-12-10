@@ -88,40 +88,56 @@ h2 {
 }
 
 /* --------------------------------- */
-/* Estilos para a Chave PIX e Botão */
+/* Estilos para a Chave PIX (AGORA ALINHADOS COM COMPROVANTE.CSS) */
 /* --------------------------------- */
 
-.pix-area {
+.pix-box {
+    /* Baseado no estilo injetado do comprovante.js + comprovante.css */
     margin-top: 15px;
-    padding-top: 10px;
-    border-top: 1px dashed #ccc;
+    padding-top: 0; 
+    border-top: none; 
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Aumenta o espaçamento */
+    gap: 10px;
     text-align: center;
+    background: none; 
+    border: none;
 }
 
-.pix-area p b {
+.pix-box h3 {
+    /* Título do PIX */
     font-size: 1.05rem;
     color: #1e3a8a;
+    margin-bottom: 0;
+    border-bottom: none;
 }
 
-.pix-key-highlight {
+.pix-box p {
+    margin: 0.2rem 0;
+    font-weight: 500;
+}
+
+.pix-key { 
+    /* Estilo da Chave PIX (classe 'pix-key' do comprovante.css) */
     font-weight: bold;
-    color: #008000; 
-    background-color: #e6ffe6; 
-    padding: 10px 12px; /* Aumenta o padding */
-    border-radius: 6px; /* Borda mais arredondada */
+    color: #008000; /* var(--mega-green) */	
+    background-color: #e6ffe6;	
+    padding: 10px 12px;
+    border-radius: 6px;
     word-break: break-all;
     font-family: monospace;
     font-size: 1rem;
     display: block;
-    border: 1px solid #008000; /* Borda para destacar */
+    border: 1px solid #008000;
+    margin: 0.5rem auto; 
+    max-width: 90%;
 }
 
+/* --------------------------------- */
+/* Botão PIX (copiarPixBtn) - Alinhado com o do comprovante.js */
+/* --------------------------------- */
 #copiarPixBtn {
-    /* Novo estilo de botão secundário, mais visível */
-    background-color: #f0f0f0; 
+    background-color: #f0f0f0;	
     color: #333;
     border: 1px solid #ccc;
     padding: 8px 15px;
@@ -130,17 +146,20 @@ h2 {
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
+    width: auto;
+    max-width: 300px;
+    align-self: center;
 }
 
 #copiarPixBtn:hover {
     background-color: #e0e0e0;
 }
 
-/* Feedback visual de cópia bem-sucedida */
-#copiarPixBtn.copied-feedback {
-    background-color: #4CAF50 !important; /* Verde de sucesso */
+/* NOVO ESTILO: Feedback de cópia (para uso do JS - cor #16a34a do comprovante.js) */
+#copiarPixBtn.copied-success {
+    background-color: #16a34a !important; 
     color: white !important;
-    border-color: #4CAF50 !important;
+    border-color: #16a34a !important;
 }
 
 /* --------------------------------- */
@@ -181,11 +200,53 @@ h2 {
     cursor: pointer;
 }
 
+/* AQUI AS CLASSES FORAM CORRIGIDAS para primary-btn e secondary-btn */
 .controles {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 15px;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	flex-wrap: wrap;
+	margin-top: 1.5rem;
+}
+
+.primary-btn {
+    background-color: #ff9800; /* Laranja do comprovante.css (var(--yellow-highlight)) */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+		flex: 1; 
+		max-width: 250px; 
+}
+.primary-btn:hover {
+    background-color: #e68900;
+}
+
+.primary-btn:disabled {
+		background-color: #ffd29c; 
+		cursor: not-allowed;
+		box-shadow: none;
+}
+
+.secondary-btn {
+    background-color: #f0f0f0;	
+    color: #333;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+		flex: 1; 
+		max-width: 250px; 
+}
+.secondary-btn:hover {
+    background-color: #e0e0e0;
 }
 
 .mensagem {
@@ -217,6 +278,6 @@ h2 {
     }
 
     #copiarPixBtn {
-        width: 100%;
+        max-width: 100%; /* Garante que o botão se expanda no mobile */
     }
 }
