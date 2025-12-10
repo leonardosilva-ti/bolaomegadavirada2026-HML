@@ -6,16 +6,16 @@
 
 :root {
 	/* Cores Unificadas */
-	--mega-green: #008000; /* Verde da Mega (index.css) */
+	--mega-green: #008000;
 	--mega-dark: #005f00;
-	--accent-blue: #0072e3; /* Azul de Destaque Secundário */
-	--action-orange: #ff9800; /* Laranja de Ação (Finalizar/Baixar) */
-	--red-status: #d32f2f; /* Vermelho de aviso/aguardando */
-	--bg-light: #f4f4f9; /* Fundo do body (index.css) */
-	--card-bg: #f9fafb; /* Fundo do card (confirmacao.css) */
+	--accent-blue: #0072e3;
+	--action-orange: #ff9800;
+	--red-status: #d32f2f;
+	--bg-light: #f4f4f9;
+	--card-bg: #f9fafb;
 	--border: #e5e7eb;
 	--text-primary: #333;
-	--text-secondary: #1e3a8a; /* Azul escuro para títulos de card */
+	--text-secondary: #1e3a8a;
 }
 
 /* --------------------------------- */
@@ -24,65 +24,61 @@
 body {
 	background-color: var(--bg-light);
 	color: var(--text-primary);
-	font-family: Arial, sans-serif; /* Unificado */
+	font-family: Arial, sans-serif;
 	margin: 0;
-	padding: 0; /* Remove o padding no body */
+	padding: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	min-height: 100vh;
 }
 
-/* --- CABEÇALHO (do index.css) --- */
 header.site-header {
 	background-color: var(--mega-green);
 	color: white;
 	text-align: center;
-	padding: 20px; /* Alinhado ao index.css */
+	padding: 20px;
 	font-size: 1.6rem;
 	font-weight: 700;
 	width: 100%;
-    /* Removendo max-width e border-radius aqui, já que cobre toda a largura */
 }
 
-/* --- CONTAINER PRINCIPAL (do confirmacao.css) --- */
 .container {
-    max-width: 850px; /* Alinhado ao max-width do confirmacao.css */
-    margin: 20px auto; /* Centralização */
-    padding: 1rem 1.2rem;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 90%; /* Ajuste para melhor visualização em desktops menores */
+	max-width: 850px;
+	margin: 20px auto;
+	padding: 1rem 1.2rem;
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	width: 90%;
 }
 
-
 /* --------------------------------- */
-/* 2. Seção de Consulta (antigo admin-card) */
+/* 2. Seção de Consulta */
 /* --------------------------------- */
 
-.consulta-box { /* Novo nome para o bloco de entrada (usava admin-card) */
-    background: #fff; /* Fundo branco, mas usará .resumo-container no HTML */
-    padding: 0; 
-    border-radius: 8px;
-    margin-bottom: 0.8rem;
-    line-height: 1.45;
+.consulta-box {
+	background: #fff;
+	padding: 0;
+	border-radius: 8px;
+	margin-bottom: 0.8rem;
+	line-height: 1.45;
 }
 
 .consulta-box h2 {
 	margin: 0 0 0.8rem 0;
-	font-size: 1.3rem; /* Alinhado ao h2 de confirmacao.css */
+	font-size: 1.3rem;
 	color: var(--accent-blue);
-    text-align: center;
+	text-align: center;
 }
 
 .consulta-box p {
 	font-size: 0.95rem;
 	margin: 0.4rem 0;
-    text-align: center;
+	text-align: center;
 }
 
-/* --- FORMULÁRIO DE CONSULTA --- */
+/* Formulário */
 .form-row {
 	display: flex;
 	flex-wrap: wrap;
@@ -93,16 +89,16 @@ header.site-header {
 input[type="text"] {
 	flex: 1;
 	padding: 10px;
-	border-radius: 6px; /* Ajustado */
+	border-radius: 6px;
 	border: 1px solid #ccc;
 	font-size: 0.95rem;
 }
 
-button.primary { /* Botão Consultar */
-	background: var(--action-orange); /* Laranja de Ação */
+button.primary {
+	background: var(--action-orange);
 	color: white;
 	border: none;
-	border-radius: 6px; /* Ajustado */
+	border-radius: 6px;
 	padding: 10px 16px;
 	font-weight: 700;
 	cursor: pointer;
@@ -114,316 +110,320 @@ button.primary:hover {
 }
 
 /* --------------------------------- */
-/* 3. Resultado da Consulta (Blocos de Resumo) */
+/* 3. Resultado da Consulta */
 /* --------------------------------- */
+
 .resultado {
 	margin-top: 1rem;
 }
 
-/* === CARD DE RESUMO (do confirmacao.css) === */
 .resumo-container {
-    background: var(--card-bg); /* #f9fafb */
-    border: 1px solid var(--border); /* #e5e7eb */
-    border-radius: 8px;
-    padding: 0.8rem 1rem;
-    margin-top: 12px;
-    font-size: 0.93rem;
-    line-height: 1.5;
+	background: var(--card-bg);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	padding: 0.8rem 1rem;
+	margin-top: 12px;
+	font-size: 0.93rem;
+	line-height: 1.5;
 }
 
 .resumo-container h3 {
-    margin: 0 0 0.6rem;
-    font-size: 1.05rem;
-    color: var(--text-secondary); /* #1e3a8a */
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--border);
-    text-align: left;
+	margin: 0 0 0.6rem;
+	font-size: 1.05rem;
+	color: var(--text-secondary);
+	padding-bottom: 4px;
+	border-bottom: 1px solid var(--border);
+	text-align: left;
 }
 
-.resumo-container p {
-	font-size: 0.95rem;
-	color: var(--text-primary);
-	margin: 3px 0;
-}
-
-.resumo-container p strong {
-	color: #111;
-}
-
-/* --- TÍTULOS DE SEÇÃO MAIORES --- */
+/* Título de Seções */
 .resultado h3.section-title {
-    margin: 20px 0 10px;
-    font-size: 1.2rem;
-    color: var(--accent-blue);
-    text-align: center;
-    border-bottom: 1px dashed #ccc;
-    padding-bottom: 5px;
+	margin: 20px 0 10px;
+	font-size: 1.2rem;
+	color: var(--accent-blue);
+	text-align: center;
+	border-bottom: 1px dashed #ccc;
+	padding-bottom: 5px;
 }
 
-
-/* --- PIX (do comprovante.css) --- */
+/* PIX – QUADRO DESTACADO */
 .pix-box {
-    /* Mesmo estilo de destaque usado no comprovante */
-    margin-top: 10px;
-    padding-top: 0;
-    border: none;
+    margin-top: 15px;
+    padding: 15px 12px;
+    background: #eaffea; /* Verde claro, destaque */
+    border: 2px solid var(--mega-green);
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.10);
+    text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    text-align: center;
-    background: none; 
+    gap: 10px;
+}
+
+.pix-box label {
+    font-weight: 700;
+    color: var(--mega-dark);
+    font-size: 1rem;
 }
 
 #pix-chave {
     font-weight: bold;
-    color: var(--mega-dark);	
-    background-color: #e6ffe6;	/* Fundo verde claro */
-    padding: 8px 10px;
-    border-radius: 6px;
+    color: var(--mega-dark);
+    background-color: #ffffff;
+    padding: 10px 14px;
+    border-radius: 8px;
     word-break: break-all;
     font-family: monospace;
-    font-size: 0.95rem;
-    display: block;
+    font-size: 1rem;
+    display: inline-block;
     border: 1px solid var(--mega-green);
-    margin: 5px 0;
+    margin: 0 auto;
+    max-width: 90%;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.15);
 }
 
 .btn-copiar {
-	background: #f0f0f0; /* Botão Secundário */
-	color: var(--text-primary);
-	border: 1px solid #ccc;
-	border-radius: 6px;
-	padding: 8px 12px;
-	font-size: 0.9rem;
-	cursor: pointer;
-	margin-top: 0;
-	transition: background 0.2s;
+    background: #f7f7f7;
+    color: var(--text-primary);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
     font-weight: 600;
+    transition: background 0.2s;
 }
 
 .btn-copiar:hover {
-	background: #e0e0e0;
+    background: #e8e8e8;
 }
 
 .pix-info {
-	font-size: 0.85rem;
-	color: #555;
-	margin-top: 0;
+    color: #2e6b2e;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 4px;
 }
 
-/* --- JOGO DA SORTE E TODOS OS JOGOS --- */
-.jogo-sorte-container,
-.jogos-bolao-container {
-    /* Não precisa de text-align, o resumo-container fará o alinhamento */
+/* Jogo da Sorte */
+.jogo-sorte-container {
 	margin-top: 1.2rem;
 }
 
-.jogo-sorte-container h3,
-.jogos-bolao-container h3 {
+.jogo-sorte-container h3 {
 	font-size: 1.05rem;
 	color: var(--text-secondary);
 	margin-bottom: 0.8rem;
+	text-align: center;   /* ⬅ CENTRALIZA NO DESKTOP E MOBILE */
 }
 
 
-/* === AVISO ACIMA DOS JOGOS === */
-.aviso-bolao {
-    background: #fff8e1; /* Amarelo clarinho */
-    border: 1px solid #ffe69c;
-    border-radius: 8px;
-    padding: 0.8rem 1rem;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    color: #a47d00;
-    text-align: left;
-}
-
-/* --- GRID DE TODOS OS JOGOS --- */
-.jogos-grid {
-	display: grid;
-    /* Usa repeat(auto-fit) para criar colunas, garantindo que cada coluna tenha no mínimo 150px de largura. */
-	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-	gap: 12px; /* Aumenta um pouco o espaçamento entre os jogos */
-	justify-content: center;
-	margin-top: 0.8rem;
-    padding: 0 5px; /* Pequeno padding para margens */
-}
-
-/* Cada cartão de jogo (onde ficam as 6 bolinhas) */
-.jogo-card {
-    /* Removemos o fundo cinza e a borda para deixar apenas as bolinhas destacadas */
-    background: none;
-    border: none;
-    padding: 8px; 
-    
-    /* Configuração para centralizar as bolinhas */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-    
-    /* Adiciona um toque visual de cartão sutil */
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08); /* Sombra mais leve */
-    background: #ffffff; /* Fundo branco para os cards de jogo */
-    transition: transform 0.2s;
-}
-
-.jogo-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* --- NÚMEROS (Bolinhas) --- */
+/* Bolinhas */
 .jogo-sorte-numeros,
 .jogo-card {
-    /* Mantido o flex/grid para jogos */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 6px;
 }
 
-/* Bolinhas dos números (unificado) */
 .jogo-sorte-numeros span,
 .jogo-card span {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 30px; 
-	height: 30px; 
+	width: 30px;
+	height: 30px;
 	border-radius: 50%;
-	background-color: var(--mega-green); 
+	background-color: var(--mega-green);
 	color: #fff;
 	font-weight: 700;
 	font-size: 0.85rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2); 
-    /* Adiciona uma pequena margem para separar as bolinhas */
-    margin: 2px 0;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+	margin: 2px 0;
 }
 
-/* Estilo para bolinhas vazias (hífen) */
 .jogo-sorte-numeros .empty {
-    background-color: #e5e7eb;
-    color: #6b7280;
-    border: 1px dashed #d1d5db;
-    font-weight: normal;
+	background-color: #e5e7eb;
+	color: #6b7280;
+	border: 1px dashed #d1d5db;
+	font-weight: normal;
+}
+
+/* Todos os Jogos */
+.jogos-bolao-container {
+	margin-top: 1.2rem;
+}
+
+.aviso-bolao {
+	background: #fff8e1;
+	border: 1px solid #ffe69c;
+	border-radius: 8px;
+	padding: 0.8rem 1rem;
+	margin-bottom: 1rem;
+	font-size: 0.9rem;
+	color: #a47d00;
+	line-height: 1.4;
+}
+
+.jogos-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: 12px;
+	justify-content: center;
+	padding: 0 5px;
+}
+
+.jogo-card {
+	background: #ffffff;
+	border: none;
+	padding: 8px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 6px;
+	border-radius: 8px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+	transition: transform 0.2s;
+}
+
+.jogo-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* --------------------------------- */
-/* 4. BOTÕES INFERIORES (Baixar Comprovante / Voltar) */
+/* 4. BOTÕES INFERIORES */
 /* --------------------------------- */
 
 .bottom-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px; /* Aumenta a distância entre os botões */
-    margin: 20px auto 15px; /* Espaçamento superior e inferior */
-    flex-wrap: wrap; /* Garante que quebrem em mobile */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+	margin: 20px auto 15px;
+	flex-wrap: wrap;
 }
 
-/* Estilo Base para TODOS os botões da seção */
 .bottom-buttons button {
-    font-weight: 700;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px; /* Borda mais suave */
-    cursor: pointer;
-    font-size: 1em;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    text-decoration: none; /* Garante que não haja sublinhado em links */
-    display: inline-block;
-    min-width: 180px; /* Garante um tamanho mínimo consistente */
+	font-weight: 700;
+	padding: 10px 18px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 1em;
+	min-width: 180px;
+	border: none;
+	transition: background 0.3s ease, transform 0.2s ease;
 }
 
-/* 1. Estilo para o botão de Ação Principal (Baixar Comprovante) */
-/* Este é o botão que está sendo renderizado dentro do .resumo-container */
 .resumo-container .bottom-buttons button {
-    background-color: var(--action-orange); /* Laranja: Ação principal */
-    color: #fff !important;
+	background-color: var(--action-orange);
+	color: #fff !important;
 }
 
-.resumo-container .bottom-buttons button:hover {
-    background-color: #e68900;
-    transform: translateY(-1px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+.bottom-buttons button:hover {
+	transform: translateY(-1px);
 }
 
-/* 2. Estilo para o botão de Navegação Secundária (Voltar ao Início) */
-/* Este é o botão que está FORA do .container, mas usa a mesma classe .bottom-buttons */
+/* Botão fora do container (Voltar) */
 .bottom-buttons button:not(.resumo-container .bottom-buttons button) {
-    background-color: #f0f0f0; /* Cinza Claro: Ação secundária */
-    color: var(--text-primary);
-    border: 1px solid #ccc;
-    box-shadow: none;
+	background-color: #f0f0f0;
+	color: var(--text-primary);
+	border: 1px solid #ccc;
 }
-
-.bottom-buttons button:not(.resumo-container .bottom-buttons button):hover {
-    background-color: #e0e0e0;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* ... [Conteúdo existente de consulta.css] ... */
 
 /* --------------------------------- */
 /* 5. RESPONSIVIDADE */
 /* --------------------------------- */
 
 @media (max-width: 768px) {
-    /* Em telas médias, a grade de jogos deve ser flexível */
-    .jogos-grid {
-		grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
-    }
+	.jogos-grid {
+		grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+	}
 }
 
 @media (max-width: 600px) {
-	/* Em telas pequenas (mobile) */
-	
-    /* Ajuste do container principal */
-    .container {
-        padding: 15px;
-        margin: 10px auto;
-        box-shadow: none;
-        max-width: 100%;
-    }
-    
-	/* Força os campos e botões do formulário a se empilharem */
-	.consulta-form > div {
+
+	.container {
+		padding: 15px;
+		margin: 10px auto;
+		box-shadow: none;
+		max-width: 100%;
+	}
+
+	/* 🔹 Centralizar o botão "Consultar" */
+	.form-row {
 		flex-direction: column;
-		gap: 5px;
+		align-items: center;
 	}
-	
-	.consulta-form input, .consulta-form button {
+
+	.form-row button.primary {
 		width: 100%;
-		margin-top: 5px; 
+		max-width: 350px;
+		text-align: center;
 	}
-	
-    /* Ajuste da grade de bolinhas */
-    .jogos-grid {
-        grid-template-columns: repeat(6, 1fr); /* 6 colunas para mobile */
-        gap: 5px;
-    }
-    
-    /* Reduz o tamanho das bolinhas */
-    .bolinha {
-        width: 25px;
-        height: 25px;
-        font-size: 0.8rem;
-    }
 
-    /* Ajuste para botões inferiores */
-    .bottom-buttons {
-        flex-direction: column;
-        width: 100%;
-        gap: 10px;
-    }
+	/* 🔹 Centralizar título do Jogo da Sorte */
+	.jogo-sorte-container h3 {
+		text-align: center;
+	}
 
-    .bottom-buttons button {
-        width: 100%;
-        min-width: auto;
+	/* 🔹 Centralizar aviso do Jogo da Sorte */
+	.jogo-sorte-container p {
+		text-align: center;
+	}
+
+	/* 🔹 Exibir TODOS os jogos do bolão em coluna única */
+	.jogos-grid {
+		grid-template-columns: 1fr !important;
+		gap: 15px;
+	}
+
+	/* 🔹 Botões inferiores empilhados */
+	.bottom-buttons {
+		flex-direction: column;
+		width: 100%;
+		gap: 10px;
+	}
+
+	.bottom-buttons button {
+		width: 100%;
+		min-width: auto;
+	}
+}
+
+/* ==========================================
+   BOTÃO FLUTUANTE "VOLTAR AO INÍCIO"
+============================================== */
+
+.btn-flutuante-voltar {
+    position: fixed;
+    bottom: 18px;
+    right: 18px;
+    background-color: var(--mega-green);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    cursor: pointer;
+    z-index: 9999;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.btn-flutuante-voltar:hover {
+    background-color: var(--mega-dark);
+    transform: translateY(-2px);
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .btn-flutuante-voltar {
+        bottom: 15px;
+        right: 15px;
+        padding: 10px 14px;
+        font-size: 0.85rem;
     }
 }

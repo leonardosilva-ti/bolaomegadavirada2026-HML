@@ -1,38 +1,54 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BBR">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Consulta - Bolão da Sorte</title>
-	<link rel="stylesheet" href="css/consulta.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Consulta - Bolão da Sorte</title>
+
+    <!-- CSS Atualizado -->
+    <link rel="stylesheet" href="css/consulta.css" />
 </head>
+
 <body>
-	<header class="site-header">
-		<h1>Consulta de Jogos</h1>
-	</header>
 
-	<main class="container">
-				<section class="resumo-container consulta-box">
-			<h2>Consultar por Protocolo</h2>
-			<p>
-				Informe o seu <strong>Número de Protocolo</strong> para consultar seus dados e jogos.
-			</p>
+    <!-- Cabeçalho -->
+    <header class="site-header">
+        <h1>Consulta de Jogos</h1>
+    </header>
 
-			<div class="form-row">
-				<input id="protocoloInput" type="text" placeholder="Número de Protocolo">
-				<button id="btnConsultar" class="primary">Consultar</button>
-			</div>
-		</section>
+    <!-- Conteúdo principal -->
+    <main class="container">
 
-				<div id="resultado" class="resultado"></div>
-	</main>
+        <!-- Caixa de Consulta -->
+        <section class="resumo-container consulta-box">
+            <h2>Consultar por Protocolo</h2>
 
-		<div class="bottom-buttons">
-		<button onclick="window.location.href='index.html'">Voltar ao Início</button>
-	</div>
+            <p>Informe o seu <strong>Número de Protocolo</strong> para consultar seus dados e jogos.</p>
 
-	<script src="js/consulta.js"></script>
-		
+            <div class="form-row">
+                <input id="protocoloInput" type="text" placeholder="Número de Protocolo" />
+                <button id="btnConsultar" class="primary">Consultar</button>
+            </div>
+        </section>
+
+        <!-- Resultados serão inseridos dinamicamente -->
+        <div id="resultado" class="resultado"></div>
+
+    </main>
+
+    <!-- Botões Inferiores -->
+    <button class="btn-flutuante-voltar" onclick="window.location.href='index.html'">
+		⮌ Voltar
+	</button>
+
+
+    <!-- Script da Página -->
+    <script src="js/consulta.js"></script>
+	<button class="btn-flutuante-voltar" onclick="window.location.href='index.html'">⮌ Voltar</button>
 </body>
+</html>
 
+
+</body>
 </html>
