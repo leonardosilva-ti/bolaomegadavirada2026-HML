@@ -388,6 +388,7 @@ button.primary:hover {
         padding: 15px;
         margin: 10px auto;
         box-shadow: none;
+        max-width: 100%;
     }
     
 	/* Força os campos e botões do formulário a se empilharem */
@@ -403,7 +404,15 @@ button.primary:hover {
 	
     /* Ajuste da grade de bolinhas */
     .jogos-grid {
-        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); 
+        grid-template-columns: repeat(6, 1fr); /* 6 colunas para mobile */
+        gap: 5px;
+    }
+    
+    /* Reduz o tamanho das bolinhas */
+    .bolinha {
+        width: 25px;
+        height: 25px;
+        font-size: 0.8rem;
     }
 
     /* Ajuste para botões inferiores */

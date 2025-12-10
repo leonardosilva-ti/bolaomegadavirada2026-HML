@@ -378,13 +378,11 @@ thead { background-color: var(--mega-green); color: white; }
 		.input-jogo-excedente, #conferenciaContainer { max-width: 100%; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 }
 
-/* ============================
-		OPTIMIZAÇÃO COMPLETA MOBILE
-		============================ */
-
-/* --- Container principal mais fluido --- */
 /* ... [Conteúdo existente de admin.css] ... */
 
+/* --------------------------------- */
+/* 5. RESPONSIVIDADE (MOBILE) */
+/* --------------------------------- */
 @media (max-width: 768px) {
 	/* --- MOBILE --- */
 
@@ -393,6 +391,7 @@ thead { background-color: var(--mega-green); color: white; }
 		padding: 15px;
 		margin: 10px auto;
 		box-shadow: none; 
+		max-width: 100%;
 	}
 
 	/* Ajuste para títulos e cards */
@@ -428,8 +427,8 @@ thead { background-color: var(--mega-green); color: white; }
 	}
 
 	table {
-		min-width: 600px; /* Força a tabela a ter uma largura mínima, ativando o scroll acima */
-		font-size: 15px;
+		min-width: 700px; /* Garante que a tabela role, mostrando todas as colunas */
+		font-size: 14px; /* Reduz um pouco a fonte */
 	}
 	
 	th, td {
@@ -440,13 +439,22 @@ thead { background-color: var(--mega-green); color: white; }
 			font-size: 13px;
 	}
 	
-	/* Botões da tabela empilhados */
-	td button.small {
-		margin: 4px 0;
-		width: 100%;
+	/* Botões de Ação na tabela (ex: Pagar/Excluir) empilhados em coluna ou full width */
+	td .flex.gap-2 {
+		flex-direction: column;
+		gap: 5px;
 	}
 
+	td button.small {
+		margin: 0;
+		width: 100%;
+	}
+	
 	/* --- Rateio --- */
+	#areaRateio {
+		padding-top: 16px;
+	}
+
 	#valorPremio {
 		width: 100%;
 		max-width: none;

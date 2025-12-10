@@ -301,6 +301,7 @@ h2 {
         margin: 10px auto;
         padding: 15px;
         box-shadow: none;
+        max-width: 100%;
     }
 
     .comprovante-box {
@@ -313,15 +314,15 @@ h2 {
         align-items: flex-start;
         gap: 5px;
     }
-
-    /* Bolinhas de número (usando a mesma lógica da confirmação) */
+    
+    /* Bolinhas de número */
     .bolinha {
         width: 25px;
         height: 25px;
         font-size: 0.8rem;
     }
-    
-    /* Empilha os botões "Baixar PDF" e "Voltar" */
+
+    /* Empilha os botões */
     .controles {
         flex-direction: column;
         gap: 10px;
