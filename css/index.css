@@ -139,6 +139,14 @@ main {
     margin: 10px 0 25px 0;
 }
 
+.titulo-jogos {
+    text-align: center;
+    width: 100%;
+    display: block;
+    margin-bottom: 15px;
+}
+
+
 .jogo-display {
     width: 35px;
     height: 35px;
