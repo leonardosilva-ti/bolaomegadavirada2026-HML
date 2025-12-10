@@ -1,455 +1,432 @@
 /* Conteúdo do home.css copiado para index.css */
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
-    color: #333;
+		font-family: Arial, sans-serif;
+		margin: 0;
+		padding: 0;
+		background-color: #f4f4f9;
+		color: #333;
 }
 
 header {
-    background-color: #008000; /* Verde da Mega Sena */
-    color: white;
-    padding: 20px;
-    text-align: center;
+		background-color: #008000; /* Verde da Mega Sena */
+		color: white;
+		padding: 20px;
+		text-align: center;
 }
 
 main {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+		max-width: 800px;
+		margin: 20px auto;
+		padding: 20px;
+		background-color: white;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		border-radius: 8px;
 }
 
 #info-bolao {
-    background-color: #e8f5e9; /* Fundo verde claro para destaque */
-    border-left: 5px solid #008000; /* Borda verde */
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 4px;
+		background-color: #e8f5e9; /* Fundo verde claro para destaque */
+		border-left: 5px solid #008000; /* Borda verde */
+		padding: 15px;
+		margin-bottom: 20px;
+		border-radius: 4px;
 }
 
 #info-bolao h3 {
-    margin-top: 0;
-    color: #005f00;
-    font-size: 1.3em;
+		margin-top: 0;
+		color: #005f00;
+		font-size: 1.3em;
 }
 
 #info-bolao p {
-    margin-bottom: 10px;
-    line-height: 1.5;
+		margin-bottom: 10px;
+		line-height: 1.5;
 }
 
 .aviso-particular {
-    font-weight: bold;
-    color: #d32f2f; /* Vermelho para chamar atenção no aviso */
-    border-top: 1px dashed #ccc;
-    padding-top: 10px;
-    margin-top: 10px;
+		font-weight: bold;
+		color: #d32f2f; /* Vermelho para chamar atenção no aviso */
+		border-top: 1px dashed #ccc;
+		padding-top: 10px;
+		margin-top: 10px;
 }
 
 .separator-info-form {
-    border: 0;
-    height: 1px;
-    background-color: #ddd;
-    margin: 20px 0;
+		border: 0;
+		height: 1px;
+		background-color: #ddd;
+		margin: 20px 0;
 }
 
 /* Formulário de Contato */
 .form-group {
-    margin-bottom: 15px;
+		margin-bottom: 15px;
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+		display: block;
+		margin-bottom: 5px;
+		font-weight: bold;
 }
 
 .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+		width: 100%;
+		padding: 10px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
 }
 
 /* PIX */
 .pix-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: #eee;
-    padding: 10px;
-    border-radius: 4px;
-    font-size: 1.1em;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		background-color: #eee;
+		padding: 10px;
+		border-radius: 4px;
+		font-size: 1.1em;
 }
 
 #chave-pix-display {
-    flex-grow: 1;
-    font-family: monospace;
-    font-weight: bold;
-    color: #000;
-    overflow-wrap: break-word; /* Garante que a chave longa se ajuste */
+		flex-grow: 1;
+		font-family: monospace;
+		font-weight: bold;
+		color: #000;
+		overflow-wrap: break-word; /* Garante que a chave longa se ajuste */
 }
 
 #copiar-pix-btn {
-    padding: 8px 15px;
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+		padding: 8px 15px;
+		background-color: #0056b3;
+		color: white;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
 }
 
 #copiar-pix-btn:hover {
-    background-color: #004494;
+		background-color: #004494;
 }
 
 hr {
-    border: 0;
-    height: 1px;
-    background-color: #ccc;
-    margin: 30px 0;
+		border: 0;
+		height: 1px;
+		background-color: #ccc;
+		margin: 30px 0;
 }
 
 /* Seleção de Jogos (Números) */
 #container-jogos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 15px;
-    border: 1px dashed #008000;
-    padding: 10px;
-    border-radius: 5px;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		justify-content: center;
+		margin-top: 15px;
+		border: 1px dashed #008000;
+		padding: 10px;
+		border-radius: 5px;
 }
 
 .numero-btn {
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    border-radius: 50%;
-    border: 2px solid #008000;
-    background-color: #fff;
-    color: #008000;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
-    user-select: none;
+		width: 40px;
+		height: 40px;
+		line-height: 40px;
+		text-align: center;
+		border-radius: 50%;
+		border: 2px solid #008000;
+		background-color: #fff;
+		color: #008000;
+		font-weight: bold;
+		cursor: pointer;
+		transition: background-color 0.2s, color 0.2s;
+		user-select: none;
 }
 
 .numero-btn.selecionado {
-    background-color: #008000;
-    color: white;
-    border-color: #005f00;
+		background-color: #008000;
+		color: white;
+		border-color: #005f00;
 }
 
 .numero-btn:hover:not(.selecionado) {
-    background-color: #e6ffe6;
-}
-
-/* Controles */
-.controles-selecao {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.controles-selecao p {
-    font-size: 1.1em;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-#finalizar-aposta-btn, #limpar-selecao-btn {
-    padding: 12px 20px;
-    margin: 5px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#finalizar-aposta-btn {
-    background-color: #ff9800; /* Laranja para destaque */
-    color: white;
-}
-
-#finalizar-aposta-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-#finalizar-aposta-btn:not(:disabled):hover {
-    background-color: #e68900;
-}
-
-#limpar-selecao-btn {
-    background-color: #f44336; /* Vermelho */
-    color: white;
-}
-
-#limpar-selecao-btn:hover {
-    background-color: #d32f2f;
+		background-color: #e6ffe6;
 }
 
 footer {
-    text-align: center;
-    padding: 10px;
-    margin-top: 20px;
-    font-size: 0.9em;
-    color: #777;
+		text-align: center;
+		padding: 10px;
+		margin-top: 20px;
+		font-size: 0.9em;
+		color: #777;
 }
 
-/* ESTILOS DA SELEÇÃO DE JOGOS POR DISPLAY */
+/* ESTILOS DA SELEÇÃO DE JOGOS POR DISPLAY (Com Adaptação para Wrap) */
 #container-displays-jogos {
-    display: flex;
-    justify-content: space-between;
-    gap: 5px;
-    margin-bottom: 20px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+		display: flex;
+    flex-wrap: wrap; /* ADICIONADO: Permite que os displays quebrem a linha */
+		justify-content: space-between;
+		gap: 8px; /* AJUSTADO: Aumentei o gap de 5px para 8px */
+		margin-bottom: 20px;
+		padding: 5px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
 }
 
 .jogo-display {
-    flex: 1;
-    padding: 10px 5px;
-    text-align: center;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, border 0.3s;
-    font-size: 0.9em;
-    border: 1px solid transparent;
+		flex: 1 1 0; /* AJUSTADO: Garante flexibilidade */
+    min-width: 140px; /* Largura mínima antes de quebrar para 2 linhas em telas maiores */
+		padding: 10px 5px;
+		text-align: center;
+		border-radius: 4px;
+		font-weight: bold;
+		cursor: pointer;
+		transition: background-color 0.3s, border 0.3s;
+		font-size: 0.9em;
+		border: 1px solid transparent;
 }
 
 /* Status: Vazio (Cinza) */
 .jogo-display[data-status="vazio"] {
-    background-color: #f0f0f0;
-    color: #666;
+		background-color: #f0f0f0;
+		color: #666;
 }
 
 /* Status: Incompleto (Amarelo) */
 .jogo-display[data-status="incompleto"] {
-    background-color: #fff9c4;
-    color: #fbc02d;
+		background-color: #fff9c4;
+		color: #fbc02d;
 }
 
 /* Status: Completo (Verde) */
 .jogo-display[data-status="completo"] {
-    background-color: #c8e6c9;
-    color: #388e3c;
+		background-color: #c8e6c9;
+		color: #388e3c;
 }
 
 /* Jogo Ativo (Destaque) */
 .jogo-display.ativo {
-    border: 2px solid #ff9800; /* Borda Laranja para o jogo em edição */
-    box-shadow: 0 0 5px rgba(255, 152, 0, 0.5);
-    transform: scale(1.02);
+		border: 2px solid #ff9800; /* Borda Laranja para o jogo em edição */
+		box-shadow: 0 0 5px rgba(255, 152, 0, 0.5);
+		transform: scale(1.02);
 }
 
 .numeros-selecionados-display {
-    display: block;
-    font-weight: normal;
-    font-size: 0.8em;
-    margin-top: 3px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+		display: block;
+		font-weight: normal;
+		font-size: 0.8em;
+		margin-top: 3px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 }
 
-/* Controles */
+/* Controles de JOGO (Limpar, Aleatório, Próximo/Confirmar) */
 .controles-jogo {
-    text-align: center;
-    margin-bottom: 20px;
+    display: flex; /* ADICIONADO: Permite layout em linha no desktop */
+    justify-content: center; /* ADICIONADO: Centraliza os botões */
+    flex-wrap: wrap; /* ADICIONADO: Permite que os botões quebrem a linha */
+		margin-top: 15px; /* ADICIONADO: Espaçamento entre a grade de números e os botões */
+		margin-bottom: 20px;
+    gap: 10px; /* ADICIONADO: Espaço entre botões */
 }
 
 .controles-jogo button {
-    padding: 10px 15px;
-    margin: 5px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s;
+		padding: 10px 15px;
+		margin: 0; /* AJUSTADO: Remove a margem individual para usar 'gap' do flexbox */
+		border: none;
+		border-radius: 5px;
+		font-size: 1em;
+		cursor: pointer;
+		transition: background-color 0.3s;
 }
 
 #limpar-jogo-btn {
-    background-color: #f44336; /* Vermelho */
-    color: white;
+		background-color: #f44336; /* Vermelho */
+		color: white;
 }
 #limpar-jogo-btn:hover {
-    background-color: #d32f2f;
+		background-color: #d32f2f;
 }
 
 #preencher-aleatoriamente-btn {
-    background-color: #2196f3; /* Azul */
-    color: white;
+		background-color: #2196f3; /* Azul */
+		color: white;
 }
 #preencher-aleatoriamente-btn:hover {
-    background-color: #1976d2;
+		background-color: #1976d2;
 }
 
 #proximo-jogo-btn {
-    background-color: #4caf50; /* Verde */
-    color: white;
+		background-color: #4caf50; /* Verde */
+		color: white;
 }
 #proximo-jogo-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+		background-color: #ccc;
+		cursor: not-allowed;
 }
 
 #confirmar-aposta-btn {
-    background-color: #ff9800; /* Laranja (substitui o botão anterior) */
-    color: white;
-    font-weight: bold;
+		background-color: #ff9800; /* Laranja (substitui o botão anterior) */
+		color: white;
+		font-weight: bold;
 }
 #confirmar-aposta-btn:hover {
-    background-color: #e68900;
+		background-color: #e68900;
 }
 
 /* Estilos dos Números (Manter) */
 #container-jogos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 15px;
-    border: 1px dashed #008000;
-    padding: 10px;
-    border-radius: 5px;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		justify-content: center;
+		margin-top: 15px;
+		border: 1px dashed #008000;
+		padding: 10px;
+		border-radius: 5px;
 }
 
 /* A classe 'selecionado' deve indicar que o número foi escolhido em QUALQUER jogo */
 .numero-btn.selecionado {
-    background-color: #008000;
-    color: white;
-    border-color: #005f00;
+		background-color: #008000;
+		color: white;
+		border-color: #005f00;
 }
 
 /* Estilos para Contato Dúvidas (Novo) */
 #contato-duvidas {
-    text-align: center;
-    margin-top: 30px;
-    padding: 15px;
-    border: 1px dashed #28a745; /* Verde do WhatsApp */
-    border-radius: 5px;
+		text-align: center;
+		margin-top: 30px;
+		padding: 15px;
+		border: 1px dashed #28a745; /* Verde do WhatsApp */
+		border-radius: 5px;
 }
 
 #contato-duvidas p {
-    margin-bottom: 10px;
-    font-size: 0.95em;
+		margin-bottom: 10px;
+		font-size: 0.95em;
 }
 
 .whatsapp-link-final {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #28a745; /* Cor do WhatsApp */
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 50px;
-    transition: background-color 0.3s;
+		display: inline-block;
+		padding: 10px 20px;
+		background-color: #28a745; /* Cor do WhatsApp */
+		color: white;
+		text-decoration: none;
+		font-weight: bold;
+		border-radius: 50px;
+		transition: background-color 0.3s;
 }
 
 .whatsapp-link-final:hover {
-    background-color: #1e7e34;
+		background-color: #1e7e34;
 }
 
 /* Estilos para Acessos Rápidos (Novo) */
 #acessos-rapidos {
-    text-align: center;
-    margin: 30px auto;
-    max-width: 800px;
-    padding: 0 20px;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+		text-align: center;
+		margin: 30px auto;
+		max-width: 800px;
+		padding: 0 20px;
+		display: flex;
+		justify-content: center;
+		gap: 15px;
 }
 
 .btn-acesso {
-    padding: 12px 20px;
-    font-size: 1em;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: opacity 0.3s;
-    flex-grow: 1;
-    max-width: 250px;
+		padding: 12px 20px;
+		font-size: 1em;
+		font-weight: bold;
+		text-decoration: none;
+		border-radius: 5px;
+		transition: opacity 0.3s;
+		flex-grow: 1;
+		max-width: 250px;
 }
 
 .btn-acesso:hover {
-    opacity: 0.9;
+		opacity: 0.9;
 }
 
 /* Estilo específico para Consulta */
 .btn-acesso:not(.admin-btn) {
-    background-color: #007bff; /* Azul */
-    color: white;
+		background-color: #007bff; /* Azul */
+		color: white;
 }
 
 /* Estilo específico para Admin */
 .admin-btn {
-    background-color: #6c757d; /* Cinza */
-    color: white;
+		background-color: #6c757d; /* Cinza */
+		color: white;
 }
 
-/* ... [Conteúdo existente de index.css] ... */
 
 /* --------------------------------- */
 /* 5. RESPONSIVIDADE (MOBILE) */
 /* --------------------------------- */
 @media (max-width: 600px) {
-    /* Ajuste do container principal */
-    main {
-        margin: 10px auto;
-        padding: 15px;
-        box-shadow: none; /* Remove a sombra para dar aspecto de tela cheia */
-        max-width: 100%; 
+		/* Ajuste do container principal */
+		main {
+				margin: 10px auto;
+				padding: 15px;
+				box-shadow: none; /* Remove a sombra para dar aspecto de tela cheia */
+				max-width: 100%;	
+		}
+    
+    /* DISPLAYS DE JOGO: Força empilhamento em colunas */
+    #container-displays-jogos {
+        flex-direction: column; 
+        gap: 10px; 
+        padding: 10px;
+    }
+
+    .jogo-display {
+        min-width: 100%; 
+        flex-basis: auto; 
+        font-size: 1em; 
+    }
+
+    .numeros-selecionados-display {
+        white-space: normal; /* Permite que os números quebrem a linha */
+        font-size: 0.9em;
     }
     
-    /* Grade de seleção de números: 6 colunas, mais espaçoso para touch */
-    #selecao-jogos .numeros-grid {
-        grid-template-columns: repeat(6, 1fr); 
-        gap: 5px;
-    }
-    
-    .numero-btn {
-        height: 40px; /* Aumenta a altura para melhor toque */
-        font-size: 1.1em;
-    }
-    
-    /* Campos de formulário: Força empilhamento */
-    .form-group {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    /* Botões de controle (limpar, aleatório, próximo, confirmar) */
-    .controles-jogo {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .controles-jogo button {
-        width: 100%;
-        max-width: none;
-    }
-    
-    /* Acessos Rápidos (Força empilhamento em colunas) */
-    #acessos-rapidos {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .atalho-box {
-        width: 100%;
-        margin-bottom: 0;
-    }
+		/* Grade de seleção de números: Aumenta o tamanho dos botões para melhor toque */
+		.numero-btn {
+				width: 45px; 
+				height: 45px; 
+        line-height: 45px;
+				font-size: 1.1em;
+		}
+			
+		/* Campos de formulário: Força empilhamento */
+		.form-group {
+				flex-direction: column;
+				gap: 10px;
+		}
+			
+		/* Botões de controle (limpar, aleatório, próximo, confirmar) */
+		.controles-jogo {
+				flex-direction: column;
+				gap: 10px;
+				margin-top: 15px;
+		}
+			
+		.controles-jogo button {
+				width: 100%;
+				max-width: none;
+        margin: 0;
+		}
+			
+		/* Acessos Rápidos (Força empilhamento em colunas) */
+		#acessos-rapidos {
+				flex-direction: column;
+				gap: 15px;
+		}
+			
+		.btn-acesso {
+				width: 100%; 
+				max-width: none;
+		}
 }
