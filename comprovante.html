@@ -1,54 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comprovante da Aposta</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Comprovante da Aposta</title>
 
-  <!-- Estilo da página -->
-  <link rel="stylesheet" href="css/comprovante.css">
+    <link rel="stylesheet" href="css/comprovante.css">
 </head>
 
 <body>
-  <header class="site-header">
-    <h1>Mega da Virada - Comprovante</h1>
-  </header>
+    <header class="site-header">
+		<h1>Mega da Virada - Comprovante</h1>
+	</header>
 
-  <main class="container">
-    <section class="comprovante" id="areaComprovante">
-      <h2>Comprovante Oficial do Bolão</h2>
+	<main class="container"> 
+		<section class="comprovante-box" id="areaComprovante"> <h2>Comprovante Oficial do Bolão</h2>
 
-      <!-- Dados principais do participante -->
-      <div id="dadosComprovante" class="card"></div>
+            <div id="dadosComprovante" class="resumo-container"></div> 
 
-      <!-- Lista de jogos -->
-      <div id="jogosComprovante" class="card"></div>
+            <div id="jogosComprovante" class="resumo-container jogos-resumo"></div>
+	
+            <div class="status-wrapper">
+				<strong>Status de Pagamento:</strong>
+				<span class="status" id="statusAposta">...</span>
+				<button id="btnAtualizarStatus" class="atualizar-btn small">Atualizar</button> </div>
+		</section>
 
-      <!-- Informações PIX -->
-      <div id="pixComprovante" class="pix-box"></div>
+		<p class="observacao"> 
+			Salve este comprovante e o número de <b>Protocolo</b> para consultar seus jogos na página de consulta.
+		</p>
 
-      <!-- Status de pagamento -->
-      <div class="status-wrapper">
-        <strong>Status de Pagamento:</strong>
-        <span class="status" id="statusAposta">...</span>
-        <button id="btnAtualizarStatus" class="muted small">Atualizar</button>
-      </div>
-    </section>
+		<div class="controles">
+            <button id="baixarPDF" class="primary-btn">Baixar Comprovante em PDF</button>
+			<button onclick="window.location.href='index.html'" class="secondary-btn">Voltar ao Início</button>
+		</div>
+	</main>
 
-    <!-- Aviso -->
-    <p class="aviso">
-      Salve este comprovante e o número de <b>Protocolo</b> para consultar seus jogos na página de consulta.
-    </p>
-
-    <!-- Controles -->
-    <div class="controles">
-      <button id="baixarPDF" class="primary">Baixar Comprovante em PDF</button>
-      <button onclick="window.location.href='index.html'" class="muted">Voltar ao Início</button>
-    </div>
-  </main>
-
-  <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="js/comprovante.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+	<script src="js/comprovante.js"></script>
 </body>
 </html>

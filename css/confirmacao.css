@@ -1,140 +1,222 @@
-/* ======= CONFIRMAÇÃO - Supercompacta ======= */
+/*
+* ======================================
+* ARQUIVO: css/confirmacao.css
+* Estilos específicos para a página de revisão e confirmação da aposta.
+* ======================================
+*/
 
+/* Estrutura Principal do Conteúdo */
 .container {
-  background: #fff;
-  padding: 1rem 1.2rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  margin-top: 0.8rem;
-  max-width: 850px;
+    background: #fff;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin: 0.8rem auto;
+    max-width: 850px;
 }
 
 h2 {
-  color: #0072e3;
-  text-align: center;
-  margin: 0 0 0.8rem;
-  font-size: 1.3rem;
+    color: #0072e3;
+    text-align: center;
+    margin: 0 0 0.8rem;
+    font-size: 1.3rem;
 }
 
-.card {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 0.6rem 0.8rem;
-  margin-bottom: 0.6rem;
-  font-size: 0.93rem;
-  line-height: 1.4;
+/* Contêiner de Resumo (Dados, Jogos, Pagamento) */
+.resumo-container {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 12px;
+    font-size: 0.93rem;
+    line-height: 1.5;
 }
 
-.card h3 {
-  margin: 0 0 0.4rem;
-  font-size: 1rem;
-  color: #1e3a8a;
+.resumo-container h3 {
+    margin: 0 0 0.6rem;
+    font-size: 1.05rem;
+    color: #1e3a8a;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #e5e7eb;
 }
+
+.resumo-container p {
+    margin: 0.4rem 0;
+    word-wrap: break-word;
+}
+
+.resumo-container p b {
+    color: #333;
+    font-weight: 700;
+}
+
+/* --------------------------------- */
+/* Estilos para Jogos em Bolinhas */
+/* --------------------------------- */
+
+.jogo-item-confirmacao {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.jogo-item-confirmacao:last-child {
+    border-bottom: none;
+}
+
+.numeros-bolinhas-container {
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.bolinha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #008000; /* Cor de fundo Verde (Mega) */
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* --------------------------------- */
+/* Estilos para a Chave PIX e Botão */
+/* --------------------------------- */
+
+.pix-area {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px dashed #ccc;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Aumenta o espaçamento */
+    text-align: center;
+}
+
+.pix-area p b {
+    font-size: 1.05rem;
+    color: #1e3a8a;
+}
+
+.pix-key-highlight {
+    font-weight: bold;
+    color: #008000; 
+    background-color: #e6ffe6; 
+    padding: 10px 12px; /* Aumenta o padding */
+    border-radius: 6px; /* Borda mais arredondada */
+    word-break: break-all;
+    font-family: monospace;
+    font-size: 1rem;
+    display: block;
+    border: 1px solid #008000; /* Borda para destacar */
+}
+
+#copiarPixBtn {
+    /* Novo estilo de botão secundário, mais visível */
+    background-color: #f0f0f0; 
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 8px 15px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#copiarPixBtn:hover {
+    background-color: #e0e0e0;
+}
+
+/* Feedback visual de cópia bem-sucedida */
+#copiarPixBtn.copied-feedback {
+    background-color: #4CAF50 !important; /* Verde de sucesso */
+    color: white !important;
+    border-color: #4CAF50 !important;
+}
+
+/* --------------------------------- */
+/* Estilos Gerais (Observação, Termos, Controles) */
+/* --------------------------------- */
 
 .observacao {
-  background: #fff8e1;
-  border: 1px solid #ffe69c;
-  border-radius: 8px;
-  padding: 0.6rem 0.8rem;
-  font-size: 0.9rem;
-  margin: 0.8rem 0 0.6rem;
-  line-height: 1.4;
+    background: #fff8e1;
+    border: 1px solid #ffe69c;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    margin: 15px 0 10px;
+    line-height: 1.4;
 }
 
 .observacao h3 {
-  margin: 0 0 0.4rem;
-  color: #a47d00;
-  font-size: 0.95rem;
+    margin: 0 0 0.4rem;
+    color: #a47d00;
+    font-size: 1rem;
 }
 
 .termos {
-  background: #f3f4f6;
-  border-radius: 6px;
-  padding: 0.5rem 0.8rem;
-  display: flex;
-  align-items: center;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  gap: 6px;
-  margin-bottom: 0.5rem;
+    background: #f3f4f6;
+    border-radius: 6px;
+    padding: 0.6rem 0.8rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.93rem;
+    line-height: 1.4;
+    gap: 8px;
+    margin-bottom: 15px;
+    cursor: pointer;
 }
 
-.termos input {
-  transform: scale(1.1);
-  cursor: pointer;
+.termos input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
 }
 
 .controles {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 0.6rem;
-}
-
-button.primary,
-button.muted {
-  border-radius: 8px;
-  padding: 7px 14px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  border: none;
-  font-weight: 600;
-  transition: background 0.2s;
-}
-
-button.primary {
-  background: #0072e3;
-  color: white;
-}
-
-button.primary:hover {
-  background: #005ec0;
-}
-
-button.muted {
-  background: #f3f4f6;
-}
-
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
 }
 
 .mensagem {
-  margin-top: 0.7rem;
-  text-align: center;
-  font-weight: 600;
-  font-size: 0.9rem;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1em;
 }
 
-/* ======= Compact Mode Class ======= */
-.compact p,
-.compact label,
-.compact h3 {
-  margin: 0.2rem 0;
-}
-
-/* ======= Responsivo ======= */
+/* Responsividade Básica */
 @media (max-width: 600px) {
-  .container {
-    padding: 0.8rem;
-  }
+    .container {
+        padding: 0.8rem;
+    }
 
-  h2 {
-    font-size: 1.15rem;
-  }
+    .bolinha {
+        width: 25px;
+        height: 25px;
+        font-size: 0.8rem;
+    }
 
-  .card {
-    font-size: 0.9rem;
-    padding: 0.5rem 0.6rem;
-  }
+    .controles {
+        flex-direction: column;
+        gap: 8px;
+    }
 
-  .controles {
-    flex-direction: column;
-  }
+    .controles button {
+        width: 100%;
+    }
 
-  .controles button {
-    width: 100%;
-  }
+    #copiarPixBtn {
+        width: 100%;
+    }
 }

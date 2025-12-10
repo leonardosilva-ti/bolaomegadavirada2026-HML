@@ -1,47 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Confirmação da Aposta</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação da Aposta</title>
 
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/confirmacao.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/confirmacao.css">
 </head>
 <body>
-  <header class="site-header">
-    <h1>Confirmação da Aposta</h1>
-  </header>
+    <header class="site-header">
+        <h1>Confirmação da Aposta</h1>
+    </header>
 
-  <main class="container">
-    <h2>Revise e Confirme seus Dados</h2>
+    <main class="container">
+        <h2>Revise e Confirme seus Dados</h2>
 
-    <div id="dadosConfirmacao" class="card compact"></div>
-    <div id="jogosConfirmacao" class="card compact"></div>
+        <div id="dadosConfirmacao" class="resumo-container"></div>
+        
+        <div id="jogosConfirmacao" class="resumo-container"></div>
+        
+        <div id="pagamentoResumo" class="resumo-container">
+            <h3>Detalhes do Pagamento (Total: R$ 60,00)</h3>
+            <p>R$ 30,00 (5 jogos de 6 números x R$ 6,00)</p>
+            <p>R$ 30,00 (Utilizado para o jogo de 9 números)</p>
 
-    <section class="observacao compact">
-      <h3>Atenção</h3>
-      <p>
-        Este bolão <b>não é oficial da CAIXA</b>. É uma organização particular — 
-        os jogos são reais, mas registrados em nome do organizador.
-        Em caso de prêmio, o valor será dividido entre os participantes
-        conforme os registros deste site.
-      </p>
-    </section>
+            <div class="pix-area"> 
+                <p><b>Chave PIX:</b></p>
+                <span id="chavePixDisplay" class="pix-key-highlight"></span>
+                <button id="copiarPixBtn" class="secondary">Copiar Chave</button>
+            </div>
+        </div>
 
-    <label class="termos compact">
-      <input type="checkbox" id="aceitoTermos" required>
-      Confirmo que li e aceito os termos acima.
-    </label>
+        <section class="observacao compact">
+            <h3>Atenção</h3>
+            <p>
+                Este bolão <b>não é oficial da CAIXA</b>. É uma organização particular — 
+                os jogos são reais, mas registrados em nome do organizador.
+                Em caso de prêmio, o valor será dividido entre os participantes
+                conforme os registros deste site.
+            </p>
+        </section>
 
-    <div class="controles compact">
-      <button id="btnVoltar" class="muted">Voltar</button>
-      <button id="btnConfirmar" class="primary" disabled>Confirmar Aposta</button>
-    </div>
+        <label class="termos compact">
+            <input type="checkbox" id="aceitoTermos" required>
+            Confirmo que li e aceito os termos acima.
+        </label>
 
-    <p id="mensagem" class="mensagem"></p>
-  </main>
+        <div class="controles compact">
+            <button id="btnVoltar" class="muted">Voltar</button>
+            <button id="btnConfirmar" class="primary" disabled>Confirmar Aposta</button>
+        </div>
 
-  <script src="js/confirmacao.js"></script>
+        <p id="mensagem" class="mensagem"></p>
+    </main>
+
+    <script src="js/confirmacao.js"></script>
 </body>
 </html>

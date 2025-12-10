@@ -1,198 +1,322 @@
+/*
+* ======================================
+* ARQUIVO: css/comprovante.css
+* Refatorado para unificar o estilo com index.css (Header/Fundo) e confirmacao.css (Cards/Tipografia)
+* ======================================
+*/
+
+/* --------------------------------- */
+/* 1. Estilos Gerais (do index.css) */
+/* --------------------------------- */
 :root {
-  --accent: #0072e3;
-  --green: #16a34a;
-  --red: #dc2626;
-  --gray: #6b7280;
-  --bg-light: #f3f6fb;
-  --border: #e5e7eb;
+	/* Definindo as cores com base nos arquivos fornecidos */
+	--mega-green: #008000;
+	--mega-dark: #005f00;
+	--accent-blue: #0072e3; /* Para o contraste no comprovante */
+	--yellow-highlight: #ff9800; /* Laranja do botão principal */
+	--red: #f44336;
+	--border: #e5e7eb;
+	--bg-light: #f4f4f9; /* Fundo do body do index.css */
 }
 
-/* ===== Layout geral ===== */
 body {
-  font-family: 'Inter', Arial, sans-serif;
-  background: var(--bg-light);
-  margin: 0;
-  padding: 0;
-  color: #333;
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: var(--bg-light); 
+	color: #333;
 }
 
 .site-header {
-  background: var(--accent);
-  color: #fff;
-  text-align: center;
-  padding: 14px;
+	background-color: var(--mega-green); /* Verde da Mega Sena (index.css) */
+	color: white;
+	padding: 20px;
+	text-align: center;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .container {
-  max-width: 850px;
-  margin: 0 auto;
-  padding: 1rem 1.2rem;
+    /* Baseado no main do index.css, mas com mais foco no container do confirmacao.css */
+		max-width: 850px;
+    margin: 20px auto;
+		padding: 1rem 1.2rem;
+		background: #fff; /* Fundo branco para o bloco principal */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* ===== Bloco do comprovante ===== */
-.comprovante {
-  background: #fff;
-  border-radius: 10px;
-  padding: 1rem 1.2rem;
-  margin-top: 0.8rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  border: 1px solid var(--border);
+h2 {
+    color: var(--accent-blue);
+    text-align: center;
+    margin: 0 0 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+    font-size: 1.5rem;
 }
 
-.comprovante h2 {
-  text-align: center;
-  color: var(--accent);
-  font-size: 1.3rem;
-  margin: 0 0 0.8rem;
+
+/* --------------------------------- */
+/* 2. Estilos do Comprovante (baseado em confirmacao.css) */
+/* --------------------------------- */
+
+.comprovante-box {
+    /* Novo bloco principal, mais simples, já que o container já tem sombra */
+    padding: 1.5rem 0; 
 }
 
-/* ===== Cartões ===== */
-.card {
-  background: #f9fafb;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.6rem 0.8rem;
-  margin-bottom: 0.6rem;
-  font-size: 0.93rem;
-  line-height: 1.4;
+/* Contêiner de Dados/Jogos (resumo-container do confirmacao.css) */
+.resumo-container {
+    background: #f9fafb;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 15px; /* Ajustado para mais espaço */
+    font-size: 0.93rem;
+    line-height: 1.5;
 }
 
-.card h3 {
-  margin: 0 0 0.4rem;
-  font-size: 1rem;
-  color: #1e3a8a;
+.resumo-container h3 {
+    margin: 0 0 0.6rem;
+    font-size: 1.05rem;
+    color: #1e3a8a; /* Azul marinho do confirmacao.css */
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
 }
 
-/* ===== PIX ===== */
+.resumo-container p {
+    margin: 0.4rem 0;
+    word-wrap: break-word;
+}
+
+.resumo-container p b {
+    color: #333;
+    font-weight: 700;
+}
+
+/* Estilos de Jogo/Bolinhas */
+.jogos-resumo .jogo-item-comprovante {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 0;
+    border-top: 1px dashed #eee; /* Adaptado de border-bottom */
+    margin-top: 0;
+}
+
+.jogos-resumo .jogo-item-comprovante:first-child {
+    border-top: none;
+}
+
+.numeros-bolinhas-container {
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.bolinha {
+    /* Estilo da bolinha do confirmacao.css */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--mega-green); 
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    flex-shrink: 0;
+}
+
+/* --------------------------------- */
+/* 3. Estilos do PIX (adaptado de confirmacao.css) */
+/* --------------------------------- */
+
 .pix-box {
-  background: #f9fafb;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.6rem 0.8rem;
-  text-align: center;
-  margin-top: 0.6rem;
-  font-size: 0.9rem;
+    /* Novo estilo de cartão, centraliza o conteúdo */
+    /* Usaremos .resumo-container no HTML/JS para o quadro cinza. */
+    margin-top: 15px;
+    padding-top: 0; /* Removido, será tratado pelo padding do resumo-container */
+    border-top: none; /* Removido, será tratado pela borda do resumo-container */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    background: none; 
+    border: none;
 }
 
 .pix-box p {
-  margin: 0.2rem 0;
-  font-weight: 500;
+    margin: 0.2rem 0;
+    font-weight: 500;
 }
 
-.pix-key {
-  font-weight: 600;
-  color: var(--accent);
-  display: inline-block;
-  margin: 0.3rem 0;
-  word-break: break-all;
+.pix-box p b {
+    font-size: 1.05rem;
+    color: #1e3a8a;
+}
+
+.pix-key { /* Classe ajustada para o pix-key-highlight */
+    font-weight: bold;
+    color: var(--mega-green);	
+    background-color: #e6ffe6;	
+    padding: 10px 12px;
+    border-radius: 6px;
+    word-break: break-all;
+    font-family: monospace;
+    font-size: 1rem;
+    display: block;
+    border: 1px solid var(--mega-green);
+    margin: 0.5rem auto; /* Centraliza se o container for menor */
+    max-width: 90%;
 }
 
 .pix-box button {
-  background: var(--accent);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: 0.25s;
+    /* Botão Copiar (secundário) */
+    background-color: #f0f0f0;	
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 8px 15px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    width: auto;
+    max-width: 300px;
+    align-self: center;
 }
 
 .pix-box button:hover {
-  background: #005ec0;
+    background-color: #e0e0e0;
 }
 
-/* ===== Status ===== */
+/* --------------------------------- */
+/* 4. Status (Estilo original mantido e aprimorado) */
+/* --------------------------------- */
 .status-wrapper {
-  background: #f9fafb;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.5rem 0.8rem;
-  margin-top: 0.6rem;
-  font-size: 0.9rem;
-  text-align: center;
+	background: #f9fafb;
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	padding: 0.8rem 1rem;
+	margin-top: 1rem;
+	font-size: 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.status-wrapper strong {
+	font-weight: 600;
 }
 
 .status {
-  font-weight: bold;
-  font-size: 1rem;
-  margin-left: 6px;
+	font-weight: bold;
+	font-size: 1.1rem;
 }
 
-.status.pago { color: var(--green); }
+.status.pago { color: #16a34a; } /* Verde mais claro para o status pago */
 .status.aguardando { color: var(--red); }
 
-/* ===== Botões ===== */
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: 0.25s;
+.atualizar-btn { /* Estilo específico para o botão de atualizar */
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    background: #e5e7eb;
+    color: #333;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
-button.primary {
-  background: var(--accent);
-  color: #fff;
-  padding: 8px 16px;
-  font-size: 0.9rem;
+.atualizar-btn:hover {
+    background: #d1d5db;
 }
 
-button.primary:hover {
-  background: #005ec0;
+/* --------------------------------- */
+/* 5. Controles e Aviso (baseado em confirmacao.css) */
+/* --------------------------------- */
+
+.observacao { /* Substitui .aviso */
+    /* Estilo do observacao do confirmacao.css */
+    background: #fff8e1;
+    border: 1px solid #ffe69c;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    margin: 15px 0 10px;
+    line-height: 1.4;
+    text-align: center;
 }
 
-button.muted {
-  background: #e5e7eb;
-  color: #333;
-  padding: 8px 14px;
-  font-size: 0.9rem;
-}
-
-button.muted:hover {
-  background: #d1d5db;
-}
-
-button.small {
-  padding: 4px 8px;
-  font-size: 0.8rem;
-}
-
-/* ===== Controles ===== */
 .controles {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-top: 0.8rem;
+    /* Estilo do controles do confirmacao.css */
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	flex-wrap: wrap;
+	margin-top: 1.5rem;
 }
 
-/* ===== Aviso ===== */
-.aviso {
-  text-align: center;
-  font-size: 0.88rem;
-  color: var(--gray);
-  margin-top: 0.8rem;
-  line-height: 1.4;
+/* Botões do index.css */
+.primary-btn {
+    background-color: var(--yellow-highlight); /* Laranja do index.css */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.primary-btn:hover {
+    background-color: #e68900;
 }
 
-/* ===== Responsivo ===== */
+.secondary-btn {
+    background-color: #f0f0f0;	/* Cor de botão secundário */
+    color: #333;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.secondary-btn:hover {
+    background-color: #e0e0e0;
+}
+
+
+/* --------------------------------- */
+/* 6. Responsivo (adaptado de confirmacao.css) */
+/* --------------------------------- */
+
 @media (max-width: 600px) {
-  .container {
-    padding: 0.8rem;
-  }
+    .container {
+        margin: 10px auto;
+        padding: 0.8rem;
+    }
 
-  .comprovante {
-    padding: 0.8rem;
-  }
+	.controles {
+		flex-direction: column;
+		gap: 8px;
+	}
 
-  .controles {
-    flex-direction: column;
-  }
+	.primary-btn,
+	.secondary-btn {
+		width: 100%;
+	}
 
-  button.primary,
-  button.muted {
-    width: 100%;
-  }
+    .bolinha {
+		width: 25px;
+		height: 25px;
+		font-size: 0.8rem;
+    }
+
+    .pix-key {
+        max-width: 100%;
+    }
 }

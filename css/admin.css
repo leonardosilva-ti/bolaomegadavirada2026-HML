@@ -1,44 +1,87 @@
-/* admin.css - Estilos específicos para a Área Administrativa */
+/*
+* ======================================
+* ARQUIVO: css/admin.css (Padronizado)
+* ======================================
+*/
 
 /* Variáveis e Reset Básico */
 :root {
-    --accent: #0072e3; /* Cor principal (azul) */
-    --muted: #f2f2f2; /* Cinza claro para botões e fundos */
-    --danger: #c62828; /* Vermelho para ações de risco */
-    --text: #222;
+	/* Cores Unificadas - Mantendo o padrão de consulta/index */
+	--mega-green: #008000; /* Verde da Mega (Header e Tabela) */
+	--mega-dark: #005f00;
+	--accent-blue: #0072e3; /* Azul de Destaque Secundário */
+	--action-orange: #ff9800; /* Laranja de Ação (Botões Principais) */
+	--red-status: #d32f2f; /* Vermelho de aviso/aguardando */
+	--bg-light: #f4f4f9; /* Fundo do body */
+	--card-bg: #fff; /* Fundo do card Admin */
+	--border: #e5e7eb;
+	--text-primary: #333;
+	--text-secondary: #1e3a8a; /* Azul escuro para títulos de card */
+
+		/* Variáveis locais Admin (Adaptadas) */
+		--accent: var(--accent-blue);
+		--muted: #f2f2f2;
+		--danger: #c62828;
+		--text: var(--text-primary);
 }
 
 * { box-sizing: border-box; }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f5f7fb;
-    margin: 0;
-    color: var(--text);
+		font-family: Arial, Helvetica, sans-serif;
+		background: var(--bg-light); /* Fundo claro */
+		margin: 0;
+		color: var(--text);
 }
 
+/* --------------------------------- */
 /* Layout e Componentes Principais */
+/* --------------------------------- */
+
+/* --- CABEÇALHO --- */
 .site-header {
-    background: var(--accent);
-    color: #fff;
-    padding: 16px;
-    text-align: center;
-    font-size: 24px;
+		background: var(--mega-green); /* Verde Padrão */
+		color: #fff;
+		padding: 16px;
+		text-align: center;
+		font-size: 24px;
 }
 
-/* Containers principais */
+/* --- CONTAINER PRINCIPAL --- */
 .container {
-    max-width: 950px;
-    background: #fff;
-    margin: 24px auto;
-    padding: 22px;
-    border-radius: 10px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+		max-width: 950px;
+		background: var(--card-bg); /* Fundo branco do container */
+		margin: 24px auto;
+		padding: 22px;
+		border-radius: 10px;
+		box-shadow: 0 4px 14px rgba(0,0,0,0.05);
 }
 
-/* Classes utilitárias Tailwind-like */
-.bg-gray-100 { background-color: #f3f4f6; }
-.text-gray-900 { color: #111827; }
+/* --- TÍTULOS --- */
+.section-title {
+		font-size: 1.35rem; /* Título principal dentro dos cards */
+		font-weight: 700;
+		margin: 0 0 1rem 0;
+		color: var(--text-secondary); /* Azul escuro */
+		padding-bottom: 5px;
+		border-bottom: 1px solid var(--border);
+		text-align: center;
+}
+
+.section-subtitle {
+		font-size: 1.15rem;
+		font-weight: 600;
+		margin: 0 0 0.8rem 0;
+		color: var(--accent-blue);
+		text-align: center;
+}
+
+
+/* --------------------------------- */
+/* Classes utilitárias Tailwind-like (Ajustadas) */
+/* --------------------------------- */
+.bg-gray-100 { background-color: var(--bg-light); }
+.text-gray-900 { color: var(--text); }
 .max-w-4xl { max-width: 950px; }
 .mx-auto { margin-left: auto; margin-right: auto; }
 .p-6 { padding: 1.5rem; }
@@ -54,8 +97,8 @@ body {
 .pt-3 { padding-top: 0.75rem; }
 .border-t { border-top: 1px solid #e5e7eb; }
 .text-center { text-align: center; }
-.text-red-500 { color: #ef4444; }
-.text-green-600 { color: #16a34a; }
+.text-red-500 { color: var(--red-status); }
+.text-green-600 { color: var(--mega-dark); }
 .text-sm { font-size: 0.875rem; }
 .hidden { display: none !important; }
 .flex { display: flex; }
@@ -72,41 +115,68 @@ body {
 .w-full { width: 100%; }
 .rounded { border-radius: 0.25rem; }
 
+input[type="text"], input[type="password"], input[type="number"], select {
+		border: 1px solid #ccc;
+		padding: 10px;
+		border-radius: 6px;
+		font-size: 1rem;
+}
+
 button {
-    cursor: pointer;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: background 0.2s ease;
+		cursor: pointer;
+		border: none;
+		border-radius: 6px;
+		font-weight: bold;
+		transition: background 0.2s ease, transform 0.1s;
 }
-button.primary { background: var(--accent); color: #fff; padding: 10px 16px; }
-button.primary:hover { background: #005bb5; }
-button.muted { background: var(--muted); color: #333; padding: 8px 12px; }
+
+/* Botão Principal: Laranja */
+button.primary { background: var(--action-orange); color: #fff; padding: 10px 16px; }
+button.primary:hover { background: #e68900; transform: translateY(-1px); }
+
+/* Botão Secundário: Cinza (Atualizar Lista) */
+button.muted { background: var(--muted); color: var(--text); padding: 8px 12px; border: 1px solid #ddd; }
 button.muted:hover { background: #e0e0e0; }
-button.danger { background: var(--danger); color: #fff; padding: 8px 12px; }
-button.danger:hover { background: #b02323; }
-button.small { font-size: 13px; padding: 6px 10px; line-height: 1; margin-top: 5px; }
-button:disabled { opacity: 0.6; cursor: not-allowed; background: #ddd !important; color: #666 !important; border: 1px solid #ccc !important; }
 
-/* Cards administrativos */
+/* Botão de Risco: Vermelho */
+button.danger { background: var(--danger); color: #fff; padding: 10px 16px; }
+button.danger:hover { background: #b02323; transform: translateY(-1px); }
+
+button.small { font-size: 13px; padding: 6px 10px; line-height: 1; margin-top: 5px; }
+
+button:disabled { opacity: 0.6; cursor: not-allowed; background: #ddd !important; color: #666 !important; border: 1px solid #ccc !important; transform: none; }
+
+
+/* --------------------------------- */
+/* Cards administrativos (Unificados) */
+/* --------------------------------- */
+
 .admin-card, .jogo-sorte-card {
-    background: #fff;
-    padding: 18px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    line-height: 1.4;
+		background: var(--card-bg);
+		padding: 18px;
+		border-radius: 12px;
+		margin-bottom: 20px;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+		line-height: 1.4;
+		/* Aplicando o estilo unificado de border */
+		border: 1px solid var(--border);
 }
 
-/* Resumo do Bolão */
+/* Regras antigas movidas do <style> inline */
+.resultado-premio p { margin: 5px 0; }
+
+
+/* --- Resumo do Bolão (Card de Destaque) --- */
 .resumo-card {
-    background: linear-gradient(135deg, #4f46e5, #3b82f6);
-    color: #fff;
-    padding: 25px 20px;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    margin-bottom: 25px;
-    text-align: center;
+		/* ALTERAÇÃO: Trocando o linear-gradient de Azul para Verde/Azul-de-fundo */
+		background: linear-gradient(135deg, var(--mega-green), #3b82f6); /* Verde Padrão */
+		color: #fff;
+		padding: 25px 20px;
+		border-radius: 16px;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+		margin-bottom: 25px;
+		text-align: center;
+		border: none; /* Sem borda no card de destaque */
 }
 .titulo-resumo { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
 .resumo-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
@@ -117,275 +187,363 @@ button:disabled { opacity: 0.6; cursor: not-allowed; background: #ddd !important
 .resumo-label { font-size: 0.9rem; opacity: 0.9; display: block; }
 .resumo-numero { font-size: 1.6rem; font-weight: bold; line-height: 1.2; }
 
+
 /* ===== Jogo da Sorte e Jogos Excedentes ===== */
 #jogoSorteContainer, #excedentesContainer {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
+		display: flex;
+		justify-content: center;
+		gap: 10px;
+		flex-wrap: wrap;
+		margin-bottom: 1rem;
 }
 
 /* Inputs Jogo da Sorte (horizontal) */
 #jogoSorteInputs {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin: 1rem 0;
-    flex-wrap: wrap;
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+		margin: 1rem 0;
+		flex-wrap: wrap;
 }
 
 .input-numero {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 1.1rem;
-    font-weight: bold;
-    -moz-appearance: textfield;
+		width: 40px;
+		height: 40px;
+		padding: 0;
+		border: 1px solid #d1d5db;
+		border-radius: 8px;
+		text-align: center;
+		font-size: 1.1rem;
+		font-weight: bold;
+		-moz-appearance: textfield;
 }
 
 /* Remove spinners */
 .input-numero::-webkit-outer-spin-button,
 .input-numero::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+		-webkit-appearance: none;
+		margin: 0;
 }
 
 /* Container dos números do jogo da sorte (visual) */
 .jogo-numero-container {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+		flex-wrap: wrap;
+		margin-bottom: 1rem;
 }
 
 .jogo-numero {
-    background: #4f46e5;
-    color: white;
-    font-weight: bold;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    cursor: default;
-    transition: transform 0.15s ease;
+		/* ALTERAÇÃO: Trocando o Azul pelo Verde Padrão */
+		background: var(--mega-green);
+		color: white;
+		font-weight: bold;
+		border-radius: 50%;
+		width: 40px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1rem;
+		cursor: default;
+		transition: transform 0.15s ease;
 }
 .jogo-numero:hover { transform: scale(1.1); }
 
 /* Inputs Excedentes e Conferência */
 .input-jogo-excedente, #conferenciaContainer {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 8px;
-    max-width: 360px;
-    margin: 1rem auto;
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		gap: 8px;
+		max-width: 360px;
+		margin: 1rem auto;
 }
 
 .input-jogo-excedente input, #conferenciaContainer input {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 1.1rem;
-    font-weight: bold;
-    -moz-appearance: textfield;
+		width: 40px;
+		height: 40px;
+		border: 1px solid #d1d5db;
+		border-radius: 8px;
+		text-align: center;
+		font-size: 1.1rem;
+		font-weight: bold;
+		-moz-appearance: textfield;
 }
 
 .input-jogo-excedente input::-webkit-outer-spin-button,
 .input-jogo-excedente input::-webkit-inner-spin-button,
 #conferenciaContainer input::-webkit-outer-spin-button,
 #conferenciaContainer input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+		-webkit-appearance: none;
+		margin: 0;
 }
 
 /* Conferência e rateio */
 .resultado-premio {
-    padding: 10px;
-    border: 1px dashed #ccc;
-    border-radius: 6px;
-    margin-top: 10px;
+		padding: 10px;
+		border: 1px dashed #ccc;
+		border-radius: 6px;
+		margin-top: 10px;
 }
-.resultado-premio h4 { margin-top: 0; margin-bottom: 5px; color: #0072e3; }
-.resultado-premio h5 { margin-bottom: 5px; color: #16a34a; }
+.resultado-premio h4 { margin-top: 0; margin-bottom: 5px; color: var(--accent-blue); }
+.resultado-premio h5 { margin-bottom: 5px; color: var(--mega-dark); }
 .resultado-premio hr { margin: 8px 0; }
 .loading { color: #666; font-style: italic; }
 
 /* Tabela de Participantes */
 table { width: 100%; border-collapse: collapse; }
 th, td { border: 1px solid #ccc; padding: 8px 12px; line-height: 1.3; }
-thead { background-color: #4f46e5; color: white; }
-.bg-indigo-600 { background-color: #4f46e5; }
+/* Estilos da tabela padronizados */
+thead { background-color: var(--mega-green); color: white; }
+.bg-indigo-600 { background-color: var(--mega-green); } /* Usado no HTML, adaptado */
 .text-white { color: #fff; }
 
-/* Responsividade */
+/* === NOVO: Estilos para a tabela de participantes (Mostrar/Ocultar Jogos) === */
+
+/* Estilo para ocultar a linha dos jogos por padrão */
+.jogos-row {
+    display: none;
+    background-color: #f7f7f7;
+    /* Ajusta a célula para exibir a lista de jogos */
+}
+
+/* Garante que a classe 'hidden' prevaleça sobre qualquer flex/grid que possa ser aplicado em um container pai */
+.jogos-row.hidden {
+    display: none !important;
+}
+
+/* --------------------------------- */
+/* NOVO ESTILO: PAGINAÇÃO AMIGÁVEL */
+/* --------------------------------- */
+
+.pagination-controls {
+    display: flex; /* Mantém o layout horizontal */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;
+    gap: 15px; /* Espaçamento entre os elementos */
+    padding: 15px 0;
+    margin-top: 10px;
+}
+
+.pagination-controls button {
+    /* Reset de estilo 'small' e padronização */
+    font-size: 14px;
+    padding: 8px 15px;
+    border-radius: 8px;
+    background: var(--accent); /* Azul de destaque */
+    color: white;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background: var(--accent-blue);
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.pagination-controls button:disabled {
+    background: var(--muted) !important;
+    color: #999 !important;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.pagination-info {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-secondary); /* Cor de destaque para a informação */
+    padding: 5px 10px;
+    min-width: 120px;
+    text-align: center;
+}
+
+/* --------------------------------- */
+/* 6. Responsividade */
+/* --------------------------------- */
+
 @media (max-width: 600px) {
-    .resumo-grid { flex-direction: column; align-items: center; }
-    .resumo-item { width: 80%; justify-content: center; }
-    #jogoSorteInputs { flex-wrap: wrap; justify-content: center; }
-    .input-jogo-excedente, #conferenciaContainer { max-width: 100%; grid-template-columns: repeat(6, 1fr); }
+		.resumo-grid { flex-direction: column; align-items: center; }
+		.resumo-item { width: 80%; justify-content: center; }
+		#jogoSorteInputs { flex-wrap: wrap; justify-content: center; }
+		/* Ajuste para inputs numéricos */
+		.input-numero,
+		.input-jogo-excedente input,
+		#conferenciaContainer input {
+				width: 42px;
+				height: 42px;
+				font-size: 1rem;
+		}
+		.input-jogo-excedente, #conferenciaContainer { max-width: 100%; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 }
 
 /* ============================
-   OPTIMIZAÇÃO COMPLETA MOBILE
-   ============================ */
+		OPTIMIZAÇÃO COMPLETA MOBILE
+		============================ */
 
 /* --- Container principal mais fluido --- */
 @media (max-width: 700px) {
 
-  .container {
-      padding: 16px;
-      margin: 12px;
-      width: calc(100% - 24px);
-  }
+	.container {
+			padding: 16px;
+			margin: 12px;
+			width: calc(100% - 24px);
+	}
 
-  /* Reduz padding dos cards */
-  .admin-card, .jogo-sorte-card {
-      padding: 14px;
-      margin-bottom: 16px;
-  }
+	/* Reduz padding dos cards */
+	.admin-card, .jogo-sorte-card {
+			padding: 14px;
+			margin-bottom: 16px;
+	}
 
-  /* Título menor para caber melhor */
-  .site-header {
-      font-size: 20px;
-      padding: 14px;
-  }
+	/* Título menor para caber melhor */
+	.site-header {
+			font-size: 20px;
+			padding: 14px;
+	}
 
-  /* --- LOGIN --- */
-  #loginArea {
-      width: 100%;
-      max-width: 380px;
-      padding: 16px;
-  }
+	/* --- LOGIN --- */
+	#loginArea {
+			width: 100%;
+			max-width: 380px;
+			padding: 16px;
+	}
 
-  input, button {
-      font-size: 16px; /* evita zoom automático do iOS */
-  }
+	input, button, select {
+			font-size: 16px; /* evita zoom automático do iOS */
+	}
 
-  /* --- RESUMO DO BOLÃO --- */
-  .resumo-card {
-      padding: 20px 14px;
-  }
+	/* --- RESUMO DO BOLÃO --- */
+	.resumo-card {
+			padding: 20px 14px;
+	}
 
-  .titulo-resumo {
-      font-size: 1.3rem;
-  }
+	.titulo-resumo {
+			font-size: 1.3rem;
+	}
 
-  .resumo-item {
-      width: 100%;
-      min-width: auto;
-      justify-content: center;
-      padding: 12px;
-  }
+	.resumo-item {
+			width: 100%;
+			min-width: auto;
+			justify-content: center;
+			padding: 12px;
+	}
 
-  /* --- Inputs numéricos (Jogo da Sorte / Excedentes / Conferência) --- */
-  .input-numero,
-  .input-jogo-excedente input,
-  #conferenciaContainer input {
-      width: 42px;
-      height: 42px;
-      font-size: 1rem;
-  }
+	/* Grid de 6 colunas vira 3 (melhor leitura) */
+	.input-jogo-excedente,
+	#conferenciaContainer {
+			grid-template-columns: repeat(3, 1fr);
+			max-width: 280px;
+			gap: 10px;
+	}
 
-  /* Grid de 6 colunas vira 3 (melhor leitura) */
-  .input-jogo-excedente,
-  #conferenciaContainer {
-      grid-template-columns: repeat(3, 1fr);
-      max-width: 280px;
-      gap: 10px;
-  }
+	/* Jogo da Sorte – números mais espaçados */
+	#jogoSorteContainer,
+	.jogo-numero-container {
+			gap: 6px;
+	}
 
-  /* Jogo da Sorte – números mais espaçados */
-  #jogoSorteContainer,
-  .jogo-numero-container {
-      gap: 6px;
-  }
+	.jogo-numero {
+			width: 38px;
+			height: 38px;
+			font-size: 0.95rem;
+	}
 
-  .jogo-numero {
-      width: 38px;
-      height: 38px;
-      font-size: 0.95rem;
-  }
+	/* --- Botões alinhados verticalmente em telas pequenas --- */
+	.flex.justify-between {
+			flex-direction: column;
+			gap: 10px;
+	}
 
-  /* --- Botões alinhados verticalmente em telas pequenas --- */
-  .flex.justify-between {
-      flex-direction: column;
-      gap: 10px;
-  }
+	.flex.justify-between button {
+			width: 100%;
+	}
+  
+  /* Corrige o alinhamento da área de pesquisa e filtro na tabela */
+  .flex.flex-wrap.justify-between.gap-4 {
+      flex-direction: column;
+      gap: 10px;
+  }
+  
+  .flex.flex-wrap.justify-between.gap-4 > div {
+      width: 100%;
+      min-width: auto;
+  }
 
-  .flex.justify-between button {
-      width: 100%;
-  }
+	/* --- TABELA --- */
+	#tabelaParticipantes {
+			overflow-x: auto;
+			-webkit-overflow-scrolling: touch;
+	}
 
-  /* --- TABELA --- */
-  #tabelaParticipantes {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-  }
+	table {
+			min-width: 600px; /* evita quebra feia */
+			font-size: 15px;
+	}
 
-  table {
-      min-width: 600px; /* evita quebra feia */
-      font-size: 15px;
-  }
+	th, td {
+			padding: 8px;
+	}
 
-  th, td {
-      padding: 8px;
-  }
+	td small {
+			font-size: 13px;
+	}
 
-  td small {
-      font-size: 13px;
-  }
+	/* Botões da tabela empilhados */
+	td button.small {
+			margin: 4px 0;
+			width: 100%;
+	}
 
-  /* Botões da tabela empilhados */
-  td button.small {
-      margin: 4px 0;
-      width: 100%;
-  }
+	/* --- Rateio --- */
+	#areaRateio {
+			padding-top: 16px;
+	}
 
-  /* --- Rateio --- */
-  #areaRateio {
-      padding-top: 16px;
-  }
-
-  #valorPremio {
-      font-size: 16px;
-  }
+	#valorPremio {
+			font-size: 16px;
+	}
 }
 
 /* =======================
-   MOBILE ULTRA-CURTO
-   <= 400px (celulares pequenos)
-   ======================= */
+		MOBILE ULTRA-CURTO
+		<= 400px (celulares pequenos)
+		======================= */
 @media (max-width: 400px) {
 
-  .input-numero {
-      width: 36px;
-      height: 36px;
-  }
+	.input-numero {
+			width: 36px;
+			height: 36px;
+	}
 
-  .jogo-numero {
-      width: 34px;
-      height: 34px;
-      font-size: 0.85rem;
-  }
+	.jogo-numero {
+			width: 34px;
+			height: 34px;
+			font-size: 0.85rem;
+	}
 
-  .resumo-item {
-      padding: 10px;
-  }
+	.resumo-item {
+			padding: 10px;
+	}
 
-  .container {
-      padding: 12px;
-  }
+	.container {
+			padding: 12px;
+	}
 
-  table {
-      min-width: 540px;
-  }
+	table {
+			min-width: 540px;
+	}
+
+    /* --- Botões de Paginação empilhados no mobile ultra-curto --- */
+    .pagination-controls {
+        flex-direction: column; 
+        gap: 8px;
+    }
+
+    .pagination-controls button {
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+    }
 }
