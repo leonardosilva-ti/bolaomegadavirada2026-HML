@@ -375,25 +375,30 @@ footer {
 				box-shadow: none; /* Remove a sombra para dar aspecto de tela cheia */
 				max-width: 100%;	
 		}
-    
-    /* DISPLAYS DE JOGO: Força empilhamento em colunas */
-    #container-displays-jogos {
-				flex-direction: column;	
+			
+		/* DISPLAYS DE JOGO: REMOVEMOS O EMPILHAMENTO EM COLUNAS */
+		#container-displays-jogos {
+				/* flex-direction: column; <--- REMOVER/COMENTAR */
 				gap: 10px;	
 				padding: 10px;
 		}
 
 		.jogo-display {
-				min-width: 100%;	
-				flex-basis: auto;	
+				/* min-width: 100%;	<--- REMOVER/COMENTAR */
+				/* flex-basis: auto;	<--- REMOVER/COMENTAR */
 				font-size: 1em;	
-		max-width: none; /* NOVO: Remove a limitação para usar a largura total */
+		/* max-width: none; <--- REMOVER/COMENTAR */
+		
+		/* NOVO: Aumenta o 'flex-grow' no mobile para preencher melhor, 
+		   mas mantém a base de 33.33% para forçar 3 por linha, se couberem. */
+		flex: 1 1 calc(33.33% - 10px); 
+		min-width: 80px; /* Reduz o min-width um pouco para telas muito pequenas */
 		}
 
-    .numeros-selecionados-display {
-        white-space: normal; /* Permite que os números quebrem a linha */
-        font-size: 0.9em;
-    }
+		.numeros-selecionados-display {
+				white-space: normal; /* Permite que os números quebrem a linha */
+				font-size: 0.9em;
+		}
     
 		/* Grade de seleção de números: Aumenta o tamanho dos botões para melhor toque */
 		.numero-btn {
