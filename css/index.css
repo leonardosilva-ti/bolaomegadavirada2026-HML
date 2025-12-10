@@ -372,28 +372,31 @@ footer {
 		main {
 				margin: 10px auto;
 				padding: 15px;
-				box-shadow: none; /* Remove a sombra para dar aspecto de tela cheia */
+				box-shadow: none; 
 				max-width: 100%;	
 		}
-			
-		/* DISPLAYS DE JOGO: REMOVEMOS O EMPILHAMENTO EM COLUNAS */
+	
+		/* DISPLAYS DE JOGO: MANTENDO 3+2 COMPACTOS */
 		#container-displays-jogos {
-				/* flex-direction: column; <--- REMOVER/COMENTAR */
-				gap: 10px;	
+				gap: 6px; /* Reduzi o gap para 6px para economizar espaço */
 				padding: 10px;
 		}
 
 		.jogo-display {
-				/* min-width: 100%;	<--- REMOVER/COMENTAR */
-				/* flex-basis: auto;	<--- REMOVER/COMENTAR */
-				font-size: 1em;	
-		/* max-width: none; <--- REMOVER/COMENTAR */
-		
-		/* NOVO: Aumenta o 'flex-grow' no mobile para preencher melhor, 
-		   mas mantém a base de 33.33% para forçar 3 por linha, se couberem. */
-		flex: 1 1 calc(33.33% - 10px); 
-		min-width: 80px; /* Reduz o min-width um pouco para telas muito pequenas */
-		}
+		/* Ajuste também a regra geral para que o min-width seja o mesmo, 
+           garantindo consistência em telas maiores que 600px */
+		flex: 0 0 calc(33.33% - 8px); 
+		max-width: 120px; /* Reduzi um pouco o max-width */
+		min-width: 75px; /* NOVO: Aplicando o menor min-width também aqui */
+		padding: 10px 5px;
+		text-align: center;
+		border-radius: 4px;
+		font-weight: bold;
+		cursor: pointer;
+		transition: background-color 0.3s, border 0.3s;
+		font-size: 0.9em;
+		border: 1px solid transparent;
+}
 
 		.numeros-selecionados-display {
 				white-space: normal; /* Permite que os números quebrem a linha */
