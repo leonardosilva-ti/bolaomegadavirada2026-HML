@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
 						pixBox.id = "pixComprovante";
 						pixBox.innerHTML = `
                 <h3>Chave PIX para Pagamento</h3>
-								<p>Realize o pagamento no valor de <b>R$30,00</b> utilizando a chave abaixo no aplicativo do seu banco:</p>
+								<p>Realize o pagamento no valor de <b>R$60,00</b> utilizando a chave abaixo no aplicativo do seu banco:</p>
 								<span class="pix-key">${PIX_KEY}</span>
 								<button id="btnCopiarPix">Copiar Chave PIX</button>
 						`;
