@@ -118,30 +118,32 @@ hr {
 
 /* Seleção de Jogos (Números) */
 #container-jogos {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 8px;
-		justify-content: center;
-		margin-top: 15px;
-		/* REMOVIDO: border: 1px dashed #008000; */
-		/* REMOVIDO: padding: 10px; */
-		border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 15px;
+    padding: 0 5px;
+    border-radius: 5px;
 }
 
+
 .numero-btn {
-		width: 40px;
-		height: 40px;
-		line-height: 40px;
-		text-align: center;
-		border-radius: 50%;
-		border: 2px solid #008000;
-		background-color: #fff;
-		color: #008000;
-		font-weight: bold;
-		cursor: pointer;
-		transition: background-color 0.2s, color 0.2s;
-		user-select: none;
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    border-radius: 50%;
+    border: 2px solid #008000;
+    background-color: #fff;
+    color: #008000;
+    font-weight: bold;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    user-select: none;
 }
+
 
 .numero-btn.selecionado {
 		background-color: #008000;
@@ -161,67 +163,51 @@ footer {
 		color: #777;
 }
 
-/* ESTILOS DA SELEÇÃO DE JOGOS POR DISPLAY (Com Adaptação para Wrap) */
+/* ------ DISPLAYS EM BOLINHAS (NOVO ESTILO) ------ */
+
 #container-displays-jogos {
-		display: flex;
-		flex-wrap: wrap; 
-		justify-content: center; /* ALTERAÇÃO CHAVE: Centraliza os itens no container */
-		gap: 8px; 
-		margin-bottom: 20px;
-		/*padding: 5px;*/
-		/*border: 1px solid #ccc;*/
-		border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    margin-top: 10px;
 }
 
 .jogo-display {
-		/* ... Mantém as alterações de largura para 3+2 linhas ... */
-		flex: 0 0 calc(33.33% - 8px); 
-		max-width: 150px; 
-		min-width: 100px; 
-		padding: 10px 5px;
-		text-align: center;
-		border-radius: 4px;
-		font-weight: bold;
-		cursor: pointer;
-		transition: background-color 0.3s, border 0.3s;
-		font-size: 0.9em;
-		border: 1px solid transparent;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: all 0.25s ease;
 }
 
-/* Status: Vazio (Cinza) */
-.jogo-display[data-status="vazio"] {
-		background-color: #f0f0f0;
-		color: #666;
-}
-
-/* Status: Incompleto (Amarelo) */
-.jogo-display[data-status="incompleto"] {
-		background-color: #fff9c4;
-		color: #fbc02d;
-}
-
-/* Status: Completo (Verde) */
-.jogo-display[data-status="completo"] {
-		background-color: #c8e6c9;
-		color: #388e3c;
-}
-
-/* Jogo Ativo (Destaque) */
+/* Jogo ativo (destacado) */
 .jogo-display.ativo {
-		border: 2px solid #ff9800; /* Borda Laranja para o jogo em edição */
-		box-shadow: 0 0 5px rgba(255, 152, 0, 0.5);
-		transform: scale(1.02);
+    border-color: #ffcc00;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
+    transform: scale(1.12);
 }
 
-.numeros-selecionados-display {
-		display: none;
-		font-weight: normal;
-		font-size: 0.8em;
-		margin-top: 3px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+/* Status vazio (cinza) */
+.jogo-display[data-status="vazio"] {
+    background-color: #d9d9d9;
+    border-color: #b5b5b5;
 }
+
+/* Status incompleto (amarelo) */
+.jogo-display[data-status="incompleto"] {
+    background-color: #ffe680;
+    border-color: #ffcc00;
+}
+
+/* Status completo (verde) */
+.jogo-display[data-status="completo"] {
+    background-color: #7ed957;
+    border-color: #4caf50;
+}
+
 
 /* Controles de JOGO (Limpar, Aleatório, Próximo/Confirmar) */
 .controles-jogo {
@@ -279,15 +265,15 @@ footer {
 
 /* Estilos dos Números (Manter) */
 #container-jogos {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 8px;
-		justify-content: center;
-		margin-top: 15px;
-		/*border: 1px dashed #008000;*/
-		/*padding: 10px;*/
-		border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 15px;
+    padding: 0 5px;
+    border-radius: 5px;
 }
+
 
 /* A classe 'selecionado' deve indicar que o número foi escolhido em QUALQUER jogo */
 .numero-btn.selecionado {
@@ -405,11 +391,11 @@ footer {
     
 		/* Grade de seleção de números: Aumenta o tamanho dos botões para melhor toque */
 		.numero-btn {
-				width: 45px; 
-				height: 45px; 
-        line-height: 45px;
-				font-size: 1.1em;
-		}
+			width: 34px;
+			height: 34px;
+			line-height: 34px;
+			font-size: 0.95em;
+}
 			
 		/* Campos de formulário: Força empilhamento */
 		.form-group {
